@@ -1,0 +1,13 @@
+﻿Выполняется установка сборки 'D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.InstallLog
+   assemblypath = D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.exe
+Отсутствуют общие программы установки с атрибутом RunInstallerAttribute.Yes в сборке D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.exe.
+Выполняется фиксация сборки 'D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.exe'.
+Затронуты следующие параметры:
+   logtoconsole = 
+   logfile = D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.InstallLog
+   assemblypath = D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.exe
+Отсутствуют общие программы установки с атрибутом RunInstallerAttribute.Yes в сборке D:\Work\!Dev\DSU\SnmpScanner\SnmpScanner\bin\Debug\SnmpScanner.exe.
+Удалите файл InstallState, поскольку отсутствуют программы установки.

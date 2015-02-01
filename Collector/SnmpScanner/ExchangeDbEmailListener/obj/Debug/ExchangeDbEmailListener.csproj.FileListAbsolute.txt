@@ -1,0 +1,10 @@
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\ExchangeDbEmailListener.exe.config
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\ExchangeDbEmailListener.exe
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\ExchangeDbEmailListener.pdb
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\obj\Debug\ExchangeDbEmailListener.exe
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\obj\Debug\ExchangeDbEmailListener.pdb
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.Auth.dll
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.Auth.xml
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.dll
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.xml
+D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\obj\Debug\ExchangeDbEmailListener.csprojResolveAssemblyReference.cache

@@ -1,0 +1,25 @@
+<Trace Tag="AutodiscoverRequest" Tid="8" Time="2014-11-30 10:01:32Z" Version="15.00.0516.014">
+  <?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:a="http://schemas.microsoft.com/exchange/2010/Autodiscover" xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Header>
+      <a:RequestedServerVersion>Exchange2010_SP2</a:RequestedServerVersion>
+      <wsa:Action>http://schemas.microsoft.com/exchange/2010/Autodiscover/Autodiscover/GetUserSettings</wsa:Action>
+      <wsa:To>https://ums-1.un1t.group/autodiscover/autodiscover.svc</wsa:To>
+    </soap:Header>
+    <soap:Body>
+      <a:GetUserSettingsRequestMessage xmlns:a="http://schemas.microsoft.com/exchange/2010/Autodiscover">
+        <a:Request>
+          <a:Users>
+            <a:User>
+              <a:Mailbox>anton.rehov@unitgroup.ru</a:Mailbox>
+            </a:User>
+          </a:Users>
+          <a:RequestedSettings>
+            <a:Setting>InternalEwsUrl</a:Setting>
+            <a:Setting>ExternalEwsUrl</a:Setting>
+          </a:RequestedSettings>
+        </a:Request>
+      </a:GetUserSettingsRequestMessage>
+    </soap:Body>
+  </soap:Envelope>
+</Trace>
