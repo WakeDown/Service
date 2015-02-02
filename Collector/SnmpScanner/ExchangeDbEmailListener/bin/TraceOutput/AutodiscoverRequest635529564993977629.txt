@@ -1,0 +1,8 @@
+<Trace Tag="AutodiscoverRequest" Tid="8" Time="2014-11-30 10:01:39Z" Version="15.00.0516.014">
+  <Autodiscover xmlns="http://schemas.microsoft.com/exchange/autodiscover/outlook/requestschema/2006">
+    <Request>
+      <EMailAddress>anton.rehov@unitgroup.ru</EMailAddress>
+      <AcceptableResponseSchema>http://schemas.microsoft.com/exchange/autodiscover/outlook/responseschema/2006a</AcceptableResponseSchema>
+    </Request>
+  </Autodiscover>
+</Trace>

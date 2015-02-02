@@ -1,0 +1,3 @@
+<Trace Tag="AutodiscoverResponse" Tid="10" Time="2014-11-30 10:09:09Z">
+Autodiscover service call failed with error 'The Autodiscover service couldn't be located.'. Will try legacy service
+</Trace>

@@ -1,0 +1,3 @@
+<Trace Tag="AutodiscoverConfiguration" Tid="10" Time="2014-11-30 10:09:09Z">
+No matching Autodiscover DNS SRV records were found.
+</Trace>
