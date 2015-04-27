@@ -59,6 +59,7 @@ namespace ServicePlaningWebUI.Models
                 WindowsIdentity wi = (WindowsIdentity)WinId;
                 string sid = wi.User.Value;
                 //sid = "S-1-5-21-1970802976-3466419101-4042325969-1784"; //Дралов ОС
+                //sid = "S-1-5-21-1970802976-3466419101-4042325969-1834"; //ГИР
                 User user = Db.Db.Users.GetUserBySid(sid);
 
                 Id = user.Id;

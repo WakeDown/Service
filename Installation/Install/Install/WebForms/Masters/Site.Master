@@ -22,6 +22,7 @@
         <%:Scripts.Render("~/bundles/bootstrap") %>
         <%:Scripts.Render("~/bundles/modernizr") %>
         <%:Scripts.Render("~/bundles/bootstrap-datepicker") %>
+        <%:Scripts.Render("~/bundles/jquery-filterByText") %>
         <%:Scripts.Render("~/bundles/filter-exp-mem") %>
         <%:Scripts.Render("~/bundles/site") %>
     </asp:PlaceHolder>
@@ -91,7 +92,7 @@
             <hr class="last" />
             <footer>
                 <div class="pull-left">
-                    <h5>&copy; 2014 <%: DateTime.Now.Year > 2014 ?String.Format(" - {0}", DateTime.Now.Year.ToString())  : String.Empty %> <%--<small>by Антон Рехов</small>--%>
+                    <h5>&copy; 2015 <%: DateTime.Now.Year > 2015 ?String.Format(" - {0}", DateTime.Now.Year.ToString())  : String.Empty %> <%--<small>by Антон Рехов</small>--%>
                         <br />
                         <small>v&nbsp;<%= WebConfigurationManager.AppSettings["progVersion"] %></small>
                     </h5>

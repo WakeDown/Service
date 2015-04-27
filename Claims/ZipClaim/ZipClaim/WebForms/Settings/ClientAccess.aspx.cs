@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.DirectoryServices;
 using System.Linq;
 using System.Net;
@@ -66,46 +67,95 @@ namespace ZipClaim.WebForms.Settings
         private void FillLists()
         {
             var userList = Db.Db.Users.GetUsersSelectionList();
-            rtrAccessList.DataSource = Db.Db.Users.GetUsersSelectionList(zipClientRightGroup, userList);
+            var contractors = Db.Db.Users.GetUsersSelectionList(zipClientRightGroup, userList);
+
+            //Пересортируем список контрагентов по имени (изначально мы получаем только логины)
+            contractors.Columns.Add("ContractorName", typeof (string));
+
+            foreach (DataRow dr in contractors.Rows)
+            {
+                string login = dr["login"].ToString();
+                dr["ContractorName"] = GetContractorNameByLogin(login);
+            }
+
+            DataView dv = contractors.DefaultView;
+            dv.Sort = "ContractorName";
+
+            rtrAccessList.DataSource = dv.ToTable();
             rtrAccessList.DataBind();
+        }
+
+        public string GetContractorNameByLogin(string login)
+        {
+            string name = String.Empty;
+
+            //string login = DataBinder.Eval(e.Item.DataItem, "login").ToString();
+            int idContractor;
+
+            try
+            {
+                idContractor = Convert.ToInt32(login);
+            }
+            catch
+            {
+                idContractor = 0;
+            }
+
+            if (idContractor > 0)
+            {
+                var dt = Db.Db.Unit.GetContractorSelectionList(null, idContractor);
+
+                if (dt.Rows.Count > 0)
+                {
+                    name = dt.Rows[0]["full_name"].ToString();
+                }
+            }
+            else
+            {
+                name = String.Format("Не удалось определить имя клиента, логин: {0}", login);
+            }
+
+            return name;
         }
 
         protected void rtrAccessList_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-            {
-                string login = DataBinder.Eval(e.Item.DataItem, "login").ToString();
-                int idContractor;
+            //if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            //{
+            //    string login = DataBinder.Eval(e.Item.DataItem, "login").ToString();
+            //    int idContractor;
 
-                try
-                {
-                    idContractor = Convert.ToInt32(login);
-                }
-                catch
-                {
-                    idContractor = 0;
-                }
+            //    try
+            //    {
+            //        idContractor = Convert.ToInt32(login);
+            //    }
+            //    catch
+            //    {
+            //        idContractor = 0;
+            //    }
 
-                var contractorName = e.Item.FindControl("contractorName") as Label;
+            //    var contractorName = e.Item.FindControl("contractorName") as Label;
+            //    var hfIdContractor = e.Item.FindControl("hfIdContractor") as HiddenField;
+            //    hfIdContractor.Value = idContractor.ToString();
 
-                if (contractorName != null)
-                {
-                    if (idContractor > 0)
-                    {
-                        var dt = Db.Db.Unit.GetContractorSelectionList(null, idContractor);
+            //    if (contractorName != null)
+            //    {
+            //        if (idContractor > 0)
+            //        {
+            //            var dt = Db.Db.Unit.GetContractorSelectionList(null, idContractor);
 
-                        if (dt.Rows.Count > 0)
-                        {
-                            contractorName.Text = dt.Rows[0]["full_name"].ToString();
-                        }
-                    }
-                    else
-                    {
-                        contractorName.Text = String.Format("Не удалось определить имя клиента, логин: {0}", login);
-                    }
-                }
+            //            if (dt.Rows.Count > 0)
+            //            {
+            //                contractorName.Text = dt.Rows[0]["full_name"].ToString();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            contractorName.Text = String.Format("Не удалось определить имя клиента, логин: {0}", login);
+            //        }
+            //    }
 
-            }
+            //}
         }
 
         protected void SaveClientZipGroup(bool add, string sid)

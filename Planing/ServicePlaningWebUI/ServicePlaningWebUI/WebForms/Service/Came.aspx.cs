@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using ServicePlaningWebUI.Helpers;
 using ServicePlaningWebUI.Models;
 using ServicePlaningWebUI.Objects;
+using ServicePlaningWebUI.WebForms.Masters;
 
 namespace ServicePlaningWebUI.WebForms.Service
 {
@@ -15,6 +16,11 @@ namespace ServicePlaningWebUI.WebForms.Service
     {
         protected string FormTitle;
         protected const string ListUrl = "~/Service";
+
+        protected bool UserIsSysAdmin
+        {
+            get { return (Page.Master.Master as Site).UserIsSysAdmin; }
+        }
 
         private int Id
         {
@@ -122,12 +128,14 @@ namespace ServicePlaningWebUI.WebForms.Service
             MainHelper.TxtSetEmptyText(ref txtDateCame);
             MainHelper.TxtSetEmptyText(ref txtDescr);
             MainHelper.TxtSetEmptyText(ref txtCounterColour);
+            lbClaim.Items.Clear();
         }
 
         private void Save()
         {
             ServiceCame serviceCame = GetFormData();
-            serviceCame.Save();
+            string serialNum = MainHelper.TxtGetText(ref txtClaimSelection);
+            serviceCame.Save(UserIsSysAdmin, serialNum);
             ServiceClaim serviceClaim = new ServiceClaim(serviceCame.IdServiceClaim);
             string messageText = String.Format("Сохранение отметки об обслуживании заявки № {0} прошло успешно", serviceClaim.Number);
             ServerMessageDisplay(new[] { phServerMessage }, messageText);
@@ -218,6 +226,9 @@ namespace ServicePlaningWebUI.WebForms.Service
 
             ScriptManager.RegisterStartupScript(this, GetType(), "datepickerCameActivate", script, true);
             //</календарь>
+
+            script = String.Format(@"if ($('#{0}').val() == '0') {{ return confirm('Вы действительно хотите сохранить 0 в поле счетчик?'); }};", txtCounter.ClientID);
+            btnSaveAndAddNew.OnClientClick = script;
         }
 
         protected void txtClaimSelection_TextChanged(object sender, EventArgs e)
@@ -255,10 +266,13 @@ namespace ServicePlaningWebUI.WebForms.Service
 
         protected void lbClaim_OnSelectedIndexChanged(object sender, EventArgs e)
         {
-            int claimId = Convert.ToInt32(lbClaim.SelectedValue);
-            SetDateCaberBorder(new ServiceClaim(claimId).PlaningDate.Value);
+            if (!String.IsNullOrEmpty(lbClaim.SelectedValue))
+            {
+                int claimId = Convert.ToInt32(lbClaim.SelectedValue);
+                SetDateCaberBorder(new ServiceClaim(claimId).PlaningDate.Value);
 
-            upDateCame.Update();
+                upDateCame.Update();
+            }
         }
 
         protected void SetDateCaberBorder(DateTime planingDate)

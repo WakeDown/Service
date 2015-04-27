@@ -136,6 +136,7 @@ namespace ServicePlaningWebUI.WebForms.DeviceModels
             deviceModel.IdPrintType = MainHelper.DdlGetSelectedValueInt(ref ddlPrintType, true);
             deviceModel.IdCartridgeType = MainHelper.DdlGetSelectedValueInt(ref ddlCartridgeType, true);
             deviceModel.IdCreator = User.Id;
+            deviceModel.MaxVolume = MainHelper.TxtGetTextInt32(ref txtMaxVolume,true);
 
             return deviceModel;
         }
@@ -151,6 +152,7 @@ namespace ServicePlaningWebUI.WebForms.DeviceModels
             MainHelper.DdlSetSelectedValue(ref ddlDeviceImprint, deviceModel.IdDeviceImprint);
             MainHelper.DdlSetSelectedValue(ref ddlPrintType, deviceModel.IdPrintType);
             MainHelper.DdlSetSelectedValue(ref ddlCartridgeType, deviceModel.IdCartridgeType);
+            MainHelper.TxtSetText(ref txtMaxVolume, deviceModel.MaxVolume);
         }
 
         //======

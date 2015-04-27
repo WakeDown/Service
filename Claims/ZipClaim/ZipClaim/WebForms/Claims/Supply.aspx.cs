@@ -111,7 +111,7 @@ namespace ZipClaim.WebForms.Claims
 
                 if (currId == idClaimUnit)
                 {
-                    row.FindControl("btnEdit").Visible = row.FindControl("lblPriceIn").Visible = row.FindControl("lblDeliveryTime").Visible = !edit;
+                    row.FindControl("btnEdit").Visible = row.FindControl("lblPriceIn").Visible = row.FindControl("lblDeliveryTime").Visible = /*row.FindControl("btnReturn").Visible = */!edit;
                     row.FindControl("btnSave").Visible = row.FindControl("btnCancel").Visible = row.FindControl("txtPriceIn").Visible = row.FindControl("txtDeliveryTime").Visible = (row.FindControl("cvTxtPriceIn") as CompareValidator).Enabled = (row.FindControl("rfvTxtPriceIn") as RequiredFieldValidator).Enabled = (row.FindControl("rfvTxtDeliveryTime") as RequiredFieldValidator).Enabled = edit;
 
                     //Если Номенклатурный номер запрошен у Снабжения, то обязательно к заполнению
@@ -127,6 +127,59 @@ namespace ZipClaim.WebForms.Claims
                     }
                 }
             }
+        }
+
+        protected void btnReturn_OnClick(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32((sender as LinkButton).CommandArgument);
+            int rowIndex = -1;
+
+            foreach (GridViewRow row in tblList.Rows)
+            {
+                int currId = Convert.ToInt32(((HiddenField)row.FindControl("hfIdClaimUnit")).Value);
+                if (currId == id)
+                {
+                    rowIndex = row.RowIndex;
+                    break;
+                }
+            }
+
+            if (rowIndex >= 0)
+            {
+                HiddenField hfIdClaim = (HiddenField)tblList.Rows[rowIndex].FindControl("hfIdClaim");
+                int idClaim = MainHelper.HfGetValueInt32(ref hfIdClaim);
+
+                ClaimUnit cu = new ClaimUnit()
+                {
+                    Id = id,
+                    IdClaim = idClaim,
+                    IdCreator = User.Id
+                };
+
+                try
+                {
+                    cu.SupplyReturn();
+                }
+                catch (Exception ex)
+                {
+                    ServerMessageDisplay(new[] { phServerMessage }, ex.Message, true);
+                }
+
+                Claim c = new Claim() { Id = idClaim, IdCreator = User.Id };
+
+                try
+                {
+                    c.SupplyReturnClaim();
+                }
+                catch (Exception ex)
+                {
+                    ServerMessageDisplay(new[] { phServerMessage }, ex.Message, true);
+                }
+
+                tblList.DataBind();
+            }
+
+            SetRowEditState(id, false);
         }
 
         protected void btnCancel_OnClick(object sender, EventArgs e)

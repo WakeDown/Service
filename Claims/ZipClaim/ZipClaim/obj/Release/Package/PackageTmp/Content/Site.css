@@ -467,6 +467,8 @@ table tr.selected {
      
  }
 
+
+
 .row-mark {
     position: relative;
     /*width: 5px;*/
@@ -477,7 +479,9 @@ table tr.selected {
     display:inline-block
 }
 
-
+ .row-mark.low {
+     min-height: 20px;
+}
 
 .row-mark.bg-success {
     background-color: #3c763d;

@@ -113,8 +113,11 @@ namespace ZipClaim.WebForms.Claims
             //Подстановка настроек фильтра
             if (!IsPostBack && !IsSearch && !FilteredByUserFilter)
             {
-                FilteredByUserFilter = true;
-                RedirectWithUserFilter(User.Id);
+                if (String.IsNullOrEmpty(Request.QueryString["id"]))
+                {
+                    FilteredByUserFilter = true;
+                    RedirectWithUserFilter(User.Id);
+                }
             }
 
             //Сбрасываем условия чтобы впоследствии была возможность подставить значение из сохраненного полдьзовательского фильтра

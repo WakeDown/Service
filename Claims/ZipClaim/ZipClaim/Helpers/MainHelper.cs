@@ -255,13 +255,11 @@ namespace ZipClaim.Helpers
         public static DateTime? TxtGetTextDateTime(ref TextBox txt, bool positiveOrNull)
         {
             string text = TxtGetText(ref txt);
-            if (!positiveOrNull || !String.IsNullOrEmpty(text))
-            {
-                DateTime result;
-                result = DateTime.Parse(text);
-                return result;
-            }
-            return null;
+            if (positiveOrNull && String.IsNullOrEmpty(text)) return null;
+            
+            DateTime result;
+            result = Convert.ToDateTime(text);
+            return result;
         }
 
         public static decimal TxtGetTextDecimal(ref TextBox txt)

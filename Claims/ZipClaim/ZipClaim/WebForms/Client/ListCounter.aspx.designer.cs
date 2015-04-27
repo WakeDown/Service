@@ -31,6 +31,42 @@ namespace ZipClaim.WebForms.Client {
         protected global::System.Web.UI.WebControls.DropDownList ddlContract;
         
         /// <summary>
+        /// txtDateBegin элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateBegin;
+        
+        /// <summary>
+        /// cvTxtDateBegin элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtDateBegin;
+        
+        /// <summary>
+        /// txtDateEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDateEnd;
+        
+        /// <summary>
+        /// cvTxtDateEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtDateEnd;
+        
+        /// <summary>
         /// txtRowsCount элемент управления.
         /// </summary>
         /// <remarks>
@@ -76,30 +112,12 @@ namespace ZipClaim.WebForms.Client {
         protected global::System.Web.UI.WebControls.Literal lRowsCount;
         
         /// <summary>
-        /// phList элемент управления.
+        /// pnlList элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder phList;
-        
-        /// <summary>
-        /// tblList элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater tblList;
-        
-        /// <summary>
-        /// sdsList элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sdsList;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlList;
     }
 }

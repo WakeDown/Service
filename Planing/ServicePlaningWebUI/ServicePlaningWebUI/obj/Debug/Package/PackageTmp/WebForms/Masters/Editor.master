@@ -5,10 +5,10 @@
     <%-- Форма ввода нового контракта --%>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>
+            <h4>
                 <asp:ContentPlaceHolder ID="cphFormTitle" runat="server">
                 </asp:ContentPlaceHolder>
-            </h3>
+            </h4>
         </div>
         <div class="panel-body">
             <asp:ContentPlaceHolder ID="cphFormBody" runat="server">

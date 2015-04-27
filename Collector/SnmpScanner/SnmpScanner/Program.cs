@@ -40,6 +40,16 @@ namespace SnmpScanner
             _threadMustStop = false;
             _dbIsBuzy = false;
 
+            //if (System.Environment.UserInteractive)
+            //{
+            //    Application.EnableVisualStyles();
+            //    Application.SetCompatibleTextRenderingDefault(false);
+            //    Application.Run(new Form1());
+
+
+            //}
+            //else
+            //{
             if (args.Any())
             {
                 switch (args[0])
@@ -48,10 +58,10 @@ namespace SnmpScanner
                         StartWinService();
                         break;
                     case "install":
-                        SelfInstaller.InstallMe();
+                        MessageBox.Show(SelfInstaller.InstallMe());
                         break;
                     case "uninstall":
-                        SelfInstaller.UninstallMe();
+                        MessageBox.Show(SelfInstaller.UninstallMe());
                         break;
                     case "frm":
                         Application.EnableVisualStyles();
@@ -64,6 +74,7 @@ namespace SnmpScanner
             {
                 StartWinService();
             }
+            //}
         }
 
         public static void StartWinService()
@@ -96,32 +107,34 @@ namespace SnmpScanner
     {
         private static readonly string _exePath =
             Assembly.GetExecutingAssembly().Location;
-        public static bool InstallMe()
+        public static string InstallMe()
         {
             try
             {
                 ManagedInstallerClass.InstallHelper(
                     new string[] { _exePath });
             }
-            catch
+            catch (Exception exception)
             {
-                return false;
+                return exception.Message + "\r\n" + exception.InnerException;
             }
-            return true;
+            return "Служба UN1TCounter успешно установлена.";
         }
 
-        public static bool UninstallMe()
+        public static string UninstallMe()
         {
             try
             {
                 ManagedInstallerClass.InstallHelper(
                     new string[] { "/u", _exePath });
             }
-            catch
+            catch (Exception exception)
             {
-                return false;
+                return exception.Message + "\r\n" + exception.InnerException;
             }
-            return true;
+            return "Служба UN1TCounter успешно удалена.";
         }
     }
+
+
 }

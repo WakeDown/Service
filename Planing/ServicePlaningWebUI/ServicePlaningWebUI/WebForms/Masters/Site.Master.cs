@@ -89,18 +89,18 @@ namespace ServicePlaningWebUI.WebForms.Masters
                 SetUserName();
 
                 //Автопереход для инженеров на страницу Отчета
-                if ((UserIsServiceEngeneer /*|| userIsSysAdmin*/) && Request.Path.Equals("/"))
+                if (!UserIsSysAdmin && (UserIsServiceEngeneer /*|| userIsSysAdmin*/) && Request.Path.Equals("/"))
                 {
                     Response.Redirect(FriendlyUrl.Href("~/Reports/PlanExecute"));
                 }
 
-                if (UserIsServiceManager && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/PlanExecute")))
+                if (!UserIsSysAdmin && UserIsServiceManager && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/PlanExecute")))
                 {
                     Response.Redirect(FriendlyUrl.Href("~/Reports/PlanExecute"));
                 }
 
-                if (UserIsReport && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/PlanExecute")) &&
-                    !Request.Path.Equals(FriendlyUrl.Href("~/Reports/Payment")))
+                if (!UserIsSysAdmin && UserIsReport && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/PlanExecute")) &&
+                    !Request.Path.Equals(FriendlyUrl.Href("~/Reports/Payment")) && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/Counters")))
                 {
                     Response.Redirect(FriendlyUrl.Href("~/Reports/PlanExecute"));
                 }
@@ -123,7 +123,7 @@ namespace ServicePlaningWebUI.WebForms.Masters
         {
             if (UserIsSysAdmin)
             {
-                liSettings.Visible = liPayment.Visible = liReports.Visible = liPlanExec.Visible = true;
+                liSettings.Visible = liPayment.Visible = liReports.Visible = liPlanExec.Visible = liCounters.Visible = true;
             }
 
             if (UserIsSysAdmin || UserIsServiceAdmin)
@@ -138,7 +138,7 @@ namespace ServicePlaningWebUI.WebForms.Masters
 
             if (UserIsReport)
             {
-                liReports.Visible = liPayment.Visible = liPlanExec.Visible = true;
+                liReports.Visible = liPayment.Visible = liPlanExec.Visible = liCounters.Visible = true;
             }
         }
 

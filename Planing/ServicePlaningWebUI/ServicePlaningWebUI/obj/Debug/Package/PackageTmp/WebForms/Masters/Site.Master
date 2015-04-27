@@ -86,6 +86,7 @@
                             <ul class="dropdown-menu">
                                 <li id="liPlanExec" runat="server" Visible="false"><a href='<%= FriendlyUrl.Href("~/Reports/PlanExecute") %>'>Выполнение плана</a></li>
                                 <li id="liPayment" runat="server" Visible="false"><a href='<%= FriendlyUrl.Href("~/Reports/Payment") %>'>Расчет зарплаты</a></li>
+                                <li id="liCounters" runat="server" Visible="false"><a href='<%= FriendlyUrl.Href("~/Reports/Counters") %>'>Счетчики</a></li>
                             </ul>
                         </li>
                         <li id="liSettings" runat="server" class="dropdown" Visible="False">

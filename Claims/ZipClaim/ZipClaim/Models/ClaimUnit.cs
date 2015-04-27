@@ -122,5 +122,13 @@ namespace ZipClaim.Models
         {
             throw new NotSupportedException();
         }
+
+        public void SupplyReturn()
+        {
+            SqlParameter pId = new SqlParameter() { ParameterName = "id_claim_unit", Value = Id, DbType = DbType.Int32 };
+            SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
+
+            ExecuteQueryStoredProcedure(Zipcl.sp, "setClaimUnitSupplyReturn", pId, pIdCreator);
+        }
     }
 }

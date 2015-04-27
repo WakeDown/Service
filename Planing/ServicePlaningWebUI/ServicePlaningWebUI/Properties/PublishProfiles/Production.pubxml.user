@@ -9,23 +9,140 @@
     <_PublishTargetUrl>\\uiis-1\c$\inetpub\wwwroot\service_planing</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/AjaxMin.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>01/20/2015 09:16:35</publishTime>
+      <publishTime>04/23/2015 14:50:50</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.pdb">
-      <publishTime>01/20/2015 09:16:35</publishTime>
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/ar/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/ClosedXML.dll">
+      <publishTime>12/17/2014 03:34:10</publishTime>
+    </File>
+    <File Include="bin/cs/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/de/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/de/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
     </File>
     <File Include="bin/Docs/Instruction.doc">
       <publishTime>05/07/2014 17:30:35</publishTime>
     </File>
+    <File Include="bin/DocumentFormat.OpenXml.dll">
+      <publishTime>09/01/2012 01:24:26</publishTime>
+    </File>
+    <File Include="bin/es/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/es/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
+    <File Include="bin/fr/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/fr/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
+    <File Include="bin/he/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/hi/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>04/23/2015 14:50:52</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.pdb">
+      <publishTime>04/23/2015 14:50:52</publishTime>
+    </File>
+    <File Include="bin/it/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/it/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
+    <File Include="bin/ja/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/ja/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
+    <File Include="bin/ko/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/ko/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
-      <publishTime>01/20/2015 09:16:36</publishTime>
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.Edm.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.OData.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>08/07/2013 15:15:08</publishTime>
+      <publishTime>07/08/2013 15:15:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WindowsAzure.Configuration.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WindowsAzure.Storage.dll">
+      <publishTime>04/23/2015 14:50:56</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
-      <publishTime>01/20/2015 09:16:36</publishTime>
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
+    <File Include="bin/nl/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
     </File>
     <File Include="bin/PdfToImage.dll">
       <publishTime>12/15/2014 00:19:13</publishTime>
@@ -33,20 +150,68 @@
     <File Include="bin/PdfToImage.pdb">
       <publishTime>12/15/2014 00:19:13</publishTime>
     </File>
+    <File Include="bin/pl/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/pt/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/ru/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/ru/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
     <File Include="bin/ServicePlaningWebUI.dll">
-      <publishTime>01/20/2015 09:23:34</publishTime>
+      <publishTime>04/24/2015 11:02:54</publishTime>
     </File>
     <File Include="bin/ServicePlaningWebUI.pdb">
-      <publishTime>01/20/2015 09:23:33</publishTime>
+      <publishTime>04/24/2015 11:02:54</publishTime>
+    </File>
+    <File Include="bin/System.Spatial.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>01/20/2015 09:16:36</publishTime>
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/tr-TR/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>01/20/2015 09:16:36</publishTime>
+      <publishTime>04/23/2015 14:50:56</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/AjaxControlToolkit.resources.dll">
+      <publishTime>04/23/2015 14:50:50</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/Microsoft.Data.Edm.resources.dll">
+      <publishTime>04/23/2015 14:50:53</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/Microsoft.Data.OData.resources.dll">
+      <publishTime>04/23/2015 14:50:54</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Spatial.resources.dll">
+      <publishTime>04/23/2015 14:50:55</publishTime>
     </File>
     <File Include="Bundle.config">
-      <publishTime>07/12/2014 21:39:54</publishTime>
+      <publishTime>12/07/2014 21:39:54</publishTime>
     </File>
     <File Include="Content/bootstrap-datepicker.css">
       <publishTime>03/24/2014 12:12:53</publishTime>
@@ -64,19 +229,22 @@
       <publishTime>03/17/2014 09:20:59</publishTime>
     </File>
     <File Include="Content/bootstrap.css">
-      <publishTime>11/07/2014 10:30:21</publishTime>
+      <publishTime>07/11/2014 10:30:21</publishTime>
     </File>
     <File Include="Content/bootstrap.css.map">
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Content/bootstrap.min.css">
-      <publishTime>11/07/2014 10:31:04</publishTime>
+      <publishTime>07/11/2014 10:31:04</publishTime>
     </File>
     <File Include="Content/bootstrapValidator.css">
       <publishTime>03/25/2014 11:17:59</publishTime>
     </File>
     <File Include="Content/bootstrapValidator.min.css">
       <publishTime>03/25/2014 11:17:59</publishTime>
+    </File>
+    <File Include="Content/Files/new_contract_claim.xlsm">
+      <publishTime>01/27/2015 19:52:28</publishTime>
     </File>
     <File Include="Content/font-awesome.css">
       <publishTime>03/27/2014 12:01:30</publishTime>
@@ -94,10 +262,10 @@
       <publishTime>03/17/2014 11:10:10</publishTime>
     </File>
     <File Include="Content/ServiceAkt.css">
-      <publishTime>12/08/2014 15:33:13</publishTime>
+      <publishTime>08/12/2014 15:33:13</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>12/23/2014 15:42:04</publishTime>
+      <publishTime>04/20/2015 17:47:51</publishTime>
     </File>
     <File Include="Content/themes/base/images/animated-overlay.gif">
       <publishTime>04/22/2014 10:29:26</publishTime>
@@ -286,7 +454,7 @@
       <publishTime>04/22/2014 10:29:22</publishTime>
     </File>
     <File Include="Content/validation.css">
-      <publishTime>03/26/2014 15:01:04</publishTime>
+      <publishTime>02/18/2015 03:08:08</publishTime>
     </File>
     <File Include="Docs/Instruction.doc">
       <publishTime>05/07/2014 17:30:35</publishTime>
@@ -361,10 +529,10 @@
       <publishTime>03/17/2014 10:38:58</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>04/22/2014 10:29:26</publishTime>
+      <publishTime>01/21/2015 19:22:44</publishTime>
     </File>
     <File Include="Scripts/arr.js">
-      <publishTime>04/09/2014 15:11:07</publishTime>
+      <publishTime>09/04/2014 15:11:07</publishTime>
     </File>
     <File Include="Scripts/bootstrap-datepicker.js">
       <publishTime>03/24/2014 12:07:54</publishTime>
@@ -583,7 +751,7 @@
       <publishTime>04/04/2014 11:06:29</publishTime>
     </File>
     <File Include="Scripts/Site.js">
-      <publishTime>02/12/2014 15:53:05</publishTime>
+      <publishTime>04/13/2015 11:06:50</publishTime>
     </File>
     <File Include="Scripts/tristate-0.9.2.js">
       <publishTime>05/16/2014 13:28:49</publishTime>
@@ -598,34 +766,37 @@
       <publishTime>03/17/2014 09:24:01</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/25/2014 13:44:17</publishTime>
+      <publishTime>04/15/2015 13:45:18</publishTime>
     </File>
     <File Include="WebForms/Addresses/Editor.aspx">
-      <publishTime>11/12/2014 10:49:04</publishTime>
+      <publishTime>12/11/2014 10:49:04</publishTime>
     </File>
     <File Include="WebForms/Cities/Editor.aspx">
-      <publishTime>08/10/2014 20:32:35</publishTime>
+      <publishTime>10/08/2014 20:32:35</publishTime>
     </File>
     <File Include="WebForms/Contracts/DevicesEditor.aspx">
-      <publishTime>11/18/2014 00:05:09</publishTime>
+      <publishTime>02/18/2015 15:00:54</publishTime>
     </File>
     <File Include="WebForms/Contracts/DevicesList.aspx">
       <publishTime>10/16/2014 22:47:33</publishTime>
     </File>
     <File Include="WebForms/Contracts/Editor.aspx">
-      <publishTime>02/12/2014 15:54:26</publishTime>
+      <publishTime>04/15/2015 16:43:02</publishTime>
+    </File>
+    <File Include="WebForms/Contracts/EditorWizard.aspx">
+      <publishTime>01/27/2015 20:21:16</publishTime>
     </File>
     <File Include="WebForms/Contracts/List.aspx">
       <publishTime>11/19/2014 19:54:57</publishTime>
     </File>
     <File Include="WebForms/Contracts/SpecPrice.aspx">
-      <publishTime>11/05/2014 18:59:57</publishTime>
+      <publishTime>01/23/2015 10:59:50</publishTime>
     </File>
     <File Include="WebForms/DeviceModels/Editor.aspx">
-      <publishTime>08/10/2014 20:32:34</publishTime>
+      <publishTime>04/20/2015 15:39:14</publishTime>
     </File>
     <File Include="WebForms/DeviceModels/List.aspx">
-      <publishTime>04/02/2014 09:51:54</publishTime>
+      <publishTime>02/04/2014 09:51:54</publishTime>
     </File>
     <File Include="WebForms/Devices/Editor.aspx">
       <publishTime>09/28/2014 17:48:15</publishTime>
@@ -636,11 +807,14 @@
     <File Include="WebForms/Error.aspx">
       <publishTime>09/28/2014 11:55:35</publishTime>
     </File>
+    <File Include="WebForms/Handlers/FileHandler.ashx">
+      <publishTime>01/27/2015 19:00:35</publishTime>
+    </File>
     <File Include="WebForms/Instruction.aspx">
-      <publishTime>04/12/2014 13:06:09</publishTime>
+      <publishTime>12/04/2014 13:06:09</publishTime>
     </File>
     <File Include="WebForms/Masters/Editor.master">
-      <publishTime>05/15/2014 09:27:47</publishTime>
+      <publishTime>01/27/2015 18:55:21</publishTime>
     </File>
     <File Include="WebForms/Masters/List.master">
       <publishTime>11/14/2014 15:13:07</publishTime>
@@ -649,10 +823,13 @@
       <publishTime>05/14/2014 14:25:13</publishTime>
     </File>
     <File Include="WebForms/Masters/Site.Master">
-      <publishTime>12/25/2014 14:02:20</publishTime>
+      <publishTime>04/16/2015 16:18:45</publishTime>
     </File>
     <File Include="WebForms/Output/ExecReport.aspx">
       <publishTime>11/14/2014 14:14:07</publishTime>
+    </File>
+    <File Include="WebForms/Reports/Counters.aspx">
+      <publishTime>04/21/2015 11:57:26</publishTime>
     </File>
     <File Include="WebForms/Reports/Payment.aspx">
       <publishTime>12/19/2014 10:56:20</publishTime>
@@ -661,25 +838,25 @@
       <publishTime>01/12/2015 17:32:28</publishTime>
     </File>
     <File Include="WebForms/Reports/ServiceAkt.aspx">
-      <publishTime>08/12/2014 15:36:17</publishTime>
+      <publishTime>12/08/2014 15:36:17</publishTime>
     </File>
     <File Include="WebForms/Service/Came.aspx">
-      <publishTime>11/17/2014 15:29:38</publishTime>
+      <publishTime>02/25/2015 13:30:19</publishTime>
     </File>
     <File Include="WebForms/Service/CameScan.aspx">
-      <publishTime>12/21/2014 21:03:32</publishTime>
+      <publishTime>04/13/2015 11:18:03</publishTime>
     </File>
     <File Include="WebForms/Service/Editor.aspx">
-      <publishTime>12/23/2014 20:00:58</publishTime>
+      <publishTime>04/13/2015 10:18:01</publishTime>
     </File>
     <File Include="WebForms/Service/EngeneerSet.aspx">
-      <publishTime>12/03/2014 11:33:11</publishTime>
+      <publishTime>04/15/2015 16:21:17</publishTime>
     </File>
     <File Include="WebForms/Service/List.aspx">
-      <publishTime>01/15/2015 17:23:30</publishTime>
+      <publishTime>04/15/2015 16:24:07</publishTime>
     </File>
     <File Include="WebForms/Service/Plan.aspx">
-      <publishTime>04/09/2014 14:43:19</publishTime>
+      <publishTime>09/04/2014 14:43:19</publishTime>
     </File>
     <File Include="WebForms/Service/Plan.aspx.cs">
       <publishTime>05/16/2014 15:22:12</publishTime>

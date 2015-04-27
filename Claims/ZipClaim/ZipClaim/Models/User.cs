@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
+using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
@@ -59,7 +61,11 @@ namespace ZipClaim.Models
             {
                 IIdentity WinId = HttpContext.Current.User.Identity;
                 WindowsIdentity wi = (WindowsIdentity)WinId;
-                string sid = "S-1-5-21-1970802976-3466419101-4042325969-3704";//wi.User.Value;//UN1T//"S-1-5-21-1970802976-3466419101-4042325969-4246"-СвердловскийХлебомакаронныйКомбинат
+                string sid = wi.User.Value;
+                //sid = "S-1-5-21-1970802976-3466419101-4042325969-3704";//UN1T
+                //sid = "S-1-5-21-1970802976-3466419101-4042325969-4246";//СвердловскийХлебомакаронныйКомбинат
+                //sid="S-1-5-21-1970802976-3466419101-4042325969-4248";//МРСК Урала-Челябэнерго
+
                 User user = Db.Db.Users.GetUserBySid(sid);
 
                 Id = user.Id;
@@ -71,8 +77,6 @@ namespace ZipClaim.Models
                 Company = user.Company;
             }
         }
-
-        
 
         public User(int id, string login, string fullName, string displayName, string mail)
             : this()

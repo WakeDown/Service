@@ -81,6 +81,16 @@
                 </span>--%>
             </div>
         </div>
+         <div class="form-group">
+            <label for='<%=txtMaxVolume.ClientID %>' class="col-sm-2 control-label">Максимальный объем печати</label>
+            <div class="col-sm-10">
+                <asp:TextBox ID="txtMaxVolume" runat="server" class="form-control" MaxLength="10"></asp:TextBox>
+                <span class="help-block">
+                    <%--<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Заполните поле &laquo;Серийный номер&raquo;" ControlToValidate="txtSerialNum" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
+                    <asp:CompareValidator ID="cvTxtMaxVolume" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="txtMaxVolume" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>
+                </span>
+            </div>
+        </div>
         <div class="col-sm-offset-2 col-sm-10">
             <asp:PlaceHolder ID="phServerMessage" runat="server"></asp:PlaceHolder>
         </div>

@@ -83,7 +83,7 @@ namespace ZipClaim.Db
             return result;
         }
 
-        protected int? GetValueIntOrNull(string value)
+        public static int? GetValueIntOrNull(string value)
         {
             int? result = null;
 
@@ -95,7 +95,7 @@ namespace ZipClaim.Db
             return result;
         }
 
-        protected decimal? GetValueDecimalOrNull(string value)
+        public static decimal? GetValueDecimalOrNull(string value)
         {
             decimal? result = null;
 
@@ -107,7 +107,7 @@ namespace ZipClaim.Db
             return result;
         }
 
-        protected DateTime? GetValueDateTimeOrNull(string value)
+        public static DateTime? GetValueDateTimeOrNull(string value)
         {
             DateTime? result = null;
 
@@ -119,7 +119,7 @@ namespace ZipClaim.Db
             return result;
         }
 
-        protected bool GetValueBool(object value)
+        public static bool GetValueBool(object value)
         {
             bool result = false;
 

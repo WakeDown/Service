@@ -224,8 +224,8 @@
     <Content Include="WebForms\Settings\Users2Roles.aspx" />
     <Content Include="Handlers\ShowImage.ashx" />
     <Content Include="Content\Files\new_contract_claim.xlsm" />
+    <None Include="Properties\PublishProfiles\DEV.pubxml" />
     <None Include="Properties\PublishProfiles\Production.pubxml" />
-    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

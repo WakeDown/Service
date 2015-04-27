@@ -135,6 +135,7 @@
     <Content Include="Scripts\filter-exp-mem.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery.filterByText.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.ar.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.az.js" />
     <Content Include="Scripts\locales\bootstrap-datepicker.bg.js" />
@@ -239,6 +240,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Db\Db.cs" />
+    <Compile Include="Db\Db.Devinst.cs" />
     <Compile Include="Db\Db.Unit.cs" />
     <Compile Include="Db\Db.Users.cs" />
     <Compile Include="Global.asax.cs">
@@ -247,6 +249,7 @@
     <Compile Include="Helpers\AdHelper.cs" />
     <Compile Include="Helpers\MainHelper.cs" />
     <Compile Include="Helpers\MessageHelper.cs" />
+    <Compile Include="Models\DeviceInstall.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Objects\AdGroup.cs" />
     <Compile Include="Objects\BaseFilteredPage.cs">

@@ -185,7 +185,7 @@
                                     <%#Eval("id_service_claim") %>
                                 </div>
                                 <div class="col-sm-3">
-                                    <%#Eval("device") %>
+                                    <%# Eval("is_limit_device_claims").ToString().Equals("1") ? "неизвестное" : Eval("device") %>
                                 </div>
                                 <div class="col-sm-2">
                                     <span runat="server" class="label label-mark" style='<%#String.Format("background-color: #{0}", Eval("mark_color"))%>'>&nbsp;</span>
@@ -193,7 +193,7 @@
                                     <div class="text-danger" runat="server" visible='<%# Eval("show_contract_state").ToString().Equals("1") %>'><%# String.Format("({0})" ,Eval("contract_state")) %></div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <%#Eval("city") %>,&nbsp;<%#Eval("address") %>
+                                    <%# Eval("is_limit_device_claims").ToString().Equals("1") ? "неизвестное" : String.Format("{0}, {1}", Eval("city"), Eval("address"))  %>
                                 </div>
                                 <div class="col-sm-1 nowrap">
                                     <%# String.Format("{0:MMMM yyyy}", Eval("planing_date")) %>

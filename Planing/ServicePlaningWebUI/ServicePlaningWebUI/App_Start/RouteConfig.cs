@@ -47,6 +47,7 @@ namespace ServicePlaningWebUI.App_Start
             routes.MapPageRoute("PlanExecute", "Reports/PlanExecute", "~/WebForms/Reports/PlanExecute.aspx");
             routes.MapPageRoute("Payment", "Reports/Payment", "~/WebForms/Reports/Payment.aspx");
             routes.MapPageRoute("ServiceAkt", "Reports/ServiceAkt", "~/WebForms/Reports/ServiceAkt.aspx");
+            routes.MapPageRoute("Counters", "Reports/Counters", "~/WebForms/Reports/Counters.aspx");
 
             routes.MapPageRoute("Error", "Error", "~/WebForms/Error.aspx");
 

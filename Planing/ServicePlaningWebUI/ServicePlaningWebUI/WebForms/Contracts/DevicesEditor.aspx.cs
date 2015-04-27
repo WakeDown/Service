@@ -295,6 +295,7 @@ namespace ServicePlaningWebUI.WebForms.Contracts
             //bool addScheduleDates2ServicePlan = chkAddScheduleDates2ServicePlan.Checked;
 
             Contract2Devices contract2Devices = GetFormData();
+            
             contract2Devices.Save(true);
 
             //StringBuilder messageText = new StringBuilder();

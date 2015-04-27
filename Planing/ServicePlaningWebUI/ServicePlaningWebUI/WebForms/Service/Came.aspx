@@ -16,7 +16,7 @@
                         <asp:TextBox ID="txtClaimSelection" runat="server" CssClass="form-control input-sm" placeholder="поиск" MaxLength="50" OnTextChanged="txtClaimSelection_TextChanged" AutoPostBack="True"></asp:TextBox>
                         <asp:ListBox ID="lbClaim" runat="server" Height="150px" CssClass="full-width input-sm" OnSelectedIndexChanged="lbClaim_OnSelectedIndexChanged" AutoPostBack="True"></asp:ListBox>
                         <span class="help-block">
-                            <%--                        <asp:RequiredFieldValidator ID="rfvDdlServiceClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="ddlServiceClaim" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
+                            <%--<asp:RequiredFieldValidator ID="rfvDdlServiceClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="ddlServiceClaim" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
                             <asp:RequiredFieldValidator ID="rfvLbClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="lbClaim" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
                         </span>
                     </ContentTemplate>

@@ -112,6 +112,24 @@ namespace ServicePlaningWebUI.WebForms.DeviceModels {
         protected global::System.Web.UI.WebControls.DropDownList ddlCartridgeType;
         
         /// <summary>
+        /// txtMaxVolume элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMaxVolume;
+        
+        /// <summary>
+        /// cvTxtMaxVolume элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtMaxVolume;
+        
+        /// <summary>
         /// phServerMessage элемент управления.
         /// </summary>
         /// <remarks>

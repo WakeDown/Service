@@ -112,7 +112,7 @@
             <label for='<%=txtDateMonthPlan.ClientID %>' class="col-sm-2 control-label">Месяц (план)</label>
             <div class="col-sm-3">
                 <div class="input-group">
-                    <asp:TextBox ID="txtDateMonthPlan" runat="server" CssClass="form-control datepicker-btn-month"></asp:TextBox>
+                    <asp:TextBox ID="txtDateMonthPlan" runat="server" CssClass="form-control input-sm datepicker-btn-month"></asp:TextBox>
                 </div>
                 <span class="help-block">
                     <asp:RegularExpressionValidator ID="revTxtDateMonthPlan" runat="server" ErrorMessage="Введите дату (месяц, год) в формате '01.2014'" ControlToValidate="txtDateMonthPlan" Display="Dynamic" SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgFilter" ValidationExpression="(0?[1-9]|1[012]).((19|20)[0-9]{2})"></asp:RegularExpressionValidator>

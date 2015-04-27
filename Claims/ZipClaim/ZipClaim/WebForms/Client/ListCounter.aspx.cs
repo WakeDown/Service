@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.FriendlyUrls;
 using ZipClaim.Helpers;
@@ -52,6 +54,8 @@ namespace ZipClaim.WebForms.Client
 
             FilterLinks = new List<FilterLink>();
             FilterLinks.Add(new FilterLink("ctr", ddlContract));
+            FilterLinks.Add(new FilterLink("dst", txtDateBegin));
+            FilterLinks.Add(new FilterLink("den", txtDateEnd));
             FilterLinks.Add(new FilterLink("rcn", txtRowsCount, "50"));
 
             BtnSearchClientId = btnSearch.ClientID;
@@ -87,20 +91,127 @@ namespace ZipClaim.WebForms.Client
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            GreateList();
+            CreateList();
         }
 
 
-        private void GreateList()
+        private void CreateList()
         {
+            
+
             int? idContract = MainHelper.DdlGetSelectedValueInt(ref ddlContract, true);
             int? rowsCount = MainHelper.TxtGetTextInt32(ref txtRowsCount, true);
-            DateTime dateBegin = new DateTime();
-            DateTime dateEnd = new DateTime();
 
-            var devices = Db.Db.Srvpl.GetContract2DevicesList(ContractorId, idContract, rowsCount);
+            var dates = GetShownDates();
+            DateTime lastDate = dates[dates.Count() - 1].Date;
+
+            DateTime dateBegin = new DateTime(lastDate.Year, lastDate.Month, 1);
+            DateTime dateEnd = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+
+
+            var devices = Db.Db.Srvpl.GetContract2DevicesList(ContractorId, idContract);
             var deviceData = Db.Db.Srvpl.GetDevicesCounterList(dateBegin, dateEnd, ContractorId, idContract);
 
+            int devRows = devices.Rows.Count;
+            lDevicesCount.Text = devRows.ToString();
+            lRowsCount.Text = rowsCount < devRows ? rowsCount.ToString() : devRows.ToString();
+
+            var devs = devices.Select(String.Format("row_num <= {0}", rowsCount)).ToList();
+
+            StringBuilder tbl = new StringBuilder();
+            tbl.Append("<table class='table table-striped'>");
+            //Total
+            tbl.Append(@"<tr class='total-counter-row'><td colspan='5' class='text-right bold'>ВСЕГО</td>");
+
+            foreach (ShownDates date in dates)
+            {
+                var volumeSum = deviceData.Compute("Sum(volume_total_counter)", String.Format("year={0} and month={1}", date.Date.Year, date.Date.Month));
+
+                tbl.Append(
+                     String.Format(@"<td class='text-right bold'>{0:### ### ### ### ###}</td>", volumeSum));
+            }
+
+            var volumeTotalSum = deviceData.Compute("Sum(volume_total_counter)", "");
+
+            tbl.Append(String.Format(@"<td class='text-right bold'>{0:### ### ### ### ###}</td>", volumeTotalSum));
+            tbl.Append("</tr>");
+            //</Total
+
+            //Header
+            tbl.Append("<tr>");
+            tbl.Append(@"<td class='min-width'></td><th>Модель</th><th>№ договора</th><th class='min-width text-center'>Дата</th><th class='text-right curr-counter-col'>Текущий</th>");
+
+            foreach (ShownDates date in dates)
+            {
+                tbl.Append(String.Format(@"<th class='text-right'>{0:MMM yyyy}</th>", date.Date));
+            }
+                        
+            tbl.Append(@"<th class='text-right total-counter-col'>ИТОГО</th>");
+            tbl.Append("</tr>");
+            //</Header
+
+            //Tbody
+            foreach (DataRow row in devs)
+            {
+                DateTime? lastCounterDate = Db.Db.GetValueDateTimeOrNull(row["last_counter_date"].ToString());
+                int daysDiff = lastCounterDate == null ? 0 : Convert.ToInt32((new DateTime(lastCounterDate.Value.Year, lastCounterDate.Value.Month, lastCounterDate.Value.Day) - new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day)).TotalDays);
+
+                DateTime? lastUnitCounterDate = Db.Db.GetValueDateTimeOrNull(row["unit_counter_last_date"].ToString());
+                int unitCounterHoursDiff = lastUnitCounterDate == null
+                    ? 0
+                    : Convert.ToInt32((DateTime.Now - lastUnitCounterDate.Value).TotalHours);
+
+                tbl.Append("<tr>");
+                tbl.Append(String.Format("<td class='min-width'><div class='row-mark low {0}'>&nbsp;</div></td>", unitCounterHoursDiff <= 24 && unitCounterHoursDiff > 0 ? "bg-success" : String.Empty));
+                tbl.Append("<td class='min-width'>");
+                string address = String.Format("{0}{3} {1}{4} {2}", row["city"], row["address"], row["object_name"], !String.IsNullOrEmpty(row["address"].ToString()) ? "," : String.Empty, !String.IsNullOrEmpty(row["object_name"].ToString()) ? "," : String.Empty);
+                tbl.Append(String.Format(@"<div data-toggle='tooltip' title='{0}' class='nowrap'>", address));
+
+                string href =
+                    GetRedirectUrlWithParams(String.Format("id={0}&cid={1}", row["id_device"], row["id_contract"]),
+                        false, DetailUrl);
+                tbl.Append(String.Format(@"<a runat='server' href='{0}' target='_blank' class='btn btn-link'>{1}</a>", href, row["device"]));
+                tbl.Append("</div>");
+                tbl.Append("</td>");
+
+                string strDate = lastCounterDate == null
+                    ? String.Empty
+                    : String.Format("{0:dd/MM/yyyy}&nbsp;({1})", lastCounterDate, daysDiff);
+
+                tbl.Append(String.Format(@"<td class='min-width nowrap'>{0:### ### ### ### ###}</td><td class='text-nowrap text-center'>{2}</td><td class='min-width nowrap text-right curr-counter-col'>{1:### ### ### ### ###}</td>", row["contract_num"], row["last_counter"], strDate));
+
+                foreach (ShownDates date in dates)
+                {
+                    var dr =
+                        deviceData.Select(String.Format("year={0} and month={1} and id_device={2}", date.Date.Year,
+                            date.Date.Month, row["id_device"]));
+
+                    if (dr != null && dr.Any())
+                    {
+                        var volume = dr[0]["volume_total_counter"];
+                        tbl.Append(String.Format(@"<td class='text-right'>{0:### ### ### ### ###}</th>", volume));
+                    }
+                    else
+                    {
+                        tbl.Append(String.Format(@"<td class='text-right'></th>"));
+                    }
+
+                    
+                }
+
+                var volSum = deviceData.Compute("Sum(volume_total_counter)", String.Format("id_device={0}", row["id_device"]));
+
+                tbl.Append(String.Format(@"<td class='text-right bold'><span class='total-counter-col'>{0}</span></td>", volSum));
+
+                tbl.Append("</tr>");
+            }
+            
+            
+            //</Tbody
+
+            tbl.Append("</table>");
+
+            pnlList.InnerHtml = tbl.ToString();
         }
 
         private void LoadData()
@@ -110,7 +221,7 @@ namespace ZipClaim.WebForms.Client
 
         private void SetDefaults()
         {
-            sdsList.SelectParameters["id_contractor"].DefaultValue = ContractorId.ToString();
+            //sdsList.SelectParameters["id_contractor"].DefaultValue = ContractorId.ToString();
             //sdsList.SelectParameters["id_contract"].DefaultValue = ddlContract.SelectedValue;
         }
 
@@ -137,8 +248,13 @@ namespace ZipClaim.WebForms.Client
             if (rtrClientCounterMonthes != null)
             {
                 var lst = GetShownDates();
-                rtrClientCounterMonthes.DataSource = lst;
-                rtrClientCounterMonthes.DataBind();
+
+                //var phDeviceCounters = e.Item.FindControl("phDeviceCounters") as PlaceHolder;
+
+
+
+                //rtrClientCounterMonthes.DataSource = lst;
+                //rtrClientCounterMonthes.DataBind();
             }
 
             if (e.Item.ItemType == ListItemType.Header)

@@ -134,6 +134,7 @@
                 </EditItemTemplate>--%>
                         <ItemTemplate>
                             <asp:LinkButton ID="btnSave" runat="server" OnClick="btnSave_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' CssClass="btn btn-link" data-toggle="tooltip" title="отправить" Visible="False" ValidationGroup="vgSupply"><i class="fa fa-reply fa-lg"></i></asp:LinkButton>
+<%--                            <asp:LinkButton ID="btnReturn" runat="server" OnClick="btnReturn_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' CssClass="btn btn-link" data-toggle="tooltip" title="вернуть" Visible='<%# UserIsSupplyMan || UserIsSysAdmin %>'><i class="fa fa-recycle fa-lg"></i></asp:LinkButton>--%>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

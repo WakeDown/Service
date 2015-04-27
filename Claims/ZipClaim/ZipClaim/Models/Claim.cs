@@ -244,6 +244,14 @@ namespace ZipClaim.Models
             DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "setClaimPriceSetState", pId, pIdCreator, pIfSetPriceDone);
         }
 
+        public void SupplyReturnClaim()
+        {
+            SqlParameter pId = new SqlParameter() { ParameterName = "id_claim", Value = Id, DbType = DbType.Int32 };
+            SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
+
+            DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "setClaimSupplyReturn", pId, pIdCreator);
+        }
+
         public void SetRequestNumState()
         {
             SqlParameter pId = new SqlParameter() { ParameterName = "id_claim", Value = Id, DbType = DbType.Int32 };

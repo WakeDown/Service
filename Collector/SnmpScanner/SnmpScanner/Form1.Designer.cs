@@ -30,6 +30,16 @@
         {
             System.Windows.Forms.TabPage tabImap;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.chkSentSsl = new System.Windows.Forms.CheckBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtSentPort = new System.Windows.Forms.TextBox();
+            this.lblSentPort = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtSentHost = new System.Windows.Forms.TextBox();
+            this.txtSentLogin = new System.Windows.Forms.TextBox();
+            this.txtSentPassword = new System.Windows.Forms.TextBox();
+            this.lblImapHost = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.lstIpRanges = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtIpFrom = new System.Windows.Forms.TextBox();
@@ -53,34 +63,25 @@
             this.label10 = new System.Windows.Forms.Label();
             this.tabDevices = new System.Windows.Forms.TabPage();
             this.tabExchange = new System.Windows.Forms.TabPage();
-            this.lblExchangeNote = new System.Windows.Forms.Label();
-            this.txtSentPort = new System.Windows.Forms.TextBox();
-            this.lblSentPort = new System.Windows.Forms.Label();
-            this.lblImapHost = new System.Windows.Forms.Label();
-            this.txtSentHost = new System.Windows.Forms.TextBox();
-            this.chkSave2Sent = new System.Windows.Forms.CheckBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.chkSslEnable = new System.Windows.Forms.CheckBox();
-            this.btnSmtpTest = new System.Windows.Forms.Button();
-            this.txtSmtpPass = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtSmtpLogin = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtSmtpPort = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtSmtpHost = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             this.tcMail = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.chkSentSsl = new System.Windows.Forms.CheckBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.txtSentLogin = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtSentPassword = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtSmtpHost = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtSmtpPort = new System.Windows.Forms.TextBox();
+            this.chkSslEnable = new System.Windows.Forms.CheckBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtSmtpLogin = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtSmtpPass = new System.Windows.Forms.TextBox();
+            this.lblExchangeNote = new System.Windows.Forms.Label();
+            this.btnSmtpTest = new System.Windows.Forms.Button();
+            this.chkSave2Sent = new System.Windows.Forms.CheckBox();
             tabImap = new System.Windows.Forms.TabPage();
+            tabImap.SuspendLayout();
             this.pnlIpRanges.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exchangeDelay)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -89,8 +90,116 @@
             this.tabExchange.SuspendLayout();
             this.tcMail.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            tabImap.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // tabImap
+            // 
+            tabImap.Controls.Add(this.chkSentSsl);
+            tabImap.Controls.Add(this.label14);
+            tabImap.Controls.Add(this.txtSentPort);
+            tabImap.Controls.Add(this.lblSentPort);
+            tabImap.Controls.Add(this.label15);
+            tabImap.Controls.Add(this.txtSentHost);
+            tabImap.Controls.Add(this.txtSentLogin);
+            tabImap.Controls.Add(this.txtSentPassword);
+            tabImap.Controls.Add(this.lblImapHost);
+            tabImap.Controls.Add(this.label16);
+            tabImap.Location = new System.Drawing.Point(4, 22);
+            tabImap.Name = "tabImap";
+            tabImap.Padding = new System.Windows.Forms.Padding(3);
+            tabImap.Size = new System.Drawing.Size(305, 134);
+            tabImap.TabIndex = 1;
+            tabImap.Text = "IMAP";
+            tabImap.UseVisualStyleBackColor = true;
+            // 
+            // chkSentSsl
+            // 
+            this.chkSentSsl.AutoSize = true;
+            this.chkSentSsl.Location = new System.Drawing.Point(113, 113);
+            this.chkSentSsl.Name = "chkSentSsl";
+            this.chkSentSsl.Size = new System.Drawing.Size(15, 14);
+            this.chkSentSsl.TabIndex = 18;
+            this.chkSentSsl.UseVisualStyleBackColor = true;
+            this.chkSentSsl.CheckedChanged += new System.EventHandler(this.SaveSentSettings);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 114);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(79, 13);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "Включить SSL";
+            // 
+            // txtSentPort
+            // 
+            this.txtSentPort.Location = new System.Drawing.Point(113, 35);
+            this.txtSentPort.Name = "txtSentPort";
+            this.txtSentPort.Size = new System.Drawing.Size(186, 20);
+            this.txtSentPort.TabIndex = 15;
+            this.txtSentPort.WordWrap = false;
+            this.txtSentPort.TextChanged += new System.EventHandler(this.SaveSentSettings);
+            // 
+            // lblSentPort
+            // 
+            this.lblSentPort.AutoSize = true;
+            this.lblSentPort.Location = new System.Drawing.Point(6, 38);
+            this.lblSentPort.Name = "lblSentPort";
+            this.lblSentPort.Size = new System.Drawing.Size(32, 13);
+            this.lblSentPort.TabIndex = 16;
+            this.lblSentPort.Text = "Порт";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 64);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(103, 13);
+            this.label15.TabIndex = 13;
+            this.label15.Text = "Имя пользователя";
+            // 
+            // txtSentHost
+            // 
+            this.txtSentHost.Location = new System.Drawing.Point(113, 9);
+            this.txtSentHost.Name = "txtSentHost";
+            this.txtSentHost.Size = new System.Drawing.Size(186, 20);
+            this.txtSentHost.TabIndex = 14;
+            this.txtSentHost.TextChanged += new System.EventHandler(this.SaveSentSettings);
+            // 
+            // txtSentLogin
+            // 
+            this.txtSentLogin.Location = new System.Drawing.Point(113, 61);
+            this.txtSentLogin.Name = "txtSentLogin";
+            this.txtSentLogin.Size = new System.Drawing.Size(186, 20);
+            this.txtSentLogin.TabIndex = 16;
+            this.txtSentLogin.TextChanged += new System.EventHandler(this.SaveSentSettings);
+            // 
+            // txtSentPassword
+            // 
+            this.txtSentPassword.Location = new System.Drawing.Point(113, 87);
+            this.txtSentPassword.Name = "txtSentPassword";
+            this.txtSentPassword.PasswordChar = '*';
+            this.txtSentPassword.Size = new System.Drawing.Size(186, 20);
+            this.txtSentPassword.TabIndex = 17;
+            this.txtSentPassword.TextChanged += new System.EventHandler(this.SaveSentSettings);
+            // 
+            // lblImapHost
+            // 
+            this.lblImapHost.AutoSize = true;
+            this.lblImapHost.Location = new System.Drawing.Point(6, 12);
+            this.lblImapHost.Name = "lblImapHost";
+            this.lblImapHost.Size = new System.Drawing.Size(74, 13);
+            this.lblImapHost.TabIndex = 15;
+            this.lblImapHost.Text = "Имя сервера";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 90);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(45, 13);
+            this.label16.TabIndex = 15;
+            this.label16.Text = "Пароль";
             // 
             // lstIpRanges
             // 
@@ -183,9 +292,9 @@
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnStart.Location = new System.Drawing.Point(6, 6);
             this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(310, 60);
+            this.btnStart.Size = new System.Drawing.Size(310, 74);
             this.btnStart.TabIndex = 18;
-            this.btnStart.Text = "Запуск";
+            this.btnStart.Text = "Ручной запуск";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
@@ -205,7 +314,7 @@
             // 
             this.lblCheckTime.AutoSize = true;
             this.lblCheckTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblCheckTime.Location = new System.Drawing.Point(157, 91);
+            this.lblCheckTime.Location = new System.Drawing.Point(157, 100);
             this.lblCheckTime.Name = "lblCheckTime";
             this.lblCheckTime.Size = new System.Drawing.Size(0, 18);
             this.lblCheckTime.TabIndex = 20;
@@ -293,7 +402,7 @@
             // 
             this.lblLastExchange.AutoSize = true;
             this.lblLastExchange.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblLastExchange.Location = new System.Drawing.Point(157, 137);
+            this.lblLastExchange.Location = new System.Drawing.Point(157, 140);
             this.lblLastExchange.Name = "lblLastExchange";
             this.lblLastExchange.Size = new System.Drawing.Size(0, 18);
             this.lblLastExchange.TabIndex = 25;
@@ -302,7 +411,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(16, 137);
+            this.label12.Location = new System.Drawing.Point(16, 140);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(135, 18);
             this.label12.TabIndex = 24;
@@ -312,7 +421,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(37, 91);
+            this.label10.Location = new System.Drawing.Point(37, 100);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(114, 18);
             this.label10.TabIndex = 22;
@@ -351,158 +460,25 @@
             this.tabExchange.UseVisualStyleBackColor = true;
             this.tabExchange.Click += new System.EventHandler(this.tabExchange_Click);
             // 
-            // lblExchangeNote
+            // btnCancel
             // 
-            this.lblExchangeNote.AutoSize = true;
-            this.lblExchangeNote.Location = new System.Drawing.Point(154, 218);
-            this.lblExchangeNote.Name = "lblExchangeNote";
-            this.lblExchangeNote.Size = new System.Drawing.Size(0, 13);
-            this.lblExchangeNote.TabIndex = 26;
+            this.btnCancel.Location = new System.Drawing.Point(221, 191);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(92, 23);
+            this.btnCancel.TabIndex = 29;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // txtSentPort
+            // btnSave
             // 
-            this.txtSentPort.Location = new System.Drawing.Point(113, 35);
-            this.txtSentPort.Name = "txtSentPort";
-            this.txtSentPort.Size = new System.Drawing.Size(186, 20);
-            this.txtSentPort.TabIndex = 15;
-            this.txtSentPort.WordWrap = false;
-            this.txtSentPort.TextChanged += new System.EventHandler(this.SaveSentSettings);
-            // 
-            // lblSentPort
-            // 
-            this.lblSentPort.AutoSize = true;
-            this.lblSentPort.Location = new System.Drawing.Point(6, 38);
-            this.lblSentPort.Name = "lblSentPort";
-            this.lblSentPort.Size = new System.Drawing.Size(32, 13);
-            this.lblSentPort.TabIndex = 16;
-            this.lblSentPort.Text = "Порт";
-            // 
-            // lblImapHost
-            // 
-            this.lblImapHost.AutoSize = true;
-            this.lblImapHost.Location = new System.Drawing.Point(6, 12);
-            this.lblImapHost.Name = "lblImapHost";
-            this.lblImapHost.Size = new System.Drawing.Size(74, 13);
-            this.lblImapHost.TabIndex = 15;
-            this.lblImapHost.Text = "Имя сервера";
-            // 
-            // txtSentHost
-            // 
-            this.txtSentHost.Location = new System.Drawing.Point(113, 9);
-            this.txtSentHost.Name = "txtSentHost";
-            this.txtSentHost.Size = new System.Drawing.Size(186, 20);
-            this.txtSentHost.TabIndex = 14;
-            this.txtSentHost.TextChanged += new System.EventHandler(this.SaveSentSettings);
-            // 
-            // chkSave2Sent
-            // 
-            this.chkSave2Sent.AutoSize = true;
-            this.chkSave2Sent.Location = new System.Drawing.Point(6, 6);
-            this.chkSave2Sent.Name = "chkSave2Sent";
-            this.chkSave2Sent.Size = new System.Drawing.Size(162, 17);
-            this.chkSave2Sent.TabIndex = 13;
-            this.chkSave2Sent.Text = "сохранять в отправленных";
-            this.chkSave2Sent.UseVisualStyleBackColor = true;
-            this.chkSave2Sent.CheckedChanged += new System.EventHandler(this.chkSave2Sent_CheckedChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 114);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(79, 13);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "Включить SSL";
-            // 
-            // chkSslEnable
-            // 
-            this.chkSslEnable.AutoSize = true;
-            this.chkSslEnable.Location = new System.Drawing.Point(113, 113);
-            this.chkSslEnable.Name = "chkSslEnable";
-            this.chkSslEnable.Size = new System.Drawing.Size(15, 14);
-            this.chkSslEnable.TabIndex = 11;
-            this.chkSslEnable.UseVisualStyleBackColor = true;
-            this.chkSslEnable.CheckedChanged += new System.EventHandler(this.SaveSmtpSettings);
-            // 
-            // btnSmtpTest
-            // 
-            this.btnSmtpTest.Location = new System.Drawing.Point(3, 191);
-            this.btnSmtpTest.Name = "btnSmtpTest";
-            this.btnSmtpTest.Size = new System.Drawing.Size(113, 23);
-            this.btnSmtpTest.TabIndex = 10;
-            this.btnSmtpTest.Text = "Тестовое письмо";
-            this.btnSmtpTest.UseVisualStyleBackColor = true;
-            this.btnSmtpTest.Click += new System.EventHandler(this.btnSmtpTest_Click);
-            // 
-            // txtSmtpPass
-            // 
-            this.txtSmtpPass.Location = new System.Drawing.Point(113, 87);
-            this.txtSmtpPass.Name = "txtSmtpPass";
-            this.txtSmtpPass.PasswordChar = '*';
-            this.txtSmtpPass.Size = new System.Drawing.Size(186, 20);
-            this.txtSmtpPass.TabIndex = 7;
-            this.txtSmtpPass.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 90);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(45, 13);
-            this.label9.TabIndex = 6;
-            this.label9.Text = "Пароль";
-            // 
-            // txtSmtpLogin
-            // 
-            this.txtSmtpLogin.Location = new System.Drawing.Point(113, 61);
-            this.txtSmtpLogin.Name = "txtSmtpLogin";
-            this.txtSmtpLogin.Size = new System.Drawing.Size(186, 20);
-            this.txtSmtpLogin.TabIndex = 5;
-            this.txtSmtpLogin.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(103, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Имя пользователя";
-            // 
-            // txtSmtpPort
-            // 
-            this.txtSmtpPort.Location = new System.Drawing.Point(113, 35);
-            this.txtSmtpPort.Name = "txtSmtpPort";
-            this.txtSmtpPort.Size = new System.Drawing.Size(186, 20);
-            this.txtSmtpPort.TabIndex = 3;
-            this.txtSmtpPort.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 38);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(32, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "Порт";
-            // 
-            // txtSmtpHost
-            // 
-            this.txtSmtpHost.Location = new System.Drawing.Point(113, 9);
-            this.txtSmtpHost.Name = "txtSmtpHost";
-            this.txtSmtpHost.Size = new System.Drawing.Size(186, 20);
-            this.txtSmtpHost.TabIndex = 1;
-            this.txtSmtpHost.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Имя сервера";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.btnSave.Location = new System.Drawing.Point(123, 191);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(92, 23);
+            this.btnSave.TabIndex = 28;
+            this.btnSave.Text = "Сохранить";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // tcMail
             // 
@@ -534,99 +510,123 @@
             this.tabPage1.Text = "SMTP";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabImap
+            // label2
             // 
-            tabImap.Controls.Add(this.chkSentSsl);
-            tabImap.Controls.Add(this.label14);
-            tabImap.Controls.Add(this.txtSentPort);
-            tabImap.Controls.Add(this.lblSentPort);
-            tabImap.Controls.Add(this.label15);
-            tabImap.Controls.Add(this.txtSentHost);
-            tabImap.Controls.Add(this.txtSentLogin);
-            tabImap.Controls.Add(this.txtSentPassword);
-            tabImap.Controls.Add(this.lblImapHost);
-            tabImap.Controls.Add(this.label16);
-            tabImap.Location = new System.Drawing.Point(4, 22);
-            tabImap.Name = "tabImap";
-            tabImap.Padding = new System.Windows.Forms.Padding(3);
-            tabImap.Size = new System.Drawing.Size(305, 134);
-            tabImap.TabIndex = 1;
-            tabImap.Text = "IMAP";
-            tabImap.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Имя сервера";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // chkSentSsl
+            // txtSmtpHost
             // 
-            this.chkSentSsl.AutoSize = true;
-            this.chkSentSsl.Location = new System.Drawing.Point(113, 113);
-            this.chkSentSsl.Name = "chkSentSsl";
-            this.chkSentSsl.Size = new System.Drawing.Size(15, 14);
-            this.chkSentSsl.TabIndex = 18;
-            this.chkSentSsl.UseVisualStyleBackColor = true;
-            this.chkSentSsl.CheckedChanged += new System.EventHandler(this.SaveSentSettings);
+            this.txtSmtpHost.Location = new System.Drawing.Point(113, 9);
+            this.txtSmtpHost.Name = "txtSmtpHost";
+            this.txtSmtpHost.Size = new System.Drawing.Size(186, 20);
+            this.txtSmtpHost.TabIndex = 1;
+            this.txtSmtpHost.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
             // 
-            // label14
+            // label5
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 114);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(79, 13);
-            this.label14.TabIndex = 18;
-            this.label14.Text = "Включить SSL";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 38);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Порт";
             // 
-            // label15
+            // txtSmtpPort
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(6, 64);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(103, 13);
-            this.label15.TabIndex = 13;
-            this.label15.Text = "Имя пользователя";
+            this.txtSmtpPort.Location = new System.Drawing.Point(113, 35);
+            this.txtSmtpPort.Name = "txtSmtpPort";
+            this.txtSmtpPort.Size = new System.Drawing.Size(186, 20);
+            this.txtSmtpPort.TabIndex = 3;
+            this.txtSmtpPort.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
             // 
-            // txtSentLogin
+            // chkSslEnable
             // 
-            this.txtSentLogin.Location = new System.Drawing.Point(113, 61);
-            this.txtSentLogin.Name = "txtSentLogin";
-            this.txtSentLogin.Size = new System.Drawing.Size(186, 20);
-            this.txtSentLogin.TabIndex = 16;
-            this.txtSentLogin.TextChanged += new System.EventHandler(this.SaveSentSettings);
+            this.chkSslEnable.AutoSize = true;
+            this.chkSslEnable.Location = new System.Drawing.Point(113, 113);
+            this.chkSslEnable.Name = "chkSslEnable";
+            this.chkSslEnable.Size = new System.Drawing.Size(15, 14);
+            this.chkSslEnable.TabIndex = 11;
+            this.chkSslEnable.UseVisualStyleBackColor = true;
+            this.chkSslEnable.CheckedChanged += new System.EventHandler(this.SaveSmtpSettings);
             // 
-            // label16
+            // label13
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 90);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(45, 13);
-            this.label16.TabIndex = 15;
-            this.label16.Text = "Пароль";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 114);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(79, 13);
+            this.label13.TabIndex = 12;
+            this.label13.Text = "Включить SSL";
             // 
-            // txtSentPassword
+            // label8
             // 
-            this.txtSentPassword.Location = new System.Drawing.Point(113, 87);
-            this.txtSentPassword.Name = "txtSentPassword";
-            this.txtSentPassword.PasswordChar = '*';
-            this.txtSentPassword.Size = new System.Drawing.Size(186, 20);
-            this.txtSentPassword.TabIndex = 17;
-            this.txtSentPassword.TextChanged += new System.EventHandler(this.SaveSentSettings);
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 64);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(103, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Имя пользователя";
             // 
-            // btnSave
+            // txtSmtpLogin
             // 
-            this.btnSave.Location = new System.Drawing.Point(123, 191);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(92, 23);
-            this.btnSave.TabIndex = 28;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.txtSmtpLogin.Location = new System.Drawing.Point(113, 61);
+            this.txtSmtpLogin.Name = "txtSmtpLogin";
+            this.txtSmtpLogin.Size = new System.Drawing.Size(186, 20);
+            this.txtSmtpLogin.TabIndex = 5;
+            this.txtSmtpLogin.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
             // 
-            // btnCancel
+            // label9
             // 
-            this.btnCancel.Location = new System.Drawing.Point(221, 191);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(92, 23);
-            this.btnCancel.TabIndex = 29;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 90);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(45, 13);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Пароль";
+            // 
+            // txtSmtpPass
+            // 
+            this.txtSmtpPass.Location = new System.Drawing.Point(113, 87);
+            this.txtSmtpPass.Name = "txtSmtpPass";
+            this.txtSmtpPass.PasswordChar = '*';
+            this.txtSmtpPass.Size = new System.Drawing.Size(186, 20);
+            this.txtSmtpPass.TabIndex = 7;
+            this.txtSmtpPass.TextChanged += new System.EventHandler(this.SaveSmtpSettings);
+            // 
+            // lblExchangeNote
+            // 
+            this.lblExchangeNote.AutoSize = true;
+            this.lblExchangeNote.Location = new System.Drawing.Point(154, 218);
+            this.lblExchangeNote.Name = "lblExchangeNote";
+            this.lblExchangeNote.Size = new System.Drawing.Size(0, 13);
+            this.lblExchangeNote.TabIndex = 26;
+            // 
+            // btnSmtpTest
+            // 
+            this.btnSmtpTest.Location = new System.Drawing.Point(3, 191);
+            this.btnSmtpTest.Name = "btnSmtpTest";
+            this.btnSmtpTest.Size = new System.Drawing.Size(113, 23);
+            this.btnSmtpTest.TabIndex = 10;
+            this.btnSmtpTest.Text = "Тестовое письмо";
+            this.btnSmtpTest.UseVisualStyleBackColor = true;
+            this.btnSmtpTest.Click += new System.EventHandler(this.btnSmtpTest_Click);
+            // 
+            // chkSave2Sent
+            // 
+            this.chkSave2Sent.AutoSize = true;
+            this.chkSave2Sent.Location = new System.Drawing.Point(6, 6);
+            this.chkSave2Sent.Name = "chkSave2Sent";
+            this.chkSave2Sent.Size = new System.Drawing.Size(162, 17);
+            this.chkSave2Sent.TabIndex = 13;
+            this.chkSave2Sent.Text = "сохранять в отправленных";
+            this.chkSave2Sent.UseVisualStyleBackColor = true;
+            this.chkSave2Sent.CheckedChanged += new System.EventHandler(this.chkSave2Sent_CheckedChanged);
             // 
             // Form1
             // 
@@ -642,6 +642,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
+            tabImap.ResumeLayout(false);
+            tabImap.PerformLayout();
             this.pnlIpRanges.ResumeLayout(false);
             this.pnlIpRanges.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exchangeDelay)).EndInit();
@@ -654,8 +656,6 @@
             this.tcMail.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            tabImap.ResumeLayout(false);
-            tabImap.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

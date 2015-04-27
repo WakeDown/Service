@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms/Masters/Editor.master" AutoEventWireup="true" CodeBehind="SpecPrice.aspx.cs" Inherits="ServicePlaningWebUI.WebForms.Contracts.SpecPrice" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphFormTitle" runat="server">
-     <%=FormTitle %>
+    <%=FormTitle %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphFormBody" runat="server">
     <div class="form-horizontal val-form" role="form">
@@ -15,26 +15,26 @@
                     <%--                    <asp:CompareValidator ID="cvTxtSpeed" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="txtSpeed" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>--%>
                 </span>
             </div>
-            </div>
+        </div>
         <div class="form-group">
             <asp:UpdatePanel ID="upNomenclature" runat="server">
-                    <ContentTemplate>
-            <div class="col-sm-3">
+                <ContentTemplate>
+                    <div class="col-sm-3">
                         <asp:HiddenField ID="hfIdNomenclatureNum" runat="server" />
                         <asp:TextBox ID="txtCatalogNum" runat="server" class="form-control" MaxLength="20" placeholder="каталожный №" OnTextChanged="txtCatalogNum_OnTextChanged"></asp:TextBox>
                         <span class="help-block">
                             <asp:RequiredFieldValidator ID="rfvTxtCatalogNum" runat="server" ErrorMessage="Заполните поле &laquo;каталожный №&raquo;" ControlToValidate="txtCatalogNum" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
                         </span>
-                    
-            </div>
-            <div class="col-sm-3">
-                <asp:TextBox ID="txtNomenclatureName" runat="server" class="form-control" MaxLength="50" placeholder="Наиманование"></asp:TextBox>
-                <span class="help-block">
-                    <asp:RequiredFieldValidator ID="refTxtNomenclatureName" runat="server" ErrorMessage="Заполните поле &laquo;Наиманование&raquo;" ControlToValidate="txtNomenclatureName" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
-                </span>
-            </div>
-        </ContentTemplate>
-                </asp:UpdatePanel>
+
+                    </div>
+                    <div class="col-sm-3">
+                        <asp:TextBox ID="txtNomenclatureName" runat="server" class="form-control" MaxLength="50" placeholder="Наиманование"></asp:TextBox>
+                        <span class="help-block">
+                            <asp:RequiredFieldValidator ID="refTxtNomenclatureName" runat="server" ErrorMessage="Заполните поле &laquo;Наиманование&raquo;" ControlToValidate="txtNomenclatureName" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
+                        </span>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
             <div class="col-sm-2">
                 <asp:TextBox ID="txtPrice" runat="server" class="form-control" MaxLength="13" placeholder="Цена, руб."></asp:TextBox>
                 <span class="help-block">

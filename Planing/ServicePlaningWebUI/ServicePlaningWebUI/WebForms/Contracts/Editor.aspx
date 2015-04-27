@@ -159,6 +159,16 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <label for='<%=txtHandlingDevices.ClientID %>' class="col-sm-2 control-label">Минимальное количество обслуживаемых ежемесячно устройств</label>
+            <div class="col-sm-10">
+                <asp:TextBox ID="txtHandlingDevices" runat="server" class="form-control" MaxLength="10"></asp:TextBox>
+                <span class="help-block">
+                    <%--                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Заполните поле &laquo;№ договора&raquo;" ControlToValidate="txtNumber" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
+                    <%--                    <asp:CompareValidator ID="cvTxtSpeed" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="txtSpeed" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>--%>
+                </span>
+            </div>
+        </div>
         <div class="col-sm-offset-2 col-sm-10">
             <asp:PlaceHolder ID="phServerMessage" runat="server"></asp:PlaceHolder>
         </div>

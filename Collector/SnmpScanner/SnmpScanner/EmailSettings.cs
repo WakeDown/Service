@@ -48,7 +48,10 @@ namespace SnmpScanner
             }
 
             Login = ConfigurationManager.AppSettings["smtpLogin"];
-            Password = ConfigurationManager.AppSettings["smtpPassword"];
+
+            string pass = ConfigurationManager.AppSettings["smtpPassword"];
+            Password = String.IsNullOrEmpty(pass) ? pass : Cryptor.Decrypt(pass, "Un1tGroup");
+
             string ssl = ConfigurationManager.AppSettings["smtpEnableSsl"];
             EnableSsl = !String.IsNullOrEmpty(ssl) && Convert.ToBoolean(ssl);
 
@@ -63,7 +66,10 @@ namespace SnmpScanner
             }
 
             SentLogin = ConfigurationManager.AppSettings["sentLogin"];
-            SentPassword = ConfigurationManager.AppSettings["sentPassword"];
+
+            string sentPass = ConfigurationManager.AppSettings["sentPassword"];
+            SentPassword = String.IsNullOrEmpty(sentPass) ? sentPass : Cryptor.Decrypt(sentPass, "Un1tGroup");
+
             string sentSsl = ConfigurationManager.AppSettings["sentEnableSsl"];
             SentEnableSsl = !String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
 

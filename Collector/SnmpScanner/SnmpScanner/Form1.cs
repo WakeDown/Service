@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Configuration.Install;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading;
@@ -91,6 +93,7 @@ namespace SnmpScanner
 
                 //AppSettings = new Settings();
                 FillIpRangeList();
+                if (lstIpRanges.Items.Count > 0) lstIpRanges.SelectedIndex = 0;
                 FillDefaults();
             }
             catch (FileNotFoundException ex)
@@ -182,6 +185,13 @@ namespace SnmpScanner
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            //if (chkLocal.Checked)
+            //{
+
+
+            //    return;
+            //}
+            
             var settings = new EmailSettings(true);
 
             DialogResult result;
@@ -396,13 +406,19 @@ namespace SnmpScanner
             SetAppConfigValue("smtpHost", txtSmtpHost.Text);
             SetAppConfigValue("smtpPort", txtSmtpPort.Text);
             SetAppConfigValue("smtpLogin", txtSmtpLogin.Text);
-            SetAppConfigValue("smtpPassword", txtSmtpPass.Text);
+
+            string pass = txtSmtpPass.Text;
+            SetAppConfigValue("smtpPassword", String.IsNullOrEmpty(pass) ? pass : Cryptor.Encrypt(pass, "Un1tGroup"));
+
             SetAppConfigValue("smtpEnableSsl", chkSslEnable.Checked.ToString());
             SetAppConfigValue("save2SentFolder", chkSave2Sent.Checked.ToString());
             SetAppConfigValue("sentHost", txtSentHost.Text);
             SetAppConfigValue("sentPort", txtSentPort.Text);
             SetAppConfigValue("sentLogin", txtSentLogin.Text);
-            SetAppConfigValue("sentPassword", txtSentPassword.Text);
+
+            string sentPass = txtSentPassword.Text;
+            SetAppConfigValue("sentPassword", String.IsNullOrEmpty(sentPass) ? sentPass : Cryptor.Encrypt(sentPass, "Un1tGroup"));
+
             SetAppConfigValue("sentEnableSsl", chkSentSsl.Checked.ToString());
         }
 
@@ -460,23 +476,25 @@ namespace SnmpScanner
 
         private void FillSmtpSettings()
         {
-            txtSmtpHost.Text = ConfigurationManager.AppSettings["smtpHost"];
-            txtSmtpPort.Text = ConfigurationManager.AppSettings["smtpPort"];
-            txtSmtpLogin.Text = ConfigurationManager.AppSettings["smtpLogin"];
-            txtSmtpPass.Text = ConfigurationManager.AppSettings["smtpPassword"];
-            string ssl = ConfigurationManager.AppSettings["smtpEnableSsl"];
-            chkSslEnable.Checked = !String.IsNullOrEmpty(ssl) && Convert.ToBoolean(ssl);
+            EmailSettings settings = new EmailSettings(true);
+
+            txtSmtpHost.Text = settings.Host;//ConfigurationManager.AppSettings["smtpHost"];
+            txtSmtpPort.Text = settings.Port.ToString();//ConfigurationManager.AppSettings["smtpPort"];
+            txtSmtpLogin.Text = settings.Login;//ConfigurationManager.AppSettings["smtpLogin"];
+            txtSmtpPass.Text = settings.Password;//ConfigurationManager.AppSettings["smtpPassword"];
+            //string ssl = ConfigurationManager.AppSettings["smtpEnableSsl"];
+            chkSslEnable.Checked = settings.EnableSsl;//!String.IsNullOrEmpty(ssl) && Convert.ToBoolean(ssl);
             //string method = ConfigurationManager.AppSettings["smtpMailMethod"];
 
-            string save = ConfigurationManager.AppSettings["save2SentFolder"];
-            chkSave2Sent.Checked = !String.IsNullOrEmpty(save) && Convert.ToBoolean(save);
+            //string save = ConfigurationManager.AppSettings["save2SentFolder"];
+            chkSave2Sent.Checked = settings.Save2SentFolder;//!String.IsNullOrEmpty(save) && Convert.ToBoolean(save);
 
-            txtSentHost.Text = ConfigurationManager.AppSettings["sentHost"];
-            txtSentPort.Text = ConfigurationManager.AppSettings["sentPort"];
-            txtSentLogin.Text = ConfigurationManager.AppSettings["sentLogin"];
-            txtSentPassword.Text = ConfigurationManager.AppSettings["sentPassword"];
-            string sentSsl = ConfigurationManager.AppSettings["sentEnableSsl"];
-            chkSentSsl.Checked = !String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
+            txtSentHost.Text = settings.SentHost;//ConfigurationManager.AppSettings["sentHost"];
+            txtSentPort.Text = settings.SentPort.ToString();//ConfigurationManager.AppSettings["sentPort"];
+            txtSentLogin.Text = settings.SentLogin;//ConfigurationManager.AppSettings["sentLogin"];
+            txtSentPassword.Text = settings.SentPassword;//ConfigurationManager.AppSettings["sentPassword"];
+            //string sentSsl = ConfigurationManager.AppSettings["sentEnableSsl"];
+            chkSentSsl.Checked = settings.SentEnableSsl; //!String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
 
             //if (String.IsNullOrEmpty(method))
             //{
@@ -651,6 +669,20 @@ namespace SnmpScanner
         private void btnCancel_Click(object sender, EventArgs e)
         {
             FillSmtpSettings();
+        }
+
+        private void btnInstall_Click(object sender, EventArgs e)
+        {
+            //ManagedInstallerClass.InstallHelper(new string[] { Assembly.GetExecutingAssembly().Location });
+            MessageBox.Show(SelfInstaller.InstallMe().ToString());
+            //MessageBox.Show(ServiceInstaller.InstallService().ToString());
+        }
+
+        private void btnUninstall_Click(object sender, EventArgs e)
+        {
+            //ManagedInstallerClass.InstallHelper(new string[] { "/u", Assembly.GetExecutingAssembly().Location });
+            MessageBox.Show(SelfInstaller.UninstallMe().ToString());
+            //MessageBox.Show(ServiceInstaller.UninstallService().ToString());
         }
     }
 }

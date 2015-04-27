@@ -51,7 +51,7 @@
                                 <asp:LinkButton ID="btnRotateRight" runat="server" OnClick="btnRotateRight_OnClick" CssClass="btn btn-primary"><i class="fa fa-share"></i></asp:LinkButton>
                                 <asp:LinkButton ID="btnRotateDownUp" runat="server" OnClick="btnRotateDownUp_OnClick" CssClass="btn btn-primary"><i class="fa fa-refresh"></i></asp:LinkButton>
                                 <div class="pull-right">
-                                    <asp:LinkButton ID="btnAktScanFileDelete" runat="server" IdAktScan='<%#Eval("id_akt_scan") %>' OnClick="btnAktScanFileDelete_OnClick" class="btn btn-danger btn-lg">удалить</asp:LinkButton>
+                                    <asp:LinkButton ID="btnAktScanFileDelete" runat="server" IdAktScan='' OnClick="btnAktScanFileDelete_OnClick" class="btn btn-danger btn-lg">удалить</asp:LinkButton>
                                 </div>
                             </div>
 
@@ -142,7 +142,7 @@
                                     <asp:DropDownList ID="ddlServiceEngeneer" runat="server" CssClass="form-control">
                                     </asp:DropDownList>
                                     <span class="help-block">
-                                        <asp:RequiredFieldValidator ID="rfvDdlServiceEngeneer" runat="server" ErrorMessage="Выберите отпечаток" Display="Dynamic" ControlToValidate="ddlServiceEngeneer" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="rfvDdlServiceEngeneer" runat="server" ErrorMessage="Выберите инженера" Display="Dynamic" ControlToValidate="ddlServiceEngeneer" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
                                     </span>
                                 </div>
                             </div>

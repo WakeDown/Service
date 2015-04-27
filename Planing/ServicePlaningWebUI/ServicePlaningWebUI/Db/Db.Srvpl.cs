@@ -125,8 +125,7 @@ namespace ServicePlaningWebUI.Db
             }
 
             #endregion
-
-
+            
             #region DeviceOptions
 
             /// <summary>
@@ -528,6 +527,39 @@ namespace ServicePlaningWebUI.Db
                 SqlParameter pDateEnd = new SqlParameter() { ParameterName = "date_end", Value = dateEnd, DbType = DbType.DateTime };
 
                 DataTable dt = GetSelectionList("getPlanExecuteServManagerContractorList", pIsDone, pNoSet, pIdServiceManager, pDateMonth, pDateBegin, pDateEnd);
+
+                return dt;
+            }
+
+            public static DataTable GetCounterReportContractorContractList(int? idContractor, int? idServiceManager, DateTime? dateMonth)
+            {
+                SqlParameter pIdServiceManager = new SqlParameter() { ParameterName = "id_manager", Value = idServiceManager, DbType = DbType.Int32 };
+                SqlParameter pDateMonth = new SqlParameter() { ParameterName = "date_month", Value = dateMonth, DbType = DbType.DateTime };
+                SqlParameter pIdContractor = new SqlParameter() { ParameterName = "id_contractor", Value = idContractor, DbType = DbType.Int32 };
+
+                DataTable dt = GetSelectionList("getCounterReportContractorContractsList", pIdServiceManager, pDateMonth, pIdContractor);
+
+                return dt;
+            }
+
+            public static DataTable GetCounterReportContractorContractDeviceList(int? idContractor, int? idServiceManager, DateTime? dateMonth)
+            {
+                SqlParameter pIdServiceManager = new SqlParameter() { ParameterName = "id_manager", Value = idServiceManager, DbType = DbType.Int32 };
+                SqlParameter pDateMonth = new SqlParameter() { ParameterName = "date_month", Value = dateMonth, DbType = DbType.DateTime };
+                SqlParameter pIdContractor = new SqlParameter() { ParameterName = "id_contractor", Value = idContractor, DbType = DbType.Int32 };
+
+                DataTable dt = GetSelectionList("getCounterReportContractorContractDeviceList", pIdServiceManager, pDateMonth, pIdContractor);
+
+                return dt;
+            }
+
+            public static DataTable GetCounterReportContractorContractDeviceData(int? idContractor, int? idServiceManager, DateTime? dateMonth)
+            {
+                SqlParameter pIdServiceManager = new SqlParameter() { ParameterName = "id_manager", Value = idServiceManager, DbType = DbType.Int32 };
+                SqlParameter pDateMonth = new SqlParameter() { ParameterName = "date_month", Value = dateMonth, DbType = DbType.DateTime };
+                SqlParameter pIdContractor = new SqlParameter() { ParameterName = "id_contractor", Value = idContractor, DbType = DbType.Int32 };
+
+                DataTable dt = GetSelectionList("getCounterReportContractorContractDeviceData", pIdServiceManager, pDateMonth, pIdContractor);
 
                 return dt;
             }

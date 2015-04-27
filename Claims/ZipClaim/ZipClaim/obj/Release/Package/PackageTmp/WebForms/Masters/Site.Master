@@ -1,5 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ZipClaim.WebForms.Masters.Site" %>
 
+<%@ Import Namespace="System.Net" %>
 <%@ Import Namespace="System.Web.Configuration" %>
 <%@ Import Namespace="System.Web.Optimization" %>
 <%@ Import Namespace="Microsoft.AspNet.FriendlyUrls" %>
@@ -79,7 +80,6 @@
                         </li>
                         <%--<li><a href='<%= FriendlyUrl.Href("~/Instruction") %>'><i class="fa fa-picture-o fa-fw"></i>Инструкция</a></li>--%>
                         <%--<li><a href='<%= ResolveClientUrl("~/Docs/Instruction.doc") %>'><i class="fa fa-picture-o fa-fw"></i>Инструкция</a></li>--%>
-                        
                     </ul>
 
                     <ul class="nav navbar-nav  navbar-right">

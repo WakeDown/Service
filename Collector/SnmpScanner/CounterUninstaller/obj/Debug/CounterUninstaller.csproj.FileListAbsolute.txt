@@ -1,0 +1,5 @@
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterUninstaller\bin\Debug\ServiceUninstall.exe.config
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterUninstaller\bin\Debug\ServiceUninstall.exe
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterUninstaller\bin\Debug\ServiceUninstall.pdb
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterUninstaller\obj\Debug\ServiceUninstall.exe
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterUninstaller\obj\Debug\ServiceUninstall.pdb

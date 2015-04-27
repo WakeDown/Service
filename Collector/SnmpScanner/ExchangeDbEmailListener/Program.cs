@@ -74,12 +74,13 @@ namespace ExchangeDbEmailListener
             //Место куда валятся письма с результатами сбора данных с КМТ
             string login = ConfigurationManager.AppSettings["login"];
             string pass = ConfigurationManager.AppSettings["pass"];
+            string mail = ConfigurationManager.AppSettings["mail"];
 
             service.Credentials = new WebCredentials(login, pass);
 
             service.UseDefaultCredentials = false;
 
-            service.AutodiscoverUrl(login, RedirectionUrlValidationCallback);
+            service.AutodiscoverUrl(mail, RedirectionUrlValidationCallback);
 
             //List<SearchFilter> searchFilterCollection = new List<SearchFilter>();
             //searchFilterCollection.Add(new SearchFilter.ContainsSubstring(ItemSchema.Subject, "test"));
@@ -113,7 +114,10 @@ namespace ExchangeDbEmailListener
                                 message.IndexOf(endTag) + endTag.Count());
                         }
 
-                        Db.Db.Snmp.SaveExchangeItem(message);
+                        if (!message.Contains("Проверка отправки сообщения на сервер ГК ЮНИТ"))
+                        {
+                            Db.Db.Snmp.SaveExchangeItem(message);
+                        }
 
                         //Удаление письма
                         //DeleteMode.SoftDelete - The item or folder will be moved to the dumpster. Items and folders in the dumpster can be recovered.
