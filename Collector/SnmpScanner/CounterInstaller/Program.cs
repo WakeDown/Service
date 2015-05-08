@@ -17,7 +17,7 @@ namespace CounterInstaller
 
             string path = Path.Combine(fldr, @"Program\UN1TCounter.exe");
 
-            var psi = new ProcessStartInfo(path, "install")
+            var psi = new ProcessStartInfo(String.Format("\"{0}\"", path), "install")
             {
                 UseShellExecute = false,
                 CreateNoWindow = true

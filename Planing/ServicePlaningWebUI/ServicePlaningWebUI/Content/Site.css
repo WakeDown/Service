@@ -282,6 +282,10 @@ table .btn {
     font-weight: 900;
 }
 
+.bold-light {
+    font-weight: 600;
+}
+
 /*.sorted-header a, .header-asc a, .header-desc a {
      white-space: nowrap;
 }*/
@@ -324,8 +328,8 @@ table .btn {
     font-weight: 400;
 }
 
-.chk-lst td {
-    padding-right: 7px;
+.chk-lst td, .chk-lst label  {
+    padding-right: 9px;
 }
 
 .nowrap {
@@ -633,6 +637,10 @@ div.table div.bg-white, a.bg-white {
     text-align: right;
 }
 
+.center {
+    text-align: center;
+}
+
 .align-left {
     text-align: left !important;
 }
@@ -671,6 +679,12 @@ div.table div.bg-white, a.bg-white {
     height: 5px;
     width: 5px;
     padding-bottom: 0 !important;
+}
+
+.label-mark.small {
+    height: 10px;
+    width: 3px;
+    display: inline-block;
 }
 
 .success-light {
@@ -815,4 +829,36 @@ div.table div.bg-white, a.bg-white {
 
 .link-like-div {
     color: black;
+}
+
+.disp-table {
+    display: table !important;
+}
+
+.exclo-btn {
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    background: black;
+}
+
+.exclo-container {
+    float: left;
+    border: 1px solid black;
+    color: black;
+    margin-left: 5px;
+    padding: 0px 4px;
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.auto-width {
+    width: auto !important;
+}
+
+.label-empty {
+    background: #ddd;
 }

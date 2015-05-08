@@ -47,7 +47,7 @@
                 </span>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" style="display:none">
             <label for='<%=txtDateClaimBegin.ClientID %>' class="col-sm-2 control-label">Период</label>
             <div class="row">
                 <div class="col-sm-2">

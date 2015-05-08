@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Configuration.Install;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.ServiceProcess;
@@ -15,9 +16,13 @@ using SnmpScanner.Models;
 
 namespace SnmpScanner
 {
+    //1.1   
+    //  добавлена возможность работы с Exchange
+    //  добавлено поле копия при обмене через почту 
+
     static class Program
     {
-        public const string progVersion = "1.0";
+        public const string progVersion = "1.1";
         public static bool _threadMustStop;
         public static bool _dbIsBuzy;
 
@@ -35,6 +40,8 @@ namespace SnmpScanner
         [STAThread]
         static void Main(string[] args)
         {
+            //Проверяем наличие файла лицензии
+
             //args = new[] { "frm" };
 
             _threadMustStop = false;
@@ -50,29 +57,48 @@ namespace SnmpScanner
             //}
             //else
             //{
-            if (args.Any())
+
+            try
             {
-                switch (args[0])
+
+                if (args.Any())
                 {
-                    default:
-                        StartWinService();
-                        break;
-                    case "install":
-                        MessageBox.Show(SelfInstaller.InstallMe());
-                        break;
-                    case "uninstall":
-                        MessageBox.Show(SelfInstaller.UninstallMe());
-                        break;
-                    case "frm":
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new Form1());
-                        break;
+                    switch (args[0])
+                    {
+                        default:
+                            StartWinService();
+                            break;
+                        case "install":
+                            MessageBox.Show(SelfInstaller.InstallMe());
+                            break;
+                        case "uninstall":
+                            MessageBox.Show(SelfInstaller.UninstallMe());
+                            break;
+                        case "frm":
+                            Application.EnableVisualStyles();
+                            Application.SetCompatibleTextRenderingDefault(false);
+                            Application.Run( new Form1());
+                            break;
+                    }
+                }
+                else
+                {
+                    StartWinService();
                 }
             }
-            else
+            catch (FileNotFoundException ex)
             {
-                StartWinService();
+                //throw new ApplicationException("Отсутсвует файл с настройками!");
+                MessageBox.Show("Отсутствует файл лицензии!");
+                Application.Exit();
+                Environment.Exit(-1);
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(String.Format("Что-то пошло не так, сообщите разработчикам информацию представленную ниже!/r/nMessage: {0}/r/n/Source: {1}/r/n/StackTrace: {2}", ex.Message, ex.Source, ex.StackTrace));
+                Application.Exit();
+                Environment.Exit(-1);
+                //throw new ApplicationException("Некорректный файл с настройками!");
             }
             //}
         }

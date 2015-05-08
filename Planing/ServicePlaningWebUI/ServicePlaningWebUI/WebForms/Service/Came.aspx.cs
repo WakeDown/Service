@@ -231,7 +231,7 @@ namespace ServicePlaningWebUI.WebForms.Service
             btnSaveAndAddNew.OnClientClick = script;
         }
 
-        protected void txtClaimSelection_TextChanged(object sender, EventArgs e)
+        protected void btnClaimSelection_Click(object sender, EventArgs e)
         {
             string serialNum = MainHelper.TxtGetText(ref txtClaimSelection);
 

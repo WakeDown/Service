@@ -11,16 +11,27 @@
             <div class="col-sm-10">
                 <%--<asp:DropDownList ID="ddlServiceClaim" runat="server" CssClass="form-control">
                     </asp:DropDownList>--%>
-                <asp:UpdatePanel ID="upClaimList" runat="server">
-                    <ContentTemplate>
-                        <asp:TextBox ID="txtClaimSelection" runat="server" CssClass="form-control input-sm" placeholder="поиск" MaxLength="50" OnTextChanged="txtClaimSelection_TextChanged" AutoPostBack="True"></asp:TextBox>
+<%--                <asp:UpdatePanel ID="upClaimList" runat="server">
+                    <ContentTemplate>--%>
+                <script type="text/javascript">
+                    function EnterEvent(e) {
+                        if (e.keyCode == 13) {
+                            __doPostBack('<%=btnClaimSelection.UniqueID%>', "");
+        }
+    }
+                </script>
+                        <asp:TextBox ID="txtClaimSelection" runat="server" CssClass="form-control input-sm" placeholder="поиск" MaxLength="50" 
+                            onkeypress="return EnterEvent(event)"
+                            ></asp:TextBox>
+                <asp:Button ID="btnClaimSelection" runat="server" style="display:none" Text="Button" OnClick="btnClaimSelection_Click" />
+                <%--OnTextChanged="txtClaimSelection_TextChanged"  AutoPostBack="True"--%>
                         <asp:ListBox ID="lbClaim" runat="server" Height="150px" CssClass="full-width input-sm" OnSelectedIndexChanged="lbClaim_OnSelectedIndexChanged" AutoPostBack="True"></asp:ListBox>
                         <span class="help-block">
                             <%--<asp:RequiredFieldValidator ID="rfvDdlServiceClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="ddlServiceClaim" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
                             <asp:RequiredFieldValidator ID="rfvLbClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="lbClaim" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
                         </span>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+<%--                    </ContentTemplate>
+                </asp:UpdatePanel>--%>
             </div>
         </div>
         <%--<asp:HiddenField ID="hfIdServiceClaim" runat="server" />

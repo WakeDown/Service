@@ -111,7 +111,7 @@ namespace ZipClaim.WebForms.Claims
 
                 if (currId == idClaimUnit)
                 {
-                    row.FindControl("btnEdit").Visible = row.FindControl("lblPriceIn").Visible = row.FindControl("lblDeliveryTime").Visible = /*row.FindControl("btnReturn").Visible = */!edit;
+                    row.FindControl("btnEdit").Visible = row.FindControl("lblPriceIn").Visible = row.FindControl("lblDeliveryTime").Visible = row.FindControl("btnReturn").Visible = !edit;
                     row.FindControl("btnSave").Visible = row.FindControl("btnCancel").Visible = row.FindControl("txtPriceIn").Visible = row.FindControl("txtDeliveryTime").Visible = (row.FindControl("cvTxtPriceIn") as CompareValidator).Enabled = (row.FindControl("rfvTxtPriceIn") as RequiredFieldValidator).Enabled = (row.FindControl("rfvTxtDeliveryTime") as RequiredFieldValidator).Enabled = edit;
 
                     //Если Номенклатурный номер запрошен у Снабжения, то обязательно к заполнению
@@ -129,7 +129,7 @@ namespace ZipClaim.WebForms.Claims
             }
         }
 
-        protected void btnReturn_OnClick(object sender, EventArgs e)
+        protected void btnSendReturn_OnClick(object sender, EventArgs e)
         {
             int id = Convert.ToInt32((sender as LinkButton).CommandArgument);
             int rowIndex = -1;
@@ -144,10 +144,14 @@ namespace ZipClaim.WebForms.Claims
                 }
             }
 
+            //((WebControl)sender).NamingContainer.ID
+
             if (rowIndex >= 0)
             {
                 HiddenField hfIdClaim = (HiddenField)tblList.Rows[rowIndex].FindControl("hfIdClaim");
                 int idClaim = MainHelper.HfGetValueInt32(ref hfIdClaim);
+                var txtReturnDescr = tblList.Rows[rowIndex].FindControl("txtReturnDescr") as TextBox;
+                string descr = MainHelper.TxtGetText(ref txtReturnDescr);
 
                 ClaimUnit cu = new ClaimUnit()
                 {
@@ -158,7 +162,7 @@ namespace ZipClaim.WebForms.Claims
 
                 try
                 {
-                    cu.SupplyReturn();
+                    cu.SupplyReturn(descr);
                 }
                 catch (Exception ex)
                 {
@@ -180,6 +184,18 @@ namespace ZipClaim.WebForms.Claims
             }
 
             SetRowEditState(id, false);
+        }
+
+        protected void btnReturn_OnClick(object sender, EventArgs e)
+        {
+            var pnl = ((sender as WebControl).NamingContainer as GridViewRow).FindControl("pnlReturnDescr") as Panel;
+
+            if (pnl != null)
+            {
+                pnl.Visible = true;
+
+                UpdatePanel1.Update();
+            }
         }
 
         protected void btnCancel_OnClick(object sender, EventArgs e)
@@ -215,7 +231,6 @@ namespace ZipClaim.WebForms.Claims
 
                 TextBox txtDeliveryTime = (TextBox)tblList.Rows[rowIndex].FindControl("txtDeliveryTime");
                 string deliveryTime = MainHelper.TxtGetText(ref txtDeliveryTime);
-
 
                 TextBox txtNomenclatureNum = (TextBox)tblList.Rows[rowIndex].FindControl("txtNomenclatureNum");
                 string nomenclatureNum = MainHelper.TxtGetText(ref txtNomenclatureNum);
@@ -256,6 +271,18 @@ namespace ZipClaim.WebForms.Claims
             }
 
             SetRowEditState(id, false);
+        }
+
+        protected void btnReturnCancel_OnClick(object sender, EventArgs e)
+        {
+            var pnl = ((sender as WebControl).NamingContainer as GridViewRow).FindControl("pnlReturnDescr") as Panel;
+
+            if (pnl != null)
+            {
+                pnl.Visible = false;
+
+                UpdatePanel1.Update();
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using Microsoft.Exchange.WebServices.Data;
 using SnmpScanner.Models;
 
 namespace SnmpScanner
@@ -420,6 +421,12 @@ namespace SnmpScanner
             SetAppConfigValue("sentPassword", String.IsNullOrEmpty(sentPass) ? sentPass : Cryptor.Encrypt(sentPass, "Un1tGroup"));
 
             SetAppConfigValue("sentEnableSsl", chkSentSsl.Checked.ToString());
+
+            //MS Exchange
+            SetAppConfigValue("msExchVers", cmbMsExchangeServerVersions.SelectedItem.ToString());
+            SetAppConfigValue("msExchLogin", txtMsExchLogin.Text);
+            string msExchPass = txtMsExchPass.Text;
+            SetAppConfigValue("msExchPass", String.IsNullOrEmpty(msExchPass) ? msExchPass : Cryptor.Encrypt(msExchPass, "Un1tGroup"));
         }
 
         
@@ -511,18 +518,46 @@ namespace SnmpScanner
             //        cmbMailMethod.SelectedIndex = -1;
             //    }
             //}
+
+
+            //MS Exchange
+            cmbMsExchangeServerVersions.SelectedItem = settings.MsExchangeVersion;
+            txtMsExchLogin.Text = settings.MsExchangeLogin;
+            txtMsExchPass.Text = settings.MsExchangePass;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab == tabExchange)
             {
+               
+                FillLists();
+
                 FillSmtpSettings();
                 exchangeDelay.Value = Program.GetExchangeDelayValue();
                 DisplayTabImapPop3();
 
                 //DisplayExchangeTabElements();
             }
+        }
+
+        private void FillLists()
+        {
+            //Тип сервера
+            FillServerTypes(cmbServerTypes);
+
+            //Заполняем версии MS Exchange
+            cmbMsExchangeServerVersions.DataSource = Enum.GetNames(typeof (ExchangeVersion));
+        }
+
+        private void FillServerTypes(ComboBox cmb)
+        {
+            List<string> ds = new List<string>();
+            ds.Add("--тип сервера--");
+            ds.Add("MS Exchange");
+            ds.Add("Другой");
+
+            cmb.DataSource = ds;
         }
 
         private void DisplayExchangeTabElements()
@@ -654,6 +689,7 @@ namespace SnmpScanner
         {
             bool save = chkSave2Sent.Checked;
             tcMail.TabPages["tabImap"].Enabled = save;
+            //tcMail.TabPages["tabMsExchange"].Enabled = save;
         }
 
         private void tabExchange_Click(object sender, EventArgs e)
@@ -683,6 +719,11 @@ namespace SnmpScanner
             //ManagedInstallerClass.InstallHelper(new string[] { "/u", Assembly.GetExecutingAssembly().Location });
             MessageBox.Show(SelfInstaller.UninstallMe().ToString());
             //MessageBox.Show(ServiceInstaller.UninstallService().ToString());
+        }
+
+        private void tcMail_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

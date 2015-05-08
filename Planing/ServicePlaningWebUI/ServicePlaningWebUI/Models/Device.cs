@@ -13,7 +13,7 @@ namespace ServicePlaningWebUI.Models
     public class Device : Db.Db, IDbObject<int>
     {
         public int Id { get; set; }
-        //public string Model { get; set; }
+        public string Model { get; set; }
         public int IdModel { get; set; }
         public string SerialNum { get; set; }
         public string InvNum { get; set; }
@@ -51,7 +51,7 @@ namespace ServicePlaningWebUI.Models
                 DataRow dr = dt.Rows[0];
 
                 Id = (int)dr["id_device"];
-                //Model = dr["model"].ToString();
+                Model = dr["model"].ToString();
                 IdModel = (int)dr["id_device_model"];
                 SerialNum = dr["serial_num"].ToString();
                 InvNum = dr["inv_num"].ToString();

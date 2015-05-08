@@ -17,6 +17,27 @@
             </div>
         </div>
         <div class="form-group">
+            <label for='<%=txtDateBegin.ClientID %>' class="col-sm-2 control-label">Период</label>
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <asp:TextBox ID="txtDateBegin" runat="server" CssClass="form-control datepicker-btn input-sm" placeholder="Дата начала"></asp:TextBox>
+                    </div>
+                    <span class="help-block">
+                        <asp:CompareValidator ID="cvTxtDateBegin" runat="server" ErrorMessage="Введите дату начала" CssClass="text-danger" ControlToValidate="txtDateBegin" Type="Date" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgFilter"></asp:CompareValidator>
+                    </span>
+                </div>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <asp:TextBox ID="txtDateEnd" runat="server" CssClass="form-control datepicker-btn input-sm" placeholder="Дата окончания"></asp:TextBox>
+                    </div>
+                    <span class="help-block">
+                        <asp:CompareValidator ID="cvTxtDateEnd" runat="server" ErrorMessage="Введите дату окончания" CssClass="text-danger" ControlToValidate="txtDateEnd" Type="Date" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgFilter"></asp:CompareValidator>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
             <label for='<%=txtRowsCount.ClientID %>' class="col-sm-2 control-label">Показывать записей</label>
             <div class="col-sm-10">
                 <asp:TextBox ID="txtRowsCount" runat="server" class="form-control input-sm" MaxLength="5"></asp:TextBox>

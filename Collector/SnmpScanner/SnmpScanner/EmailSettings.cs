@@ -29,6 +29,10 @@ namespace SnmpScanner
         public string SentPassword;
         public bool SentEnableSsl;
 
+        public string MsExchangeVersion;
+        public string MsExchangeLogin;
+        public string MsExchangePass;
+
         public EmailSettings(bool defaultSettings)
         {
             var settings = new Settings();
@@ -74,6 +78,11 @@ namespace SnmpScanner
             SentEnableSsl = !String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
 
             //SentMethod = ConfigurationManager.AppSettings["sentMethod"];
+
+            MsExchangeVersion = ConfigurationManager.AppSettings["msExchVers"];
+            MsExchangeLogin = ConfigurationManager.AppSettings["msExchLogin"];
+            string msExchPass = ConfigurationManager.AppSettings["msExchPass"];
+            MsExchangePass = String.IsNullOrEmpty(msExchPass) ? msExchPass : Cryptor.Decrypt(msExchPass, "Un1tGroup"); 
         }
     }
 }

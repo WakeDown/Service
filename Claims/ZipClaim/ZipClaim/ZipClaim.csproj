@@ -38,6 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.5.7.1213, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\..\Work\Components\AJAX\DEC2013AjaxControlToolkit.Binary.NET45\AjaxControlToolkit.dll</HintPath>
+    </Reference>
     <Reference Include="AspNet.ScriptManager.bootstrap, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AspNet.ScriptManager.bootstrap.3.1.1\lib\net45\AspNet.ScriptManager.bootstrap.dll</HintPath>
@@ -277,6 +281,7 @@
     <Compile Include="Helpers\MessageHelper.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\ClaimUnit.cs" />
+    <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\Manager2Operator.cs" />
     <Compile Include="Models\User.cs" />

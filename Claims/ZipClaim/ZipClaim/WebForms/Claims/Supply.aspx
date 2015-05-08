@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms/Masters/List.master" AutoEventWireup="true" CodeBehind="Supply.aspx.cs" Inherits="ZipClaim.WebForms.Claims.Supply" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="cphControlButtons" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphFilterBody" runat="server">
@@ -10,7 +12,7 @@
                 <asp:TextBox ID="txtId" runat="server" class="form-control input-sm" MaxLength="20"></asp:TextBox>
             </div>
         </div>--%>
-                <div class="form-group">
+        <div class="form-group">
             <label for='<%=ddlSupplyMan.ClientID %>' class="col-sm-2 control-label">Снабженец</label>
             <div class="col-sm-10">
                 <asp:DropDownList ID="ddlSupplyMan" runat="server" CssClass="form-control input-sm">
@@ -65,7 +67,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphList" runat="server">
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
             <asp:PlaceHolder ID="phServerMessage" runat="server"></asp:PlaceHolder>
             <h5><span class="label label-default">Показано записей:
@@ -134,11 +136,22 @@
                 </EditItemTemplate>--%>
                         <ItemTemplate>
                             <asp:LinkButton ID="btnSave" runat="server" OnClick="btnSave_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' CssClass="btn btn-link" data-toggle="tooltip" title="отправить" Visible="False" ValidationGroup="vgSupply"><i class="fa fa-reply fa-lg"></i></asp:LinkButton>
-<%--                            <asp:LinkButton ID="btnReturn" runat="server" OnClick="btnReturn_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' CssClass="btn btn-link" data-toggle="tooltip" title="вернуть" Visible='<%# UserIsSupplyMan || UserIsSysAdmin %>'><i class="fa fa-recycle fa-lg"></i></asp:LinkButton>--%>
+                            <asp:LinkButton ID="btnReturn" runat="server" CssClass="btn btn-link" OnClick="btnReturn_OnClick" data-toggle="tooltip" title="вернуть" Visible='<%# UserIsSupplyMan || UserIsSysAdmin %>'><i class="fa fa-recycle fa-lg"></i></asp:LinkButton>
+                            <asp:Panel ID="pnlReturnDescr" runat="server" Visible="false">
+                                <div class="supply-return-pnl">
+                                    <asp:TextBox ID="txtReturnDescr" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control" placeholder="Комментарий к возврату"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="rfvTxtReturnDescr" runat="server" ErrorMessage="Укажите причину отклонения позиции" ControlToValidate="txtReturnDescr" Display="Dynamic" SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgCancel"></asp:RequiredFieldValidator>
+                                    <div>
+                                        <asp:LinkButton ID="btnSendReturn" runat="server" CssClass="btn btn-success" Text="Вернуть" OnClick="btnSendReturn_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' ValidationGroup="vgCancel" />
+                                        <asp:LinkButton ID="btnReturnCancel" runat="server" CssClass="btn btn-danger" Text="Отмена" OnClick="btnReturnCancel_OnClick" />
+                                    </div>
+                                </div>
+                            </asp:Panel>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
+
             <asp:SqlDataSource ID="sdsList" runat="server" ConnectionString="<%$ ConnectionStrings:unitConnectionString %>" SelectCommand="ui_zip_claims" SelectCommandType="StoredProcedure" CancelSelectOnNullParameter="false">
                 <SelectParameters>
                     <asp:Parameter DefaultValue="getClaimUnitCommonList" Name="action" />
@@ -154,4 +167,10 @@
             </asp:SqlDataSource>
         </ContentTemplate>
     </asp:UpdatePanel>
+    <%--    <asp:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
+        CancelControlID="btnReturnCancel" OkControlID="btnSendReturn"
+        TargetControlID="btnFakePopup" PopupControlID="pnlReturnDescr"
+        BackgroundCssClass="ModalPopupBG">
+    </asp:ModalPopupExtender>--%>
+    <%--    <asp:Button ID="btnFakePopup" runat="server" Text="test" />--%>
 </asp:Content>

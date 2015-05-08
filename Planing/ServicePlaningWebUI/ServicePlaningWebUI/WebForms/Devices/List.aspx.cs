@@ -62,6 +62,7 @@ namespace ServicePlaningWebUI.WebForms.Devices
         protected string FormUrl = FriendlyUrl.Href("~/Devices/Editor");
         protected string Contract2DevicesFormUrl = FriendlyUrl.Href("~/Contracts/Devices/Editor");
         protected string ContracDevtFormUrl = FriendlyUrl.Href("~/Contracts/Devices");
+        protected string ContracFormUrl = FriendlyUrl.Href("~/Contracts/Editor");
 
         protected new void Page_Load(object sender, EventArgs e)
         {

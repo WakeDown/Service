@@ -17,7 +17,7 @@ namespace CounterUninstaller
 
             string path = Path.Combine(fldr, @"Program\UN1TCounter.exe");
 
-            var psi = new ProcessStartInfo(path, "uninstall")
+            var psi = new ProcessStartInfo(String.Format("\"{0}\"", path), "uninstall")
             {
                 UseShellExecute = false,
                 CreateNoWindow = true

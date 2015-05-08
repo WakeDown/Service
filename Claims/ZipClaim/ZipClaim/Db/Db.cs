@@ -95,6 +95,18 @@ namespace ZipClaim.Db
             return result;
         }
 
+        protected decimal? GetValueDeciamlOrNull(string value)
+        {
+            decimal? result = null;
+
+            if (!String.IsNullOrEmpty(value))
+            {
+                result = Convert.ToDecimal(value);
+            }
+
+            return result;
+        }
+
         public static decimal? GetValueDecimalOrNull(string value)
         {
             decimal? result = null;

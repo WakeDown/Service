@@ -180,7 +180,7 @@ tr.text-line td, td.text-line {
 }
 
 .align-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .nowrap {

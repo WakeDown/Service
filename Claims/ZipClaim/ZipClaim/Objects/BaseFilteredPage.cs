@@ -200,6 +200,11 @@ document.getElementById('{0}').click();
                                           "');$(rbl" + filterLink.ParamName + ").find(':radio').removeAttr('checked');");
                         //script.AppendLine("var x = 0;for(x = 0; x < rbl" + filterLink.ParamName + ".length; x++){rbl" + filterLink.ParamName + "[x].checked=false;}");
                         break;
+                    case "CheckBoxList":
+                        script.AppendLine("var chk" + filterLink.ParamName + "=document.getElementById('" + clientId +
+                                          "');$(chk" + filterLink.ParamName + ").find(':checkbox').removeAttr('checked');");
+                        //script.AppendLine("var x = 0;for(x = 0; x < rbl" + filterLink.ParamName + ".length; x++){rbl" + filterLink.ParamName + "[x].checked=false;}");
+                        break;
                 }
 
             }

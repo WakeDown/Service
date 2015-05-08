@@ -534,6 +534,15 @@ namespace ServicePlaningWebUI.Helpers
             rbl.Enabled = enable;
         }
 
+        public static bool? RblGetValueBool(ref RadioButtonList rbl, bool positiveOrNull)
+        {
+            string val = rbl.SelectedValue;
+
+            if (!val.Equals("1") && !val.Equals("0") && positiveOrNull) return null;
+
+            return val.Equals("1");
+        }
+
         #endregion
 
         #region Кнопки

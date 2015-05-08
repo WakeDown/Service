@@ -224,7 +224,7 @@ namespace ServicePlaningWebUI.WebForms.Service
         private void Save()
         {
             ServiceClaim serviceClaim = GetFormData();
-            serviceClaim.Save();
+            serviceClaim.Save(true);
             string messageText = String.Format("Сохранение выезда № {0} прошло успешно", serviceClaim.Number);
             ServerMessageDisplay(new[] { phServerMessage }, messageText);
         }

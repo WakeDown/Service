@@ -72,6 +72,11 @@ namespace ServicePlaningWebUI.Objects
                         value = Request.Form[filterLink.ControlId];
                         value = String.IsNullOrEmpty(value) || value == MainHelper.ddlEmptyValue || value == MainHelper.ddlSelectAllValue ? null : value;
                         break;
+                    case "CheckBoxList":
+                        CheckBoxList cbl = (CheckBoxList)FindControl(filterLink.ControlId);
+                        value = MainHelper.ChkListGetCheckedValuesString(ref cbl);//Request.Form[filterLink.ControlId];
+                        value = String.IsNullOrEmpty(value) ? null : value;
+                        break;
                 }
 
                 filterLink.Value = value;
@@ -101,6 +106,11 @@ namespace ServicePlaningWebUI.Objects
                     case "RadioButtonList":
                         RadioButtonList rbl = FindControl(filterLink.ControlId) as RadioButtonList;
                         MainHelper.RblSetValue(ref rbl, value);
+                        break;
+                    case "CheckBoxList":
+                        CheckBoxList cbl = FindControl(filterLink.ControlId) as CheckBoxList;
+                        string[] arrVal = value != null ? value.Split(',') : new[] { "" };
+                        MainHelper.ChkListSetSelectedValues(ref cbl, arrVal);
                         break;
                 }
             }
@@ -188,6 +198,11 @@ ctrl.addEventListener('keyup', function (e) {{
                     case "RadioButtonList":
                         script.AppendLine("var rbl" + filterLink.ParamName + "=document.getElementById('" + clientId +
                                           "');$(rbl" + filterLink.ParamName + ").find(':radio').removeAttr('checked');");
+                        //script.AppendLine("var x = 0;for(x = 0; x < rbl" + filterLink.ParamName + ".length; x++){rbl" + filterLink.ParamName + "[x].checked=false;}");
+                        break;
+                    case "CheckBoxList":
+                        script.AppendLine("var chk" + filterLink.ParamName + "=document.getElementById('" + clientId +
+                                          "');$(chk" + filterLink.ParamName + ").find(':checkbox').removeAttr('checked');");
                         //script.AppendLine("var x = 0;for(x = 0; x < rbl" + filterLink.ParamName + ".length; x++){rbl" + filterLink.ParamName + "[x].checked=false;}");
                         break;
                 }

@@ -44,10 +44,13 @@ namespace ServicePlaningWebUI.App_Start
             routes.MapPageRoute("TariffServADmin", "Settings/TariffServADmin", "~/WebForms/Settings/TariffServADmin.aspx");
             routes.MapPageRoute("Users2Roles", "Settings/Users2Roles", "~/WebForms/Settings/Users2Roles.aspx");
 
+            //Reports
             routes.MapPageRoute("PlanExecute", "Reports/PlanExecute", "~/WebForms/Reports/PlanExecute.aspx");
             routes.MapPageRoute("Payment", "Reports/Payment", "~/WebForms/Reports/Payment.aspx");
             routes.MapPageRoute("ServiceAkt", "Reports/ServiceAkt", "~/WebForms/Reports/ServiceAkt.aspx");
             routes.MapPageRoute("Counters", "Reports/Counters", "~/WebForms/Reports/Counters.aspx");
+            routes.MapPageRoute("CountersDetail", "Reports/CountersDetail", "~/WebForms/Reports/CountersDetail.aspx");
+            //----
 
             routes.MapPageRoute("Error", "Error", "~/WebForms/Error.aspx");
 

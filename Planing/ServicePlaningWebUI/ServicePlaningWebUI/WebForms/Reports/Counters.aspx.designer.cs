@@ -49,6 +49,114 @@ namespace ServicePlaningWebUI.WebForms.Reports {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator revTxtPlaningDate;
         
         /// <summary>
+        /// txtWearBegin элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWearBegin;
+        
+        /// <summary>
+        /// cvTxtWearBegin элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtWearBegin;
+        
+        /// <summary>
+        /// txtWearEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtWearEnd;
+        
+        /// <summary>
+        /// cvTxtWearEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtWearEnd;
+        
+        /// <summary>
+        /// txtLoadingBegin элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoadingBegin;
+        
+        /// <summary>
+        /// cvTxtLoadingBegin элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtLoadingBegin;
+        
+        /// <summary>
+        /// txtLoadingEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLoadingEnd;
+        
+        /// <summary>
+        /// cvTxtLoadingEnd элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtLoadingEnd;
+        
+        /// <summary>
+        /// pnlTristate элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlTristate;
+        
+        /// <summary>
+        /// chkTristate элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden chkTristate;
+        
+        /// <summary>
+        /// chklVendor элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chklVendor;
+        
+        /// <summary>
+        /// rblHasCames элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblHasCames;
+        
+        /// <summary>
         /// btnSearch элемент управления.
         /// </summary>
         /// <remarks>
@@ -74,6 +182,15 @@ namespace ServicePlaningWebUI.WebForms.Reports {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl sDevCountTotal;
+        
+        /// <summary>
+        /// sDevCountWithVolTotal элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sDevCountWithVolTotal;
         
         /// <summary>
         /// sCurVolTotal элемент управления.
@@ -110,14 +227,5 @@ namespace ServicePlaningWebUI.WebForms.Reports {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater tblCounterReport;
-        
-        /// <summary>
-        /// sdsCounterReport элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sdsCounterReport;
     }
 }
