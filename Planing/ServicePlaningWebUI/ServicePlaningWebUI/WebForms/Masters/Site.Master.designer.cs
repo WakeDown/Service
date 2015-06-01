@@ -94,6 +94,15 @@ namespace ServicePlaningWebUI.WebForms.Masters {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPayment;
         
         /// <summary>
+        /// liCounters элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCounters;
+        
+        /// <summary>
         /// liSettings элемент управления.
         /// </summary>
         /// <remarks>

@@ -13,15 +13,6 @@ namespace ServicePlaningWebUI.WebForms.Service {
     public partial class Came {
         
         /// <summary>
-        /// upClaimList элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel upClaimList;
-        
-        /// <summary>
         /// txtClaimSelection элемент управления.
         /// </summary>
         /// <remarks>
@@ -29,6 +20,15 @@ namespace ServicePlaningWebUI.WebForms.Service {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtClaimSelection;
+        
+        /// <summary>
+        /// btnClaimSelection элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClaimSelection;
         
         /// <summary>
         /// lbClaim элемент управления.

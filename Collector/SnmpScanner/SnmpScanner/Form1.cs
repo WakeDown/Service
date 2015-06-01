@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Configuration.Install;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using Microsoft.Exchange.WebServices.Data;
 using SnmpScanner.Models;
 
 namespace SnmpScanner
@@ -91,6 +94,7 @@ namespace SnmpScanner
 
                 //AppSettings = new Settings();
                 FillIpRangeList();
+                if (lstIpRanges.Items.Count > 0) lstIpRanges.SelectedIndex = 0;
                 FillDefaults();
             }
             catch (FileNotFoundException ex)
@@ -182,6 +186,13 @@ namespace SnmpScanner
 
         private void btnStart_Click(object sender, EventArgs e)
         {
+            //if (chkLocal.Checked)
+            //{
+
+
+            //    return;
+            //}
+            
             var settings = new EmailSettings(true);
 
             DialogResult result;
@@ -358,6 +369,44 @@ namespace SnmpScanner
 
         private EmailSettings currSettings = new EmailSettings(false);
 
+        public void FillCurrSettings()
+        {
+            currSettings.Host = txtSmtpHost.Text;
+
+            if (!String.IsNullOrEmpty(txtSmtpPort.Text))
+            {
+                currSettings.Port = Convert.ToInt32(txtSmtpPort.Text);
+            }
+
+            currSettings.Login = txtSmtpLogin.Text;
+            currSettings.Password = txtSmtpPass.Text;
+            string ssl = chkSslEnable.Checked.ToString();
+            currSettings.EnableSsl = !String.IsNullOrEmpty(ssl) && Convert.ToBoolean(ssl);
+
+            string save = chkSave2Sent.Checked.ToString();
+            currSettings.Save2SentFolder = !String.IsNullOrEmpty(save) && Convert.ToBoolean(save);
+
+            currSettings.SentHost = txtSentHost.Text;
+
+            if (!String.IsNullOrEmpty(txtSentPort.Text))
+            {
+                currSettings.SentPort = Convert.ToInt32(txtSentPort.Text);
+            }
+
+            currSettings.SentLogin = txtSentLogin.Text;
+            currSettings.SentPassword = txtSentPassword.Text;
+            string sentSsl = chkSentSsl.Checked.ToString();
+            currSettings.SentEnableSsl = !String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
+
+            currSettings.ServerType = cmbServerTypes.SelectedItem.ToString();
+
+            currSettings.MsExchangeVersion = cmbMsExchangeServerVersions.SelectedItem == null ? String.Empty :cmbMsExchangeServerVersions.SelectedItem.ToString();
+            currSettings.MsExchangeLogin = txtMsExchLogin.Text;
+            currSettings.MsExchangePass = txtMsExchPass.Text;
+
+            currSettings.MailCopyTo = txtMailCopyTo.Text;
+        }
+
         private void SaveSmtpSettings(object sender, EventArgs e)
         {
             currSettings.Host = txtSmtpHost.Text;
@@ -374,6 +423,14 @@ namespace SnmpScanner
 
             string save = chkSave2Sent.Checked.ToString();
             currSettings.Save2SentFolder = !String.IsNullOrEmpty(save) && Convert.ToBoolean(save);
+
+            currSettings.ServerType = cmbServerTypes.SelectedItem.ToString();
+
+            currSettings.MsExchangeVersion = cmbMsExchangeServerVersions.SelectedItem == null ? String.Empty : cmbMsExchangeServerVersions.SelectedItem.ToString();
+            currSettings.MsExchangeLogin = txtMsExchLogin.Text;
+            currSettings.MsExchangePass = txtMsExchPass.Text;
+
+            currSettings.MailCopyTo = txtMailCopyTo.Text;
         }
 
         private void SaveSentSettings(object sender, EventArgs e)
@@ -389,21 +446,45 @@ namespace SnmpScanner
             currSettings.SentPassword = txtSentPassword.Text;
             string sentSsl = chkSentSsl.Checked.ToString();
             currSettings.SentEnableSsl = !String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
+
+            currSettings.ServerType = cmbServerTypes.SelectedItem.ToString();
+
+            currSettings.MsExchangeVersion = cmbMsExchangeServerVersions.SelectedItem == null ? String.Empty : cmbMsExchangeServerVersions.SelectedItem.ToString();
+            currSettings.MsExchangeLogin = txtMsExchLogin.Text;
+            currSettings.MsExchangePass = txtMsExchPass.Text;
+
+            currSettings.MailCopyTo = txtMailCopyTo.Text;
         }
 
         private void SaveSettings2Config()
         {
+            SetAppConfigValue("serverType", cmbServerTypes.SelectedItem.ToString());
+
             SetAppConfigValue("smtpHost", txtSmtpHost.Text);
             SetAppConfigValue("smtpPort", txtSmtpPort.Text);
             SetAppConfigValue("smtpLogin", txtSmtpLogin.Text);
-            SetAppConfigValue("smtpPassword", txtSmtpPass.Text);
+
+            string pass = txtSmtpPass.Text;
+            SetAppConfigValue("smtpPassword", String.IsNullOrEmpty(pass) ? pass : Cryptor.Encrypt(pass, "Un1tGroup"));
+
             SetAppConfigValue("smtpEnableSsl", chkSslEnable.Checked.ToString());
             SetAppConfigValue("save2SentFolder", chkSave2Sent.Checked.ToString());
             SetAppConfigValue("sentHost", txtSentHost.Text);
             SetAppConfigValue("sentPort", txtSentPort.Text);
             SetAppConfigValue("sentLogin", txtSentLogin.Text);
-            SetAppConfigValue("sentPassword", txtSentPassword.Text);
+
+            string sentPass = txtSentPassword.Text;
+            SetAppConfigValue("sentPassword", String.IsNullOrEmpty(sentPass) ? sentPass : Cryptor.Encrypt(sentPass, "Un1tGroup"));
+
             SetAppConfigValue("sentEnableSsl", chkSentSsl.Checked.ToString());
+
+            //MS Exchange
+            SetAppConfigValue("msExchVers", cmbMsExchangeServerVersions.SelectedItem == null ? String.Empty : cmbMsExchangeServerVersions.SelectedItem.ToString());
+            SetAppConfigValue("msExchLogin", txtMsExchLogin.Text);
+            string msExchPass = txtMsExchPass.Text;
+            SetAppConfigValue("msExchPass", String.IsNullOrEmpty(msExchPass) ? msExchPass : Cryptor.Encrypt(msExchPass, "Un1tGroup"));
+
+            SetAppConfigValue("mailCopyTo", txtMailCopyTo.Text);
         }
 
         
@@ -460,23 +541,27 @@ namespace SnmpScanner
 
         private void FillSmtpSettings()
         {
-            txtSmtpHost.Text = ConfigurationManager.AppSettings["smtpHost"];
-            txtSmtpPort.Text = ConfigurationManager.AppSettings["smtpPort"];
-            txtSmtpLogin.Text = ConfigurationManager.AppSettings["smtpLogin"];
-            txtSmtpPass.Text = ConfigurationManager.AppSettings["smtpPassword"];
-            string ssl = ConfigurationManager.AppSettings["smtpEnableSsl"];
-            chkSslEnable.Checked = !String.IsNullOrEmpty(ssl) && Convert.ToBoolean(ssl);
+            EmailSettings settings = new EmailSettings(true);
+
+            cmbServerTypes.SelectedItem = settings.ServerType;
+
+            txtSmtpHost.Text = settings.Host;//ConfigurationManager.AppSettings["smtpHost"];
+            txtSmtpPort.Text = settings.Port.ToString();//ConfigurationManager.AppSettings["smtpPort"];
+            txtSmtpLogin.Text = settings.Login;//ConfigurationManager.AppSettings["smtpLogin"];
+            txtSmtpPass.Text = settings.Password;//ConfigurationManager.AppSettings["smtpPassword"];
+            //string ssl = ConfigurationManager.AppSettings["smtpEnableSsl"];
+            chkSslEnable.Checked = settings.EnableSsl;//!String.IsNullOrEmpty(ssl) && Convert.ToBoolean(ssl);
             //string method = ConfigurationManager.AppSettings["smtpMailMethod"];
 
-            string save = ConfigurationManager.AppSettings["save2SentFolder"];
-            chkSave2Sent.Checked = !String.IsNullOrEmpty(save) && Convert.ToBoolean(save);
+            //string save = ConfigurationManager.AppSettings["save2SentFolder"];
+            chkSave2Sent.Checked = settings.Save2SentFolder;//!String.IsNullOrEmpty(save) && Convert.ToBoolean(save);
 
-            txtSentHost.Text = ConfigurationManager.AppSettings["sentHost"];
-            txtSentPort.Text = ConfigurationManager.AppSettings["sentPort"];
-            txtSentLogin.Text = ConfigurationManager.AppSettings["sentLogin"];
-            txtSentPassword.Text = ConfigurationManager.AppSettings["sentPassword"];
-            string sentSsl = ConfigurationManager.AppSettings["sentEnableSsl"];
-            chkSentSsl.Checked = !String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
+            txtSentHost.Text = settings.SentHost;//ConfigurationManager.AppSettings["sentHost"];
+            txtSentPort.Text = settings.SentPort.ToString();//ConfigurationManager.AppSettings["sentPort"];
+            txtSentLogin.Text = settings.SentLogin;//ConfigurationManager.AppSettings["sentLogin"];
+            txtSentPassword.Text = settings.SentPassword;//ConfigurationManager.AppSettings["sentPassword"];
+            //string sentSsl = ConfigurationManager.AppSettings["sentEnableSsl"];
+            chkSentSsl.Checked = settings.SentEnableSsl; //!String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
 
             //if (String.IsNullOrEmpty(method))
             //{
@@ -493,18 +578,48 @@ namespace SnmpScanner
             //        cmbMailMethod.SelectedIndex = -1;
             //    }
             //}
+
+
+            //MS Exchange
+            cmbMsExchangeServerVersions.SelectedItem = settings.MsExchangeVersion;
+            txtMsExchLogin.Text = settings.MsExchangeLogin;
+            txtMsExchPass.Text = settings.MsExchangePass;
+
+            txtMailCopyTo.Text = settings.MailCopyTo;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl1.SelectedTab == tabExchange)
             {
+               
+                FillLists();
+
                 FillSmtpSettings();
                 exchangeDelay.Value = Program.GetExchangeDelayValue();
                 DisplayTabImapPop3();
 
                 //DisplayExchangeTabElements();
             }
+        }
+
+        private void FillLists()
+        {
+            //Тип сервера
+            FillServerTypes(cmbServerTypes);
+
+            //Заполняем версии MS Exchange
+            cmbMsExchangeServerVersions.DataSource = Enum.GetNames(typeof (ExchangeVersion));
+        }
+
+        private void FillServerTypes(ComboBox cmb)
+        {
+            List<string> ds = new List<string>();
+            ds.Add("--тип сервера--");
+            ds.Add("MS Exchange");
+            ds.Add("Другой");
+
+            cmb.DataSource = ds;
         }
 
         private void DisplayExchangeTabElements()
@@ -517,6 +632,8 @@ namespace SnmpScanner
         {
             try
             {
+                FillCurrSettings();
+
                 var settings = currSettings;//GetFormSettings();
 
                 if (ValidateSmtpSettings(settings))
@@ -636,6 +753,7 @@ namespace SnmpScanner
         {
             bool save = chkSave2Sent.Checked;
             tcMail.TabPages["tabImap"].Enabled = save;
+            //tcMail.TabPages["tabMsExchange"].Enabled = save;
         }
 
         private void tabExchange_Click(object sender, EventArgs e)
@@ -651,6 +769,62 @@ namespace SnmpScanner
         private void btnCancel_Click(object sender, EventArgs e)
         {
             FillSmtpSettings();
+        }
+
+        private void btnInstall_Click(object sender, EventArgs e)
+        {
+            //ManagedInstallerClass.InstallHelper(new string[] { Assembly.GetExecutingAssembly().Location });
+            MessageBox.Show(SelfInstaller.InstallMe().ToString());
+            //MessageBox.Show(ServiceInstaller.InstallService().ToString());
+        }
+
+        private void btnUninstall_Click(object sender, EventArgs e)
+        {
+            //ManagedInstallerClass.InstallHelper(new string[] { "/u", Assembly.GetExecutingAssembly().Location });
+            MessageBox.Show(SelfInstaller.UninstallMe().ToString());
+            //MessageBox.Show(ServiceInstaller.UninstallService().ToString());
+        }
+
+        private void tcMail_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cmbServerTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //ds.Add("--тип сервера--");
+            //ds.Add("MS Exchange");
+            //ds.Add("Другой");
+
+            //Дективируем все вкладки
+            foreach (TabPage tabPage in tcMail.TabPages)
+                    {
+                        tabPage.Enabled = false;
+                    }
+            bool displayBtns = false;
+
+            if (cmbServerTypes.SelectedItem == null)
+            {
+                cmbServerTypes.SelectedItem = "--тип сервера--";
+            }
+
+            switch (cmbServerTypes.SelectedItem.ToString())
+            {
+                case "--тип сервера--":
+                    displayBtns = false;
+                    break;
+                case "MS Exchange":
+                    tcMail.TabPages["tabMsExchange"].Enabled = true;
+                    displayBtns = true;
+                    break;
+                case "Другой":
+                   tcMail.TabPages["tabSmtp"].Enabled = tcMail.TabPages["tabImap"].Enabled = true;
+                   displayBtns = true;
+                    break;
+            }
+
+
+            chkSave2Sent.Enabled = btnSmtpTest.Enabled = btnSave.Enabled = btnCancel.Enabled = btnExchange.Enabled = exchangeDelay.Enabled = txtMailCopyTo .Enabled= displayBtns;
         }
     }
 }

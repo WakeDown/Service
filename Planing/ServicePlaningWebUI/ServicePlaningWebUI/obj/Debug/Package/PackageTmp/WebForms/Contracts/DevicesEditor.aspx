@@ -89,7 +89,7 @@
                         </asp:DropDownList>
                     </div>
                     <span class="help-block">
-                        <asp:RequiredFieldValidator ID="rfvDdlServiceAdmin" runat="server" ErrorMessage="Выберите сервисного администратора" ControlToValidate="ddlContractNumber" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" ValidationGroup="vgForm" InitialValue="-1"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvDdlServiceAdmin" runat="server" ErrorMessage="Выберите сервисного администратора" ControlToValidate="ddlServiceAdmin" Display="Dynamic" CssClass="text-danger" SetFocusOnError="True" ValidationGroup="vgForm" InitialValue="-1"></asp:RequiredFieldValidator>
                         <%--                            <asp:CompareValidator ID="cvTxtSpeed" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="ddlContractNumber" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>--%>
                     </span>
                 </div>

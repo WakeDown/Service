@@ -107,7 +107,7 @@ namespace ServicePlaningWebUI.Models
             Save(false);
         }
 
-        public void Save(bool addScheduleDates2ServicePlan)
+        public void Save(bool addScheduleDates2ServicePlan, bool isHandlingDevicesContract = false)
         {
             SqlParameter pId = new SqlParameter() { ParameterName = "id_contract2devices", Value = Id, DbType = DbType.Int32 };
             SqlParameter pIdContract = new SqlParameter() { ParameterName = "id_contract", Value = IdContract, DbType = DbType.Int32 };
@@ -127,6 +127,7 @@ namespace ServicePlaningWebUI.Models
             SqlParameter pCoord = new SqlParameter() { ParameterName = "coord", Value = Coord, DbType = DbType.AnsiString };
             SqlParameter pScheduleDates = new SqlParameter() { ParameterName = "lst_schedule_dates", Value = String.Join(",", ScheduleDates), DbType = DbType.AnsiString };
             SqlParameter pAddScheduleDates2ServicePlan = new SqlParameter() { ParameterName = "add_scheduled_dates2service_plan", Value = addScheduleDates2ServicePlan, DbType = DbType.Boolean };
+
 
             DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveContract2Devices", pId, pIdContract, /*pIdDevice,*/pLstIdDevice, pIdServiceInterval, pIdCity, pAddress, pContactName, pComment, pIdCreator, pIdServiceAdmin, pObjectName, pCoord, pScheduleDates, pAddScheduleDates2ServicePlan);
         }

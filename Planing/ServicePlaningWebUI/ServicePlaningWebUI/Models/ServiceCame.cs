@@ -9,7 +9,7 @@ using ServicePlaningWebUI.Objects.Interfaces;
 
 namespace ServicePlaningWebUI.Models
 {
-    public class ServiceCame : Db.Db, IDbObject<int>
+    public class ServiceCame : Db.Db
     {
         public int Id;
         public int IdServiceClaim;
@@ -58,7 +58,7 @@ namespace ServicePlaningWebUI.Models
             }
         }
 
-        public void Save()
+        public void Save(bool isSysAdmin = false, string serialNum = null)
         {
             SqlParameter pId = new SqlParameter() { ParameterName = "id_service_came", Value = Id, DbType = DbType.Int32 };
             SqlParameter pIdServiceClaim = new SqlParameter() { ParameterName = "id_service_claim", Value = IdServiceClaim, DbType = DbType.Int32 };
@@ -70,8 +70,10 @@ namespace ServicePlaningWebUI.Models
             SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
             SqlParameter pCounterColour = new SqlParameter() { ParameterName = "counter_colour", Value = CounterColour, DbType = DbType.Int32 };
             SqlParameter pIdAktScan = new SqlParameter() { ParameterName = "id_akt_scan", Value = IdAktScan, DbType = DbType.Int32 };
+            SqlParameter pIsSysAdmin = new SqlParameter() { ParameterName = "is_sys_admin", Value = isSysAdmin, DbType = DbType.Boolean };
+            SqlParameter pSerialNum = new SqlParameter() { ParameterName = "serial_num", Value = serialNum, DbType = DbType.AnsiString };
 
-            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveServiceCame", pId, pIdServiceClaim, pDescr, pDateCame, pCounter, pIdServiceEngeneer, pIdServiceActionType, pIdCreator, pCounterColour, pIdAktScan);
+            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveServiceCame", pId, pIdServiceClaim, pDescr, pDateCame, pCounter, pIdServiceEngeneer, pIdServiceActionType, pIdCreator, pCounterColour, pIdAktScan, pIsSysAdmin, pSerialNum);
         }
 
         public void Delete(int id)

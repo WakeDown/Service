@@ -124,6 +124,10 @@ hr.smallmargin {
     padding-left: 30px;
 }
 
+.pad-l-mid-plus {
+    padding-left: 40px;
+}
+
 #filter .panel-heading {
     cursor: pointer;
 }
@@ -278,6 +282,10 @@ table .btn {
     font-weight: 900;
 }
 
+.bold-light {
+    font-weight: 600;
+}
+
 /*.sorted-header a, .header-asc a, .header-desc a {
      white-space: nowrap;
 }*/
@@ -320,8 +328,8 @@ table .btn {
     font-weight: 400;
 }
 
-.chk-lst td {
-    padding-right: 7px;
+.chk-lst td, .chk-lst label  {
+    padding-right: 9px;
 }
 
 .nowrap {
@@ -595,6 +603,10 @@ div.table div.row {
     border-top: 1px solid #ddd;
 }
 
+div.row-total {
+     border-top: none !important;
+}
+
 div.table div.header {
     font-size: 1.1em;
     font-weight: 600;
@@ -617,7 +629,7 @@ div.row-bg {
     padding-bottom: 10px;
 }
 
-div.table div.bg-white {
+div.table div.bg-white, a.bg-white {
     background-color: #f9f9f9;
 }
 
@@ -625,13 +637,31 @@ div.table div.bg-white {
     text-align: right;
 }
 
+.center {
+    text-align: center;
+}
+
 .align-left {
     text-align: left !important;
 }
 
+.link-header-expanded {
+    display: block;
+    color: black;
+    padding-left: 5px;
+    padding-top: 5px;
+    margin-top: 2px;
+    border-top: 1px dotted #ddd;
+}
+
+.link-header-expanded:hover {
+    color: black;
+    text-decoration: none;
+}
+
 .link-control-header {
     display: block;
-    float: left;
+    /*float: left;*/
     color: black;
     padding-left: 5px;
 }
@@ -649,6 +679,12 @@ div.table div.bg-white {
     height: 5px;
     width: 5px;
     padding-bottom: 0 !important;
+}
+
+.label-mark.small {
+    height: 10px;
+    width: 3px;
+    display: inline-block;
 }
 
 .success-light {
@@ -789,4 +825,44 @@ div.table div.bg-white {
 
 .text-middle {
     vertical-align: middle !important;
+}
+
+.link-like-div {
+    color: black;
+}
+
+.disp-table {
+    display: table !important;
+}
+
+.exclo-btn {
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    background: black;
+}
+
+.exclo-container {
+    float: left;
+    border: 1px solid black;
+    color: black;
+    margin-left: 5px;
+    padding: 0px 4px;
+    cursor: pointer;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.auto-width {
+    width: auto !important;
+}
+
+.label-empty {
+    background: #ddd;
+}
+
+.text-smaller {
+    font-size:8pt;
 }

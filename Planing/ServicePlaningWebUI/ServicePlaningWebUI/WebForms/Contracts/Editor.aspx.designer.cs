@@ -247,6 +247,15 @@ namespace ServicePlaningWebUI.WebForms.Contracts {
         protected global::System.Web.UI.WebControls.LinkButton btnContractPeriodReduction;
         
         /// <summary>
+        /// txtHandlingDevices элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtHandlingDevices;
+        
+        /// <summary>
         /// phServerMessage элемент управления.
         /// </summary>
         /// <remarks>

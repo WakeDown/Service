@@ -7,15 +7,15 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <StartPageUrl>WebForms/Contracts/EditorWizard.aspx</StartPageUrl>
-          <StartAction>SpecificPage</StartAction>
+          <StartPageUrl>WebForms/Devices/List.aspx</StartPageUrl>
+          <StartAction>URL</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
           <SilverlightDebugging>False</SilverlightDebugging>
           <NativeDebugging>False</NativeDebugging>
           <SQLDebugging>False</SQLDebugging>
           <ExternalProgram>
           </ExternalProgram>
-          <StartExternalURL>http://localhost:49942/Reports/PlanExecute?rep=execEngAlloc&amp;mth=01.2015&amp;nst=1</StartExternalURL>
+          <StartExternalURL>http://localhost:49942/Reports/CountersDetail?id=4013&amp;cid=149</StartExternalURL>
           <StartCmdLineArguments>
           </StartCmdLineArguments>
           <StartWorkingDirectory>

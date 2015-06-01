@@ -8,3 +8,13 @@ D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchang
 D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.dll
 D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.xml
 D:\Work\!Dev\DSU\SnmpScanner\ExchangeDbEmailListener\obj\Debug\ExchangeDbEmailListener.csprojResolveAssemblyReference.cache
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\bin\Debug\ExchangeDbEmailListener.exe.config
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\obj\Debug\ExchangeDbEmailListener.exe
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\obj\Debug\ExchangeDbEmailListener.pdb
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\bin\Debug\ExchangeDbEmailListener.exe
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\bin\Debug\ExchangeDbEmailListener.pdb
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.Auth.dll
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.dll
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.xml
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\bin\Debug\Microsoft.Exchange.WebServices.Auth.xml
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\ExchangeDbEmailListener\obj\Debug\ExchangeDbEmailListener.csprojResolveAssemblyReference.cache

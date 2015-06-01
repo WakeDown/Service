@@ -29,6 +29,14 @@ namespace SnmpScanner
         public string SentPassword;
         public bool SentEnableSsl;
 
+        public string MsExchangeVersion;
+        public string MsExchangeLogin;
+        public string MsExchangePass;
+
+        public string ServerType;
+
+        public string MailCopyTo;
+
         public EmailSettings(bool defaultSettings)
         {
             var settings = new Settings();
@@ -40,6 +48,8 @@ namespace SnmpScanner
 
         private void LoadDefault()
         {
+            ServerType = ConfigurationManager.AppSettings["serverType"];
+
             Host = ConfigurationManager.AppSettings["smtpHost"];
 
             if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["smtpPort"]))
@@ -48,7 +58,10 @@ namespace SnmpScanner
             }
 
             Login = ConfigurationManager.AppSettings["smtpLogin"];
-            Password = ConfigurationManager.AppSettings["smtpPassword"];
+
+            string pass = ConfigurationManager.AppSettings["smtpPassword"];
+            Password = String.IsNullOrEmpty(pass) ? pass : Cryptor.Decrypt(pass, "Un1tGroup");
+
             string ssl = ConfigurationManager.AppSettings["smtpEnableSsl"];
             EnableSsl = !String.IsNullOrEmpty(ssl) && Convert.ToBoolean(ssl);
 
@@ -63,11 +76,23 @@ namespace SnmpScanner
             }
 
             SentLogin = ConfigurationManager.AppSettings["sentLogin"];
-            SentPassword = ConfigurationManager.AppSettings["sentPassword"];
+
+            string sentPass = ConfigurationManager.AppSettings["sentPassword"];
+            SentPassword = String.IsNullOrEmpty(sentPass) ? sentPass : Cryptor.Decrypt(sentPass, "Un1tGroup");
+
             string sentSsl = ConfigurationManager.AppSettings["sentEnableSsl"];
             SentEnableSsl = !String.IsNullOrEmpty(sentSsl) && Convert.ToBoolean(sentSsl);
 
             //SentMethod = ConfigurationManager.AppSettings["sentMethod"];
+
+            MsExchangeVersion = ConfigurationManager.AppSettings["msExchVers"];
+            MsExchangeLogin = ConfigurationManager.AppSettings["msExchLogin"];
+            string msExchPass = ConfigurationManager.AppSettings["msExchPass"];
+            MsExchangePass = String.IsNullOrEmpty(msExchPass) ? msExchPass : Cryptor.Decrypt(msExchPass, "Un1tGroup");
+
+            MailCopyTo = ConfigurationManager.AppSettings["mailCopyTo"];
         }
+
+       
     }
 }

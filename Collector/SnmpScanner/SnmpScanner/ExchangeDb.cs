@@ -7,6 +7,8 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using Microsoft.Exchange.WebServices.Data;
 using S22.Imap;
 using SnmpScanner.Models;
 
@@ -58,11 +60,88 @@ namespace SnmpScanner
 
             //IMail email = Mail.Text(body).To(settings.MailTo.ToString()).From(settings.EnableSsl ? settings.Login : settings.MailFrom.ToString()).Subject(subject).Create();
 
+            if (settings.ServerType == "Другой")//Если сервер Другой то шлем по SMTP
+            {
+                SendMailSmtp(subject, body, settings);
+                if (settings.Save2SentFolder)
+                {
+                    SaveMail2SentFolder(subject, body, settings);
+                }
 
-            SendMailSmtp(subject, body, settings);
+                return;
+            }
+            else if (settings.ServerType == "MS Exchange")//Если это Exchange
+            {
+                SendMailExchange2007Plus(subject, body, settings);
+
+                return;
+            }
+
+            throw new Exception("Не указан тип сервера! Письмо не было отправлено");
+        }
+
+        private static void SendMailExchange2007Plus(string subject, string body, EmailSettings settings)
+        {
+            ExchangeService _service;
+
+            //Мычаем выбранную версию Exchange
+            if (!string.IsNullOrEmpty(settings.MsExchangeVersion))
+            {
+                try
+                {
+                    ExchangeVersion ver;
+                    ExchangeVersion.TryParse(settings.MsExchangeVersion, out ver);
+                    _service = new ExchangeService(ver);
+                }
+                catch
+                {
+                    _service = new ExchangeService();
+                }
+            }
+            else
+            {
+                _service = new ExchangeService();    
+            }
+            
+
+            if (!String.IsNullOrEmpty(settings.MsExchangeLogin))
+            {
+                string login = settings.MsExchangeLogin.Remove(settings.MsExchangeLogin.IndexOf('@'));
+
+                _service.Credentials = new WebCredentials(login, settings.MsExchangePass);
+            }
+
+            _service.AutodiscoverUrl(settings.MsExchangeLogin);
+
+            EmailMessage mail = new EmailMessage(_service);
+            
+            mail.ToRecipients.Add(settings.MailTo.ToString());
+
+            _service.HttpHeaders.Remove("");
+            //Шлем копию письма если надо
+            if (!String.IsNullOrEmpty(settings.MailCopyTo))
+            {
+                mail.CcRecipients.Add(settings.MailCopyTo);
+            }
+            else
+            {
+                mail.CcRecipients.Clear();
+            }
+
+            mail.Subject = subject;
+
+            //Подготавливаем тело письма так как может не отображаться если клиент не узнает эти тэги
+            //body = String.Format(@"<plaintext>{0}</plaintext>", body);
+
+            mail.Body = new MessageBody(BodyType.Text, body);
+
             if (settings.Save2SentFolder)
             {
-                SaveMail2SentFolder(subject, body, settings);
+                mail.SendAndSaveCopy();
+            }
+            else
+            {
+                mail.Send();
             }
         }
 
@@ -124,7 +203,15 @@ namespace SnmpScanner
 
             mail.To.Add(settings.MailTo);
 
-            
+            //Шлем копию письма если надо
+            if (!String.IsNullOrEmpty(settings.MailCopyTo))
+            {
+                mail.CC.Add(new MailAddress(settings.MailCopyTo));
+            }
+            else
+            {
+                mail.CC.Clear();
+            }
 
             mail.Subject = subject;
             mail.Body = body;
@@ -210,6 +297,62 @@ namespace SnmpScanner
 
                 StringBuilder content = new StringBuilder();
 
+                //content.Append(@"<?xml version=""1.0"" encoding=""UTF-8"" ?>");
+
+                //////XmlDocument document = new XmlDocument();
+
+                //////XmlNode deviceRequestRoot = document.CreateElement("DeviceRequestRoot");
+                //////document.DocumentElement.AppendChild(deviceRequestRoot);
+
+                ////////SysInfo
+                //////XmlNode sysInfo = document.CreateElement("SysInfo");
+                //////deviceRequestRoot.AppendChild(sysInfo);
+
+                //////XmlAttribute idContractor = document.CreateAttribute("idContractor");
+                //////idContractor.Value = AppSettings.ContractorId.ToString();
+                //////sysInfo.Attributes.Append(idContractor);
+                //////XmlAttribute dateSend = document.CreateAttribute("dateSend");
+                //////dateSend.Value = DateTime.Now.ToString("1:dd-MM-yyyy HH:mm:ss zzz");
+                //////sysInfo.Attributes.Append(dateSend);
+                //////XmlAttribute progVersion = document.CreateAttribute("progVersion");
+                //////idContractor.Value = Program.progVersion;
+                //////sysInfo.Attributes.Append(progVersion);
+                ////////>SysInfo
+
+                //////XmlNode deviceRequestList = document.CreateElement("DeviceRequestList");
+                //////deviceRequestRoot.AppendChild(deviceRequestList);
+
+                //////foreach (Request request in lst)
+                //////{
+                //////    XmlNode deviceRequest = document.CreateElement("DeviceRequest");
+                //////    deviceRequestList.AppendChild(deviceRequest);
+
+                //////    XmlAttribute serialNum = document.CreateAttribute("serialNum");
+                //////    serialNum.Value = request.SerialNum.Replace("\"", "");
+                //////    deviceRequest.Attributes.Append(serialNum);
+
+                //////    XmlAttribute date = document.CreateAttribute("date");
+                //////    date.Value = request.DateRequest.ToString();
+                //////    deviceRequest.Attributes.Append(date);
+
+                //////    XmlAttribute host = document.CreateAttribute("host");
+                //////    host.Value = request.Host;
+                //////    deviceRequest.Attributes.Append(host);
+
+                //////    XmlAttribute oid = document.CreateAttribute("oid");
+                //////    oid.Value = request.Oid;
+                //////    deviceRequest.Attributes.Append(oid);
+
+                //////    XmlAttribute value = document.CreateAttribute("value");
+                //////    value.Value = request.Value.Replace("\"", "");
+                //////    deviceRequest.Attributes.Append(value);
+
+                //////    XmlAttribute oidType = document.CreateAttribute("oidType");
+                //////    oidType.Value = request.OidType;
+                //////    deviceRequest.Attributes.Append(oidType);
+                //////}
+
+
                 content.Append("<DeviceRequestRoot>");
 
                 content.Append(String.Format(@"<SysInfo idContractor=""{0}"" dateSend=""{1:dd-MM-yyyy HH:mm:ss zzz}"" progVersion=""{2}"" />",
@@ -228,6 +371,7 @@ namespace SnmpScanner
 
 
                 var emailSettings = new EmailSettings(true);
+                //SendMail(AppSettings.MailSubject, document.ToString(), emailSettings);
                 SendMail(AppSettings.MailSubject, content.ToString(), emailSettings);
             }
             finally

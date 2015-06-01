@@ -23,7 +23,8 @@
         <ItemTemplate>
             <tr>
                 <td>
-                    <asp:Label ID="contractorName" runat="server" Text=""></asp:Label>
+                    <asp:HiddenField ID="hfIdContractor" runat="server" Value='<%#Eval("login") %>' />
+                    <asp:Label ID="contractorName" runat="server" Text='<%#Eval("ContractorName") %>'></asp:Label>
                 </td>
                 <td>
                     <asp:CheckBox ID="chkZip" runat="server" Value='<%#Eval("sid") %>' Checked='<%# UserHaveZipGroup(Eval("login").ToString()) %>' OnCheckedChanged="chkZip_OnCheckedChanged"/>

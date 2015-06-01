@@ -28,6 +28,8 @@ namespace ZipClaim.WebForms.Settings
 
         protected new void Page_Load(object sender, EventArgs e)
         {
+            base.Page_Load(sender, e);
+
             if (!IsPostBack)
             {
                 UserIsSysAdmin = Db.Db.Users.CheckUserRights(User.Login, sysAdminRightGroup);
@@ -39,6 +41,7 @@ namespace ZipClaim.WebForms.Settings
 
                 FillList();
             }
+            
         }
 
         private void FillList()

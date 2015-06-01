@@ -1,0 +1,5 @@
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterInstaller\bin\Debug\ServiceInstall.exe.config
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterInstaller\bin\Debug\ServiceInstall.exe
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterInstaller\bin\Debug\ServiceInstall.pdb
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterInstaller\obj\Debug\ServiceInstall.exe
+D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterInstaller\obj\Debug\ServiceInstall.pdb

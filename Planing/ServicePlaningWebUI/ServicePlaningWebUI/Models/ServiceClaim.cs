@@ -8,7 +8,7 @@ using ServicePlaningWebUI.Objects.Interfaces;
 
 namespace ServicePlaningWebUI.Models
 {
-    public class ServiceClaim : Db.Db, IDbObject<int>
+    public class ServiceClaim : Db.Db
     {
         public int Id;
         public int IdDevice;
@@ -63,7 +63,7 @@ namespace ServicePlaningWebUI.Models
             }
         }
 
-        public void Save()
+        public void Save(bool isManual = false)
         {
             SqlParameter pId = new SqlParameter() { ParameterName = "id_service_claim", Value = Id, DbType = DbType.Int32 };
             
@@ -79,9 +79,11 @@ namespace ServicePlaningWebUI.Models
             SqlParameter pOrderNum = new SqlParameter() { ParameterName = "order_num", Value = OrderNum, DbType = DbType.Int32 };
             SqlParameter pDescr = new SqlParameter() { ParameterName = "descr", Value = Descr, DbType = DbType.AnsiString };
             SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
+            SqlParameter pIsManual = new SqlParameter() { ParameterName = "is_manual", Value = isManual, DbType = DbType.Boolean };//Ручное сохранение
+
             //SqlParameter pIdServiceClaimStatus = new SqlParameter() { ParameterName = "id_service_claim_status", Value = IdServiceClaimStatus, DbType = DbType.Int32 };
 
-            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveServiceClaim", pId, /*pIdDevice,*/pLstIdContract2Device, /*pIdContract, */ pIdServiceClaimType, pPlaningDate, pNumber, pIdServiceEngeneer, pOrderNum, pDescr, pIdCreator/*, pIdServiceClaimStatus*/);
+            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveServiceClaim", pId, /*pIdDevice,*/pLstIdContract2Device, /*pIdContract, */ pIdServiceClaimType, pPlaningDate, pNumber, pIdServiceEngeneer, pOrderNum, pDescr, pIdCreator, pIsManual/*, pIdServiceClaimStatus*/);
         }
 
         public void Delete(int id, int idCreator)
@@ -91,7 +93,6 @@ namespace ServicePlaningWebUI.Models
 
             ExecuteStoredProcedure(Srvpl.sp, "closeServiceClaim", pId, pIdCreator);
         }
-
 
         public void Delete(int id)
         {

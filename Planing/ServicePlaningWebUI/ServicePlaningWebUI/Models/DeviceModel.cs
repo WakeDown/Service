@@ -20,6 +20,7 @@ namespace ServicePlaningWebUI.Models
         public int? IdPrintType { get; set; }
         public int? IdCartridgeType { get; set; }
         public int? IdCreator { get; set; }
+        public int? MaxVolume { get; set; }
 
         public DeviceModel()
         {
@@ -54,6 +55,7 @@ namespace ServicePlaningWebUI.Models
                 IdPrintType = (int?)dr["id_print_type"];
                 IdCartridgeType = (int?)dr["id_cartridge_type"];
                 IdCreator = (int)dr["id_creator"];
+                MaxVolume = GetValueIntOrNull(dr["max_volume"]);
             }
         }
 
@@ -69,8 +71,9 @@ namespace ServicePlaningWebUI.Models
             SqlParameter pIdDeviceImprint = new SqlParameter() { ParameterName = "id_device_imprint", Value = IdDeviceImprint, DbType = DbType.Int32 };
             SqlParameter pIdPrintType = new SqlParameter() { ParameterName = "id_print_type", Value = IdPrintType, DbType = DbType.Int32 };
             SqlParameter pIdCartridgeType = new SqlParameter() { ParameterName = "id_cartridge_type", Value = IdCartridgeType, DbType = DbType.Int32 };
+            SqlParameter pMaxVolume = new SqlParameter() { ParameterName = "max_volume", Value = MaxVolume, DbType = DbType.Int32 };
 
-            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveDeviceModel", pId, pIdDeviceType, pName, pVendor, pNickname, pIdCreator, pSpeed, pIdDeviceImprint, pIdPrintType, pIdCartridgeType);
+            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveDeviceModel", pId, pIdDeviceType, pName, pVendor, pNickname, pIdCreator, pSpeed, pIdDeviceImprint, pIdPrintType, pIdCartridgeType, pMaxVolume);
 
             //if (dt.Rows.Count > 0)
             //{

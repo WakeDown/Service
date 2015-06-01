@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -67,8 +68,35 @@ namespace ServicePlaningWebUI.WebForms.Service
 
         private void FillLists()
         {
-            MainHelper.DdlFill(ref ddlServiceEngeneer, Db.Db.Users.GetUsersSelectionList(serviceEngeneersRightGroup),
+            //Заполняем список групп (Организаций) инженеров
+            var lstEngeneerGroups = AdHelper.GetGroupListFromAdUnit("OU=engeneer-groups,OU=DSU,OU=System-Groups,OU=UNIT");
+            MainHelper.DdlFill(ref ddlEngeneerGroup, lstEngeneerGroups, true, MainHelper.ListFirstItemType.SelectAll);
+
+            string defVal = "S-1-5-21-1970802976-3466419101-4042325969-4014";
+
+            ddlEngeneerGroup.SelectedValue = defVal;
+            FillEngeneersList(defVal);
+        }
+
+        protected void ddlEngeneerGroup_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            string val = ddlEngeneerGroup.SelectedValue;
+            if (val.Equals("-13")) val = null;
+            FillEngeneersList(val);
+        }
+
+        protected void FillEngeneersList(string userGroupSid=null)
+        {
+            if (String.IsNullOrEmpty(userGroupSid))
+            {
+                MainHelper.DdlFill(ref ddlServiceEngeneer, Db.Db.Users.GetUsersSelectionList(serviceEngeneersRightGroup),
                     true);
+            }
+            else
+            {
+                MainHelper.DdlFill(ref ddlServiceEngeneer, Db.Db.Users.GetUsersSelectionList(null, groupSid: userGroupSid),
+                    true);
+            }
         }
 
         private string GetQueryStringValue(string key)
@@ -442,5 +470,6 @@ namespace ServicePlaningWebUI.WebForms.Service
         {
             e.Command.CommandTimeout = 0;
         }
+
     }
 }

@@ -119,6 +119,12 @@ div.check-box {
     border: 1px solid black;
 }
 
+.text-box-sm {
+    width: 150px;
+    height: 15px;
+    border: 1px solid black;
+}
+
 .tb-info {
     text-align: center;
     font-size: 0.8em;
@@ -180,7 +186,7 @@ tr.text-line td, td.text-line {
 }
 
 .align-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .nowrap {

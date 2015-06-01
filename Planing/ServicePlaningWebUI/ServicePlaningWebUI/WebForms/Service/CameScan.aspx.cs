@@ -13,6 +13,7 @@ using Microsoft.AspNet.FriendlyUrls;
 using ServicePlaningWebUI.Helpers;
 using ServicePlaningWebUI.Models;
 using ServicePlaningWebUI.Objects;
+using ServicePlaningWebUI.WebForms.Masters;
 
 namespace ServicePlaningWebUI.WebForms.Service
 {
@@ -30,6 +31,11 @@ namespace ServicePlaningWebUI.WebForms.Service
 
                 return id;
             }
+        }
+
+        protected bool UserIsSysAdmin
+        {
+            get { return (Page.Master.Master as Site).UserIsSysAdmin; }
         }
 
         protected void Page_PreLoad(object sender, EventArgs e)
@@ -117,7 +123,9 @@ namespace ServicePlaningWebUI.WebForms.Service
         private void Save()
         {
             ServiceCame serviceCame = GetFormData();
-            serviceCame.Save();
+            string serialNum = MainHelper.TxtGetText(ref txtClaimSelection);
+            serviceCame.Save(UserIsSysAdmin, serialNum);
+            serviceCame.Save(UserIsSysAdmin);
             ServiceClaim serviceClaim = new ServiceClaim(serviceCame.IdServiceClaim);
             string messageText = String.Format("Сохранение отметки об обслуживании заявки № {0} прошло успешно", serviceClaim.Number);
             ServerMessageDisplay(new[] { phServerMessage }, messageText);
@@ -213,6 +221,9 @@ namespace ServicePlaningWebUI.WebForms.Service
 
             ScriptManager.RegisterStartupScript(this, GetType(), "datepickerCameActivate", script, true);
             //</календарь>
+
+            script = String.Format(@"if ($('#{0}').val() == '0') {{ return confirm('Вы действительно хотите сохранить 0 в поле счетчик?'); }};", txtCounter.ClientID);
+            btnSaveAndAddNew.OnClientClick = script;
         }
 
         protected void txtClaimSelection_TextChanged(object sender, EventArgs e)
@@ -294,14 +305,16 @@ namespace ServicePlaningWebUI.WebForms.Service
             int idAktScan = Convert.ToInt32((sender as WebControl).Attributes["IdAktScan"]);
 
             new AktScan().Delete(idAktScan, User.Id);
-            ClearScanViewSelect();
-            tblAktScanList.DataBind();
+            RedirectWithParams();
+            //ClearScanViewSelect();
+            //sdsAktScanList.DataBind();
+            //tblAktScanList.DataBind();
         }
 
         protected void btnAktScanFile_OnClick(object sender, EventArgs e)
         {
 
-            int idAktScan = Convert.ToInt32((sender as WebControl).Attributes["IdAktScan"]);
+            int idAktScan = Convert.ToInt32((sender as LinkButton).Attributes["IdAktScan"]);
 
             SetFileScanSelected(idAktScan);
 
@@ -328,6 +341,7 @@ namespace ServicePlaningWebUI.WebForms.Service
 
                     imgAktScan.Attributes["IdAktScan"] = idAktScan.ToString();
                     FileScanDeleteDisplay(true);
+                    btnAktScanFileDelete.Attributes["IdAktScan"] = idAktScan.ToString();
                 }
                 else
                 {

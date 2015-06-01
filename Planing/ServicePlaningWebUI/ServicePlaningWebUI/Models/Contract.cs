@@ -26,6 +26,7 @@ namespace ServicePlaningWebUI.Models
         public int? IdContractProlong;
         public int? IdPriceDiscount;
         public bool PeriodReduction;
+        public int? HandlingDevices;
 
         public Contract()
         {
@@ -66,6 +67,7 @@ namespace ServicePlaningWebUI.Models
                 IdContractProlong = GetValueIntOrNull(dr["id_contract_prolong"].ToString());
                 IdPriceDiscount = GetValueIntOrNull(dr["id_price_discount"].ToString());
                 PeriodReduction = GetValueBool(dr["period_reduction"].ToString());
+                HandlingDevices = GetValueIntOrNull(dr["handling_devices"].ToString());
             }
         }
 
@@ -86,8 +88,9 @@ namespace ServicePlaningWebUI.Models
             SqlParameter pNote = new SqlParameter() { ParameterName = "note", Value = Note, DbType = DbType.AnsiString };
             SqlParameter pIdContractProlong = new SqlParameter() { ParameterName = "id_contract_prolong", Value = IdContractProlong, DbType = DbType.Int32 };
             SqlParameter pIdPriceDiscount = new SqlParameter() { ParameterName = "id_price_discount", Value = IdPriceDiscount, DbType = DbType.Int32 };
+            SqlParameter pHandlingDevices = new SqlParameter() { ParameterName = "handling_devices", Value = HandlingDevices, DbType = DbType.Int32 };
 
-            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveContract", pId, pNumber, pPrice, pIdServiceType, pIdContractType, pIdContractor, pIdContractStatus, pIdManager, pDateBegin, pDateEnd, pIdCreator, pIdZipState, pNote, pIdContractProlong, pIdPriceDiscount);
+            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveContract", pId, pNumber, pPrice, pIdServiceType, pIdContractType, pIdContractor, pIdContractStatus, pIdManager, pDateBegin, pDateEnd, pIdCreator, pIdZipState, pNote, pIdContractProlong, pIdPriceDiscount, pHandlingDevices);
 
 
             //TODO: Перенести исключения на уровень БД!!!
@@ -155,6 +158,14 @@ namespace ServicePlaningWebUI.Models
             SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = idCreator, DbType = DbType.Int32 };
 
             DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "enableContract", pId, pIdCreator);
+        }
+
+        public void AddFakeClaims(int idCreator)
+        {
+            SqlParameter pId = new SqlParameter() { ParameterName = "id_contract", Value = Id, DbType = DbType.Int32 };
+            SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = idCreator, DbType = DbType.Int32 };
+
+            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "addContractFakeClaims", pId, pIdCreator);
         }
     }
 }

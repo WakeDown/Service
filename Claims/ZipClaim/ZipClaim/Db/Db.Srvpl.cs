@@ -180,13 +180,15 @@ namespace ZipClaim.Db
                 return GetSelectionList("getContract2DevicesSelectionList", pIdContract);
             }
 
-            public static DataTable GetContract2DevicesList(int idContractor, int? idContract = null, int? rowsCount = null)
+            public static DataTable GetContract2DevicesList(int idContractor, int? idContract = null, int? rowsCount = null/*, DateTime? periodBegin = null, DateTime? periodEnd = null*/)
             {
                 SqlParameter pIdContractor = new SqlParameter() { ParameterName = "id_contractor", Value = idContractor, DbType = DbType.Int32 };
                 SqlParameter pIdContract = new SqlParameter() { ParameterName = "id_contract", Value = idContract, DbType = DbType.Int32 };
                 SqlParameter pRowsCount = new SqlParameter() { ParameterName = "rows_count", Value = rowsCount, DbType = DbType.Int32 };
+                /*SqlParameter pPeriodBegin = new SqlParameter() { ParameterName = "period_begin", Value = periodBegin, DbType = DbType.DateTime };
+                SqlParameter pPeriodEnd = new SqlParameter() { ParameterName = "period_end", Value = periodEnd, DbType = DbType.DateTime };*/
 
-                return ExecuteQueryStoredProcedure(Srvpl.sp, "getContract2DevicesList", pIdContractor, pIdContract, pRowsCount);
+                return ExecuteQueryStoredProcedure(Srvpl.sp, "getContract2DevicesList", pIdContractor, pIdContract, pRowsCount/*, pPeriodBegin, pPeriodEnd*/);
             }
 
             

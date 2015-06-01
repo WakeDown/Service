@@ -77,7 +77,10 @@ namespace ServicePlaningWebUI.Models
 
         public void Delete(int id, int idCreator)
         {
-            throw new NotImplementedException();
+            SqlParameter pId = new SqlParameter() { ParameterName = "id_akt_scan", Value = id, DbType = DbType.Int32 };
+            SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = idCreator, DbType = DbType.Int32 };
+
+            ExecuteStoredProcedure(Srvpl.sp, "closeAktScan", pId, pIdCreator);
         }
     }
 }

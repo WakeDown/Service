@@ -60,3 +60,30 @@ function initControlDisableStateElementAndTextIfChecked(chkId, inputId, textOnDi
 
     }).change();
 }
+
+
+
+function desableTextboxWhenNoCounter(chkId, inputId, textOnDisalbe, isChecked, validatorId) {
+    //if ($('#' + inputId)[0].disabled == true) {
+    isChecked = $('#' + inputId)[0].disabled;
+    //}
+
+    $('#' + chkId).prop('checked', isChecked);
+    $('#' + chkId).on('change', function () {
+        //$('#' + inputId).prop('placeholder', textOnDisalbe);
+        var checked = $(this).prop('checked');
+
+        $('#' + inputId).prop('disabled', checked);
+
+        if (checked) {
+            $('#' + inputId).prop('placeholder', textOnDisalbe).val(null);
+        } else {
+            $('#' + inputId).prop('placeholder', 'Счетчик');//.focus();
+        }
+        var validator = $('#' + validatorId);
+        try {
+            ValidatorEnable(validator[0], !checked);
+        } catch (e) { }
+
+    }).change();
+}

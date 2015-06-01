@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.DirectoryServices.AccountManagement;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,22 @@ namespace ServicePlaningWebUI.Helpers
 {
     public class AdHelper
     {
+        public static List<ListClass> GetGroupListFromAdUnit(string adQuery)
+        {
+            List<ListClass> list = new List<ListClass>();
+
+            var domain = new PrincipalContext(ContextType.Domain, "UN1T.GROUP", String.Format("{0}, DC=UN1T,DC=GROUP", adQuery));
+            GroupPrincipal groupList = new GroupPrincipal(domain, "*");
+            PrincipalSearcher ps = new PrincipalSearcher(groupList);
+
+            foreach (var grp in ps.FindAll())
+            {
+                list.Add(new ListClass() {Name =grp.Name,Id= grp.Sid.ToString()});
+            }
+
+            return list;
+        }
+
         public static List<AdGroup> GetUserAdGroups(User user)
         {
             List<AdGroup> result = new List<AdGroup>();

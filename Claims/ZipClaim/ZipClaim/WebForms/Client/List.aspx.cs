@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.FriendlyUrls;
 using ZipClaim.Helpers;
@@ -74,11 +75,22 @@ namespace ZipClaim.WebForms.Client
                 if (contractorId > 0)
                 {
                     lblContractorName.Text = Db.Db.Unit.GetContractorSelectionList(null, contractorId).Rows[0]["full_name"].ToString();
+                    DataTable dtCtrs =Db.Db.Srvpl.GetContractList(contractorId <= 0 ? -999 : contractorId);
+                    pnlNoData.Controls.Clear();
+                    //Если нет активных договоров
+                    if (dtCtrs.Rows.Count == 0)
+                    {
+                        var h2 = new HtmlGenericControl("h2");
+                        h2.InnerText = "Нет активных договоров";
+
+                        pnlNoData.Controls.Add(h2);
+                    }
                 }
             }
 
             RegisterStartupScripts();
         }
+
 
 
         private void FillFilterLists()

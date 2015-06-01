@@ -210,6 +210,7 @@
     <Content Include="WebForms\Error.aspx" />
     <Content Include="WebForms\Output\ExecReport.aspx" />
     <Content Include="WebForms\Reports\Counters.aspx" />
+    <Content Include="WebForms\Reports\CountersDetail.aspx" />
     <Content Include="WebForms\Reports\Payment.aspx" />
     <Content Include="WebForms\Reports\PlanExecute.aspx" />
     <Content Include="WebForms\Reports\ServiceAkt.aspx" />
@@ -224,8 +225,8 @@
     <Content Include="WebForms\Settings\Users2Roles.aspx" />
     <Content Include="Handlers\ShowImage.ashx" />
     <Content Include="Content\Files\new_contract_claim.xlsm" />
+    <None Include="Properties\PublishProfiles\DEV.pubxml" />
     <None Include="Properties\PublishProfiles\Production.pubxml" />
-    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -253,6 +254,7 @@
     <Compile Include="Models\PaymentTariff.cs" />
     <Compile Include="Models\TariffFeature.cs" />
     <Compile Include="Models\User2UserRole.cs" />
+    <Compile Include="Objects\ListClass.cs" />
     <Compile Include="Objects\NetworkConnection.cs" />
     <Compile Include="Objects\WindowsImpersonationContextFacade.cs" />
     <Compile Include="WebForms\Addresses\Editor.aspx.cs">
@@ -306,6 +308,13 @@
     </Compile>
     <Compile Include="WebForms\Reports\Counters.aspx.designer.cs">
       <DependentUpon>Counters.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Reports\CountersDetail.aspx.cs">
+      <DependentUpon>CountersDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Reports\CountersDetail.aspx.designer.cs">
+      <DependentUpon>CountersDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForms\Reports\Payment.aspx.cs">
       <DependentUpon>Payment.aspx</DependentUpon>

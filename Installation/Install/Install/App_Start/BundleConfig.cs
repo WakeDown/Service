@@ -45,6 +45,7 @@ namespace Install
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include("~/Scripts/jquery-{version}.js", "~/Scripts/jquery-ui-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js"));
             bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include("~/Scripts/bootstrap-datepicker.js", "~/Scripts/locales/bootstrap-datepicker.ru.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery-filterByText").Include("~/Scripts/jquery.filterByText.js"));
             bundles.Add(new ScriptBundle("~/bundles/filter-exp-mem").Include("~/Scripts/filter-exp-mem.js"));
             bundles.Add(new ScriptBundle("~/bundles/site").Include("~/Scripts/Site.js"));
 

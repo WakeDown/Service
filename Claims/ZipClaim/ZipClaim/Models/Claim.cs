@@ -52,6 +52,8 @@ namespace ZipClaim.Models
         public string Manager { get; set; }
         public string EngeneerConclusion { get; set; }
         public string ManagerMail { get; set; }
+        public int? IdContract { get; set; }
+        public bool HideTop { get; set; }    
 
 
         public Claim()
@@ -115,6 +117,8 @@ namespace ZipClaim.Models
                 EngeneerConclusion = dr["engeneer_conclusion"].ToString();
                 ManagerMail = dr["manager_mail"].ToString();
                 ContractorSdNum = dr["contractor_sd_num"].ToString();
+                IdContract = GetValueIntOrNull(dr["id_contract"].ToString());
+                HideTop = GetValueBool(dr["hide_top"].ToString());
 
                 //SqlParameter pIdClaim = new SqlParameter() { ParameterName = "id_claim", Value = id, DbType = DbType.Int32 };
                 //dt = ExecuteQueryStoredProcedure(Zipcl.sp, "getClaimStateHistory", pIdClaim);
@@ -242,6 +246,14 @@ namespace ZipClaim.Models
             SqlParameter pIfSetPriceDone = new SqlParameter() { ParameterName = "if_set_price_done", Value = ifSetPriceDone, DbType = DbType.Boolean };
 
             DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "setClaimPriceSetState", pId, pIdCreator, pIfSetPriceDone);
+        }
+
+        public void SupplyReturnClaim()
+        {
+            SqlParameter pId = new SqlParameter() { ParameterName = "id_claim", Value = Id, DbType = DbType.Int32 };
+            SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
+
+            DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "setClaimSupplyReturn", pId, pIdCreator);
         }
 
         public void SetRequestNumState()

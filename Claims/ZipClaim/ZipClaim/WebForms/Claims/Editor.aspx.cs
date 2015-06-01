@@ -23,6 +23,7 @@ namespace ZipClaim.WebForms.Claims
     {
         private bool btnRequestPriceDisplay { get; set; }
         protected string ListUrl = FriendlyUrl.Resolve("~/Claims");
+        protected const string CountersReportUrl = "http://service-plan.un1t.group/Reports/CountersDetail";
 
         protected string FormTitle;
 
@@ -34,6 +35,28 @@ namespace ZipClaim.WebForms.Claims
         private const string serviceManagerRightGroupVSKey = "serviceManagerRightGroupVSKey";
         private const string serviceOperatorRightGroupVSKey = "serviceOperatorRightGroupVSKey";
         private const string sysAdminRightGroupVSKey = "sysAdminRightGroupVSKey";
+
+        protected int IdDevice
+        {
+            get
+            {
+                int id;
+                int.TryParse(hfIdDevice.Value, out id);
+
+                return id;
+            }
+        }
+
+        protected int IdContract
+        {
+            get
+            {
+                int id;
+                int.TryParse(hfIdContract.Value, out id);
+
+                return id;
+            }
+        }
 
         protected bool UserIsManager
         {
@@ -137,6 +160,12 @@ namespace ZipClaim.WebForms.Claims
             DisplayFormParts();
         }
 
+        //protected void btnCountersReport_Click(object sender, EventArgs e)
+        //{
+        //    string url = String.Format("{0}?id={1}&cid={2}", CountersReportUrl, IdDevice, IdContract);
+        //    Response.Redirect(url);
+        //}
+
         private void DisplayFormParts()
         {
             bool isEdit = Id > 0;
@@ -144,6 +173,19 @@ namespace ZipClaim.WebForms.Claims
             pnlDevicesListWarning.Visible = !isEdit;
             pnlClaimUnits.Visible = isEdit;
             pnlUsers.Visible = isEdit;
+
+            //Если нет возможности перейти на отчет то выводим предупреждение и дизейблим кнопку
+            if (IdDevice <= 0 || IdContract <= 0)
+            {
+                counterReportError.Visible = true;
+                btnCountersReport.Attributes.Add("disabled", "true");
+                //btnCountersReport.Attributes.Add("title", "Переход к отчету невозможен!");
+            }
+            else
+            {
+                counterReportError.Visible = false;
+                //btnCountersReport.Attributes["disabled"]
+            }
 
             //Доступы к элементам и кнопкам по группам
             //сначала скрваем все недоступные элементы, затем показываем в зависимости от доступа
@@ -386,6 +428,9 @@ namespace ZipClaim.WebForms.Claims
             MainHelper.HfSetValue(ref hfDisplayCancelState, claim.DisplayCancelState);
 
             MainHelper.HfSetValue(ref hfIdDevice, claim.IdDevice);
+            MainHelper.HfSetValue(ref hfIdContract, claim.IdContract);
+            btnCountersReport.HRef = String.Format("{0}?id={1}&cid={2}", CountersReportUrl, claim.IdDevice, claim.IdContract);
+
             MainHelper.TxtSetText(ref txtSerialNum, claim.SerialNum);
             MainHelper.TxtSetText(ref txtDeviceModel, claim.DeviceModel);
             MainHelper.TxtSetText(ref txtCity, claim.City);
@@ -435,6 +480,15 @@ namespace ZipClaim.WebForms.Claims
 
             rfvTxtSerialNum.Enabled = String.IsNullOrEmpty(txtInvNum.Text);
             rfvTxtInvNum.Enabled = String.IsNullOrEmpty(txtSerialNum.Text);
+
+            if (claim.HideTop)
+            {
+                string script = String.Format(@"$(document).ready(function() {{
+    $('#oftenSelectedPanel').collapse({{'toggle': false}});
+$('#oftenSelectedPanel').collapse('hide');
+}});");
+                ScriptManager.RegisterStartupScript(this, GetType(), "HideTopList", script, true);
+            }
         }
 
 
@@ -472,6 +526,9 @@ namespace ZipClaim.WebForms.Claims
             //}});", aCopyInfo.ClientID);
             //            ScriptManager.RegisterStartupScript(this, GetType(), "copyInfo", script, true);
             //</Копирование информации в буфер>
+
+
+
         }
 
 

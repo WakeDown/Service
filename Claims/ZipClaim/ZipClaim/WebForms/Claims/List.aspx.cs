@@ -113,8 +113,11 @@ namespace ZipClaim.WebForms.Claims
             //Подстановка настроек фильтра
             if (!IsPostBack && !IsSearch && !FilteredByUserFilter)
             {
-                FilteredByUserFilter = true;
-                RedirectWithUserFilter(User.Id);
+                if (String.IsNullOrEmpty(Request.QueryString["id"]))
+                {
+                    FilteredByUserFilter = true;
+                    RedirectWithUserFilter(User.Id);
+                }
             }
 
             //Сбрасываем условия чтобы впоследствии была возможность подставить значение из сохраненного полдьзовательского фильтра
@@ -472,9 +475,13 @@ namespace ZipClaim.WebForms.Claims
                 DateTime dt;
                 DateTime.TryParse(date, out dt);
 
-                if (dt != new DateTime())
+                if (dt != new DateTime() && dt.Year > 1990)
                 {
                     result = String.Format("{0:d} ({1:N0} дн.)", dt, ((DateTime.Now - dt).TotalDays));
+                }
+                else if (dt != new DateTime() && dt.Year == 1899)
+                {
+                    result = "не уствновлена";
                 }
                 else
                 {

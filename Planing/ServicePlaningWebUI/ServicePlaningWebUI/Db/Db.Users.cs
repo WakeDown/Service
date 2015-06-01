@@ -92,7 +92,7 @@ namespace ServicePlaningWebUI.Db
                 return dt;
             }
 
-            public static DataTable GetUsersSelectionList(string groupName, DataTable dtUsers = null)
+            public static DataTable GetUsersSelectionList(string groupName, DataTable dtUsers = null, string groupSid = null)
             {
                 if (dtUsers == null)
                 {
@@ -107,10 +107,17 @@ namespace ServicePlaningWebUI.Db
                 SqlParameter pProgramName = new SqlParameter() { ParameterName = "program_name", Value = programName, DbType = DbType.AnsiString };
                 SqlParameter pRightName = new SqlParameter() { ParameterName = "sys_name", Value = groupName, DbType = DbType.AnsiString };
 
-                DataTable dtGroupSid = ExecuteQueryStoredProcedure(sp, "getUserGroupSid", pProgramName, pRightName);
-                if (dtGroupSid.Rows.Count > 0)
+                if (String.IsNullOrEmpty(groupSid))
                 {
-                    userGroupSid = dtGroupSid.Rows[0]["sid"].ToString();
+                    DataTable dtGroupSid = ExecuteQueryStoredProcedure(sp, "getUserGroupSid", pProgramName, pRightName);
+                    if (dtGroupSid.Rows.Count > 0)
+                    {
+                        userGroupSid = dtGroupSid.Rows[0]["sid"].ToString();
+                    }
+                }
+                else
+                {
+                    userGroupSid = groupSid;
                 }
 
 

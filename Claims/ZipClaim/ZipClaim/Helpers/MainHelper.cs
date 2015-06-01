@@ -22,7 +22,7 @@ namespace ZipClaim.Helpers
         private const string listDefaultDataTextField = "name";
         private const string ddlEmptyText = "--выберите значение--";
         public const string ddlEmptyValue = "-1";
-        private const string ddlSelectAllText = "--все--";
+        public const string ddlSelectAllText = "--все--";
         public const string ddlSelectAllValue = "-13";
         public const string rblSelectAllText = "все";
         public const string rblSelectAllValue = "-13";
@@ -255,13 +255,11 @@ namespace ZipClaim.Helpers
         public static DateTime? TxtGetTextDateTime(ref TextBox txt, bool positiveOrNull)
         {
             string text = TxtGetText(ref txt);
-            if (!positiveOrNull || !String.IsNullOrEmpty(text))
-            {
-                DateTime result;
-                result = DateTime.Parse(text);
-                return result;
-            }
-            return null;
+            if (positiveOrNull && String.IsNullOrEmpty(text)) return null;
+            
+            DateTime result;
+            result = Convert.ToDateTime(text);
+            return result;
         }
 
         public static decimal TxtGetTextDecimal(ref TextBox txt)

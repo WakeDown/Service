@@ -46,7 +46,6 @@ namespace SnmpScanner
         {
             InitializeComponent();
 
-            
             if (!System.Diagnostics.EventLog.SourceExists("UN1TCounterSource"))
             {
                 System.Diagnostics.EventLog.CreateEventSource(
@@ -70,7 +69,10 @@ namespace SnmpScanner
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.ServiceName = "UN1TCounter";
+            //this.ServiceName = "UN1TCounter";
+            //this.CanStop = true;
+            //this.CanPauseAndContinue = true;
+            this.AutoLog = false;
         }
 
         protected override void OnStart(string[] args)

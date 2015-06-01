@@ -467,6 +467,8 @@ table tr.selected {
      
  }
 
+
+
 .row-mark {
     position: relative;
     /*width: 5px;*/
@@ -477,7 +479,9 @@ table tr.selected {
     display:inline-block
 }
 
-
+ .row-mark.low {
+     min-height: 20px;
+}
 
 .row-mark.bg-success {
     background-color: #3c763d;
@@ -665,4 +669,8 @@ tr.total-counter-row td, tr.total-counter-row th {
 }
 
 .total-counter-col {
+}
+
+.supply-return-pnl {
+    width: 200px;
 }

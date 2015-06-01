@@ -162,6 +162,7 @@
 <%--                    <a href='<%#  GetRedirectUrlWithParams(String.Format("id={0}", Eval("id_device")), false, FormUrl) %>' class="btn btn-link" data-toggle="tooltip" title="на договоре"><i class="fa fa-external-link-square fa-lg"></i></a>--%>
                     <a href='<%#  GetRedirectUrlWithParams(String.Format("id={0}", Eval("id_device")), false, FormUrl) %>' class="btn btn-link" data-toggle="tooltip" title="редактировать"><i class="fa fa-edit fa-lg"></i></a>
                     <asp:LinkButton ID="btnAdd2Contract" runat="server" OnClick="btnAdd2Contract_OnClick" CommandArgument='<%#Eval("id_device") %>' CssClass="btn btn-link" data-toggle="tooltip" title="привязать к договору"><i class="fa fa-external-link-square fa-lg"></i></asp:LinkButton>
+                    <a href='<%#  GetRedirectUrlWithParams(String.Format("id={0}", Eval("id_contract")), false, ContracDevtFormUrl) %>' class="btn btn-link" data-toggle="tooltip" title="список оборудования"><i class="fa fa-print fa-lg"></i></a>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="model" SortExpression="model" HeaderText="Модель" HeaderStyle-CssClass="sorted-header" />
@@ -178,9 +179,10 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:BoundField DataField="instalation_date" SortExpression="instalation_date" HeaderText="Дата установки" DataFormatString="{0:d}" HeaderStyle-CssClass="sorted-header" />
-            <asp:TemplateField  SortExpression="contract_num" HeaderText="№ договора" HeaderStyle-CssClass="sorted-header" ItemStyle-CssClass="min-width bold">
+            <asp:TemplateField  SortExpression="contract_num" HeaderText="№ договора" HeaderStyle-CssClass="sorted-header" ItemStyle-CssClass="min-width">
                 <ItemTemplate>
-                    <a href='<%#  GetRedirectUrlWithParams(String.Format("id={0}", Eval("id_contract")), false, ContracDevtFormUrl) %>' class="btn btn-link" data-toggle="tooltip" title="перейти к списку оборудования"><%#Eval("contract_num") %></a>
+                    <span class="nowrap"><a href='<%#  GetRedirectUrlWithParams(String.Format("id={0}", Eval("id_contract")), false, ContracFormUrl) %>' class="btn btn-link" data-toggle="tooltip" title="к договору"><i class="fa fa-sign-out"></i></a>&nbsp;
+                    <%#Eval("contract_num") %></span>
                 </ItemTemplate>
             </asp:TemplateField>
 <%--            <asp:BoundField DataField="contract_num" SortExpression="contract_num" HeaderText="№ договора" ItemStyle-CssClass="min-width bold" HeaderStyle-CssClass="sorted-header" />--%>

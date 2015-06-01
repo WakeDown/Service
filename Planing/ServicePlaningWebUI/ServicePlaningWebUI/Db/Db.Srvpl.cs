@@ -14,6 +14,7 @@ namespace ServicePlaningWebUI.Db
             #region Константы
 
             public const string sp = "ui_service_planing";
+            public const string sp2 = "ui_service_planing_2";
 
             #endregion
 
@@ -28,6 +29,14 @@ namespace ServicePlaningWebUI.Db
                 DataTable dt = new DataTable();
 
                 dt = ExecuteQueryStoredProcedure(sp, action, sqlParams);
+                return dt;
+            }
+
+            public static DataTable GetSelectionList2(string action, params SqlParameter[] sqlParams)
+            {
+                DataTable dt = new DataTable();
+
+                dt = ExecuteQueryStoredProcedure(sp2, action, sqlParams);
                 return dt;
             }
 
@@ -125,8 +134,7 @@ namespace ServicePlaningWebUI.Db
             }
 
             #endregion
-
-
+            
             #region DeviceOptions
 
             /// <summary>
@@ -362,7 +370,7 @@ namespace ServicePlaningWebUI.Db
                 SqlParameter pIdServiceCame = new SqlParameter() { ParameterName = "id_service_came", Value = idServiceCame, DbType = DbType.AnsiString };
                 SqlParameter pIdServiceClaim = new SqlParameter() { ParameterName = "id_service_claim", Value = idServiceClaim, DbType = DbType.AnsiString };
 
-                return GetSelectionList("getServiceClaimFullNameSelectionList", pSerialNum, pIdServiceCame, pIdServiceClaim);
+                return GetSelectionList2("getServiceClaimFullNameSelectionList", pSerialNum, pIdServiceCame, pIdServiceClaim);
             }
 
             #endregion
@@ -529,6 +537,61 @@ namespace ServicePlaningWebUI.Db
 
                 DataTable dt = GetSelectionList("getPlanExecuteServManagerContractorList", pIsDone, pNoSet, pIdServiceManager, pDateMonth, pDateBegin, pDateEnd);
 
+                return dt;
+            }
+
+            public static DataTable GetCounterReportContractorContractList(int? idContractor, int? idServiceManager, DateTime? dateMonth)
+            {
+                SqlParameter pIdServiceManager = new SqlParameter() { ParameterName = "id_manager", Value = idServiceManager, DbType = DbType.Int32 };
+                SqlParameter pDateMonth = new SqlParameter() { ParameterName = "date_month", Value = dateMonth, DbType = DbType.DateTime };
+                SqlParameter pIdContractor = new SqlParameter() { ParameterName = "id_contractor", Value = idContractor, DbType = DbType.Int32 };
+
+                DataTable dt = GetSelectionList("getCounterReportContractorContractsList", pIdServiceManager, pDateMonth, pIdContractor);
+
+                return dt;
+            }
+
+            public static DataTable GetCounterReportContractorContractDeviceList(int? idContractor, int? idServiceManager, DateTime? dateMonth, int? wearBegin, int? wearEnd, int? loadingBegin, int? loadingEnd, string lstVendor, bool? hasCames)
+            {
+                SqlParameter pIdServiceManager = new SqlParameter() { ParameterName = "id_manager", Value = idServiceManager, DbType = DbType.Int32 };
+                SqlParameter pDateMonth = new SqlParameter() { ParameterName = "date_month", Value = dateMonth, DbType = DbType.DateTime };
+                SqlParameter pIdContractor = new SqlParameter() { ParameterName = "id_contractor", Value = idContractor, DbType = DbType.Int32 };
+                SqlParameter pWearBegin = new SqlParameter() { ParameterName = "wear_begin", Value = wearBegin, DbType = DbType.Int32 };
+                SqlParameter pWearEnd = new SqlParameter() { ParameterName = "wear_end", Value = wearEnd, DbType = DbType.Int32 };
+                SqlParameter pLoadingBegin = new SqlParameter() { ParameterName = "loading_begin", Value = loadingBegin, DbType = DbType.Int32 };
+                SqlParameter pLoadingEnd = new SqlParameter() { ParameterName = "loading_end", Value = loadingEnd, DbType = DbType.Int32 };
+                SqlParameter pLstVendor = new SqlParameter() { ParameterName = "lst_vendor", Value = lstVendor, DbType = DbType.AnsiString };
+                SqlParameter pHasCames = new SqlParameter() { ParameterName = "has_cames", Value = hasCames, DbType = DbType.Boolean };
+
+                DataTable dt = GetSelectionList("getCounterReportContractorContractDeviceList", pIdServiceManager, pDateMonth, pIdContractor, pWearBegin, pWearEnd, pLoadingBegin, pLoadingEnd, pLstVendor, pHasCames);
+
+                return dt;
+            }
+
+            public static DataTable GetCounterReportContractorContractDeviceData(int? idContractor, int? idServiceManager, DateTime? dateMonth)
+            {
+                SqlParameter pIdServiceManager = new SqlParameter() { ParameterName = "id_manager", Value = idServiceManager, DbType = DbType.Int32 };
+                SqlParameter pDateMonth = new SqlParameter() { ParameterName = "date_month", Value = dateMonth, DbType = DbType.DateTime };
+                SqlParameter pIdContractor = new SqlParameter() { ParameterName = "id_contractor", Value = idContractor, DbType = DbType.Int32 };
+                
+
+                DataTable dt = GetSelectionList("getCounterReportContractorContractDeviceData", pIdServiceManager, pDateMonth, pIdContractor);
+
+                return dt;
+            }
+
+            public static DataTable GetVendorSelectionList()
+            {
+                DataTable dt = GetSelectionList("getVendorSelectionList");
+                return dt;
+            }
+
+            internal static DataTable GetContractorDevice(int idDevice, int idContract)
+            {
+                SqlParameter pIdDevice = new SqlParameter() { ParameterName = "id_device", Value = idDevice, DbType = DbType.Int32 };
+                SqlParameter pIdContract = new SqlParameter() { ParameterName = "id_contract", Value = idContract, DbType = DbType.Int32 };
+
+                var dt = ExecuteQueryStoredProcedure(Srvpl.sp, "getContract2Devices", pIdDevice, pIdContract);
                 return dt;
             }
         }

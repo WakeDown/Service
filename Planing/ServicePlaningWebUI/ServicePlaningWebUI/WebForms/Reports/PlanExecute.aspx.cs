@@ -307,15 +307,27 @@ namespace ServicePlaningWebUI.WebForms.Reports
 
                 int idServiceEngeneer;
                 int.TryParse(DataBinder.Eval(e.Item.DataItem, "id_service_engeneer").ToString(), out idServiceEngeneer);
-                DateTime? dateMonth =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_month"].DefaultValue);
 
-                DateTime? dateBegin =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_begin"].DefaultValue);
-                DateTime? dateEnd =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_end"].DefaultValue);
-                int? isDone = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["is_done"].DefaultValue);
-                int? noSet = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["no_set"].DefaultValue);
+                //DateTime? dateMonth = Db.Db.GetValueDateTimeOrNull(MainHelper.TxtGetText(ref txtDateMonth));
+                //DateTime? dateBegin = Db.Db.GetValueDateTimeOrNull(MainHelper.TxtGetText(ref txtDateClaimBegin));
+                //DateTime? dateEnd = Db.Db.GetValueDateTimeOrNull(MainHelper.TxtGetText(ref txtDateClaimEnd));
+                //int? isDone = Db.Db.GetValueIntOrNull(MainHelper.RblGetValueBool(ref rblDone, true));
+                //int? noSet = Db.Db.GetValueIntOrNull(MainHelper.RblGetValueBool(ref rblNoSet, true));
+
+                DateTime? dateMonth = Db.Db.GetValueDateTimeOrNull(Request.QueryString["mth"]);
+                DateTime? dateBegin = Db.Db.GetValueDateTimeOrNull(Request.QueryString["dst"]);
+                DateTime? dateEnd = Db.Db.GetValueDateTimeOrNull(Request.QueryString["den"]);
+                int? isDone = Db.Db.GetValueIntOrNull(Request.QueryString["dne"]);
+                int? noSet = Db.Db.GetValueIntOrNull(Request.QueryString["nst"]);
+
+                //DateTime? dateMonth =
+                //    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_month"].DefaultValue);
+                //DateTime? dateBegin =
+                //    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_begin"].DefaultValue);
+                //DateTime? dateEnd =
+                //    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_end"].DefaultValue);
+                //int? isDone = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["is_done"].DefaultValue);
+                //int? noSet = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["no_set"].DefaultValue);
 
                 var dtCtrs = Db.Db.Srvpl.GetPlanExecuteContractorList(idServiceEngeneer, dateMonth, isDone, noSet,
                     dateBegin, dateEnd);
@@ -623,15 +635,21 @@ namespace ServicePlaningWebUI.WebForms.Reports
                 int idServiceAdmin;
                 int.TryParse(DataBinder.Eval(e.Item.DataItem, "id_service_admin").ToString(), out idServiceAdmin);
 
-                DateTime? dateMonth =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_month"].DefaultValue);
+                DateTime? dateMonth = Db.Db.GetValueDateTimeOrNull(Request.QueryString["mth"]);
+                DateTime? dateBegin =Db.Db.GetValueDateTimeOrNull(Request.QueryString["dst"]);
+                DateTime? dateEnd =Db.Db.GetValueDateTimeOrNull(Request.QueryString["den"]);
+                int? isDone = Db.Db.GetValueIntOrNull(Request.QueryString["dne"]);
+                int? noSet = Db.Db.GetValueIntOrNull(Request.QueryString["nst"]);
 
-                DateTime? dateBegin =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_begin"].DefaultValue);
-                DateTime? dateEnd =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_end"].DefaultValue);
-                int? isDone = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["is_done"].DefaultValue);
-                int? noSet = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["no_set"].DefaultValue);
+                //DateTime? dateMonth =
+                //    Db.Db.GetValueDateTimeOrNull(sdsListExecByServAdmins.SelectParameters["date_month"].DefaultValue);
+
+                //DateTime? dateBegin =
+                //    Db.Db.GetValueDateTimeOrNull(sdsListExecByServAdmins.SelectParameters["date_begin"].DefaultValue);
+                //DateTime? dateEnd =
+                //    Db.Db.GetValueDateTimeOrNull(sdsListExecByServAdmins.SelectParameters["date_end"].DefaultValue);
+                //int? isDone = Db.Db.GetValueIntOrNull(sdsListExecByServAdmins.SelectParameters["is_done"].DefaultValue);
+                //int? noSet = Db.Db.GetValueIntOrNull(sdsListExecByServAdmins.SelectParameters["no_set"].DefaultValue);
 
                 var dtCtrs = Db.Db.Srvpl.GetPlanExecuteServAdminContractorList(idServiceAdmin, dateMonth, isDone, noSet,
                     dateBegin, dateEnd);
@@ -723,7 +741,7 @@ namespace ServicePlaningWebUI.WebForms.Reports
                         var spanDevice = new HtmlGenericControl("span");
                         divDeviceContIn1.Controls.Add(spanDevice);
                         spanDevice.Attributes["class"] = "pad-l-mid";
-                        spanDevice.InnerText = drDevice["device"].ToString();
+                        spanDevice.InnerText = drDevice["is_limit_device_claims"].ToString().Equals("1") ? "неизвестно" : drDevice["device"].ToString();
 
                         var divDeviceContIn2 = new HtmlGenericControl("div");
                         divDeviceCont.Controls.Add(divDeviceContIn2);
@@ -829,7 +847,7 @@ namespace ServicePlaningWebUI.WebForms.Reports
             var lDonePercentSum = tblListExecServAdmins.Controls[tblListExecServAdmins.Controls.Count - 1].Controls[0].FindControl("lDonePercentSum") as Literal;
             var footerChart = tblListExecServAdmins.Controls[tblListExecServAdmins.Controls.Count - 1].Controls[0].FindControl("footerChart") as HtmlContainerControl;
 
-            if (footerChart != null && lDonePercentSum != null)
+            if (footerChart != null && lDonePercentSum != null && !String.IsNullOrEmpty(done_cnt) && !String.IsNullOrEmpty(plan_cnt))
             {
                 int sumDonePercent = Convert.ToInt32((Convert.ToDecimal(done_cnt) / Convert.ToDecimal(plan_cnt)) * 100);
                 footerChart.Style.Value = String.Format("width: {0:N0}%", sumDonePercent);
@@ -847,14 +865,25 @@ namespace ServicePlaningWebUI.WebForms.Reports
                 int idServiceManager;
                 int.TryParse(DataBinder.Eval(e.Item.DataItem, "id_manager").ToString(), out idServiceManager);
 
-                DateTime? dateMonth = Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_month"].DefaultValue);
+                DateTime? dateMonth = Db.Db.GetValueDateTimeOrNull(
+                    Request.QueryString["mth"]
+                    //sdsListExecByServManagers.SelectParameters["date_month"].DefaultValue
+                    );
 
                 DateTime? dateBegin =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_begin"].DefaultValue);
+                    Db.Db.GetValueDateTimeOrNull(Request.QueryString["dst"]
+                    //sdsListExecByServManagers.SelectParameters["date_begin"].DefaultValue
+                    );
                 DateTime? dateEnd =
-                    Db.Db.GetValueDateTimeOrNull(sdsListExecByEngeneers.SelectParameters["date_end"].DefaultValue);
-                int? isDone = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["is_done"].DefaultValue);
-                int? noSet = Db.Db.GetValueIntOrNull(sdsListExecByEngeneers.SelectParameters["no_set"].DefaultValue);
+                    Db.Db.GetValueDateTimeOrNull(Request.QueryString["den"]
+                    //sdsListExecByServManagers.SelectParameters["date_end"].DefaultValue
+                    );
+                int? isDone = Db.Db.GetValueIntOrNull(Request.QueryString["dne"]
+                    //sdsListExecByServManagers.SelectParameters["is_done"].DefaultValue
+                    );
+                int? noSet = Db.Db.GetValueIntOrNull(Request.QueryString["nst"]
+                    //sdsListExecByServManagers.SelectParameters["no_set"].DefaultValue
+                    );
 
                 var dtCtrs = Db.Db.Srvpl.GetPlanExecuteServManagerContractorList(idServiceManager, dateMonth, isDone, noSet,
                     dateBegin, dateEnd);
