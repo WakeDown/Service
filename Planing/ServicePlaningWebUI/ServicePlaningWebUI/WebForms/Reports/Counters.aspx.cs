@@ -73,10 +73,10 @@ namespace ServicePlaningWebUI.WebForms.Reports
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            if (!UserIsSysAdmin && !UserIsReport)
-            {
-                Response.Redirect(FriendlyUrl.Href("~/Error"));
-            }
+            //if (!UserIsSysAdmin && !UserIsReport)
+            //{
+            //    Response.Redirect(FriendlyUrl.Href("~/Error"));
+            //}
 
             SetDefaults();
         }
@@ -358,22 +358,19 @@ namespace ServicePlaningWebUI.WebForms.Reports
                 //{
                 //    string s = "";
                 //}
-
+                
                 list.Append("<div class='row bg-white'>");
 
                 list.Append(String.Format(@"<div class='col-sm-3'><span class='pad-l-mid'><span class='label label-mark small {2}'></span>&nbsp;<a target='_blank' href='{1}'>{0}</a></span></div>", row[2], GetRedirectUrlWithParams(String.Format("id={0}&cid={1}", row[1], row[0]), false, CounterDetailForm), row[23].ToString().Equals("1") ? "label-success success-light" : "label-empty"));//Имя аппарата , передаем в ссылку id аппарата и id договора
                 list.Append(String.Format(@"<div class='col-sm-1'></div>"));
                 list.Append(String.Format(@"<div class='col-sm-1 align-right {1}'>{0:### ### ### ### ### ###}</div>", curVol, 
-                    ////!String.IsNullOrEmpty(curVol.ToString()) && cur[0][12].ToString().Equals("True") ? "bg-success" : String.Empty
-                    String.Empty
+                    !String.IsNullOrEmpty(curVol.ToString()) && row[24].ToString().Equals("True") ? "bg-success" : String.Empty
                     ));//Выделяем цветом если выводится среднее значение
                 list.Append(String.Format(@"<div class='col-sm-1 align-right {1}'>{0:### ### ### ### ### ###}</div>", prevVol, 
-                    //!String.IsNullOrEmpty(prevVol.ToString()) && prev[0][12].ToString().Equals("True")? "bg-success": String.Empty
-                    String.Empty
+                    !String.IsNullOrEmpty(prevVol.ToString()) && row[25].ToString().Equals("True")? "bg-success": String.Empty
                     ));
                 list.Append(String.Format(@"<div class='col-sm-1 align-right {1}'>{0:### ### ### ### ### ###}</div>", prevPrevVol, 
-                    //!String.IsNullOrEmpty(prevPrevVol.ToString()) && prevPrev[0][12].ToString().Equals("True") ? "bg-success" : String.Empty
-                    String.Empty
+                    !String.IsNullOrEmpty(prevPrevVol.ToString()) && row[26].ToString().Equals("True") ? "bg-success" : String.Empty
                     ));
                 list.Append("<div class='col-sm-3'>");
                 list.Append(String.Format(@"<div class='col-sm-3 align-right {1}'>{0:P0}</div>", curLoading, curLoading.HasValue && curLoading.Value > 1 ? "bg-danger" : String.Empty));

@@ -29,8 +29,7 @@
                                         <table class="sheet-line">
                                             <tbody>
                                                 <tr>
-                                                    <td colspan="4" class="title">Акт
-технического обслуживания (ремонта) </td>
+                                                    <td colspan="4" class="title">Сервисный лист</td>
                                                     <td rowspan="2" class="title-img align-center">
                                                         <asp:Image ID="imgUnit" runat="server" ImageUrl="~/Images/logo-unit.png"></asp:Image></td>
                                                 </tr>
@@ -38,8 +37,12 @@
                                                     <td colspan="2" class="nowrap">от
 _________ / __________ / __________г. </td>
                                                     <td class="pad-mid-l pad-mid-r align-right">НОМЕР
-ЗАЯВКИ: </td>
+ЗАЯВКИ:
+                                                        <br />НОМЕР ЗАЯВКИ ЗИП:
+
+                                                    </td>
                                                     <td>
+                                                        <div class="text-box"></div>
                                                         <div class="text-box"></div>
                                                     </td>
                                                 </tr>
@@ -264,7 +267,7 @@ _________ / __________ / __________г. </td>
                                                     <td>
                                                         <div class="check-box"></div>
                                                     </td>
-                                                    <td>Исправен (восстановлен после неисправности)</td>
+                                                    <td>Исправен [восстановлен, ЗИП не требуется]</td>
                                                     <td colspan="4" class="text-line">&nbsp;</td>
                                                 </tr>
                                                 <tr>

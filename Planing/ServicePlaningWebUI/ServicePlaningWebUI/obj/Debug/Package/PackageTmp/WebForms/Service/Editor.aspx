@@ -90,7 +90,7 @@
                                         <asp:HiddenField ID="hfLstCheckedDeviceIds" runat="server" />
                                         <asp:Repeater ID="rtrDeviceList" runat="server">
                                             <ItemTemplate>
-                                                <div class="row">
+                                                <div class='row <%# Eval("is_new").ToString().Equals("1") ? "bg-warning" : String.Empty %>'>
                                                     <div class="col-sm-4">
                                                         <asp:CheckBox ID="chkIdC2d" runat="server" Value='<%#Eval("id") %>'  />&nbsp;<%#Eval("name") %>
 <%--                                                                                                         <input type="checkbox" ID="chkIdC2d" runat="server" Value='<%#Eval("id") %>' />&nbsp;<%#Eval("name") %>--%>

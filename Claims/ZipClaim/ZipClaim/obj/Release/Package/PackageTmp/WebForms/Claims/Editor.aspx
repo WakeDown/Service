@@ -310,6 +310,12 @@
                 <a type="button" class="btn btn-default btn-lg" data-toggle="tooltip" title="к списку заявок" href='<%=  FriendlyUrl.Href("~/Claims") %>'><i class="fa fa-mail-reply"></i></a>
                 <%--<a id="aCopyInfo" runat="server" type="button" class="btn btn-default btn-lg" data-toggle="tooltip" title="Информация" href='#'><i class="fa fa-copy"></i></a>--%>
                 <asp:LinkButton ID="btnCopyInfo" runat="server" class="btn btn-default btn-lg" data-toggle="tooltip" title="информация" OnClick="btnCopyInfo_Click"><i class="fa fa-copy"></i></asp:LinkButton>
+                <div class="pull-right">
+                    <asp:HiddenField ID="hfIdContract" runat="server" />
+                    <div id="counterReportError" runat="server" Visible="False" class="text-danger">Аппарата нет в базе!</div>
+<%--                    <asp:LinkButton ID="btnCountersReport" runat="server" class="btn btn-primary" data-toggle="tooltip" title="" OnClick="btnCountersReport_Click"><i class="fa fa-clock-o"></i> История счетчиков</asp:LinkButton>--%>
+                    <a id="btnCountersReport" runat="server" target="_blank" class="btn btn-primary"><i class="fa fa-clock-o"></i> История счетчиков</a>
+                </div>
             </div>
         </div>
 
@@ -430,7 +436,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div id="pnlTop" runat="server" visible='False'>
                                 <div class="panel-group" id="oftenSelected">
                                     <div class="panel panel-default" id="pnl-oftenSelected">

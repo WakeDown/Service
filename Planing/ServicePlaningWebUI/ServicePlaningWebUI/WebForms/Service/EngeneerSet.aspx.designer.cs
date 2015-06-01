@@ -13,6 +13,15 @@ namespace ServicePlaningWebUI.WebForms.Service {
     public partial class EngeneerSet {
         
         /// <summary>
+        /// ddlEngeneerGroup элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEngeneerGroup;
+        
+        /// <summary>
         /// ddlServiceEngeneer элемент управления.
         /// </summary>
         /// <remarks>

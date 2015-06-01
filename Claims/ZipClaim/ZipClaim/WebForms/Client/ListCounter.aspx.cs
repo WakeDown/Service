@@ -84,6 +84,16 @@ namespace ZipClaim.WebForms.Client
                 SetDefaults();
 
                 LoadData();
+
+                pnlNoData.Controls.Clear();
+                //Если нет активных договоров
+                if (ddlContract.Items.Count == 0 || (ddlContract.Items.Count == 1 && ddlContract.Items[0].Text.Equals(MainHelper.ddlSelectAllText)))
+                {
+                    var h2 = new HtmlGenericControl("h2");
+                    h2.InnerText = "Нет активных договоров";
+
+                    pnlNoData.Controls.Add(h2);
+                }
             }
 
             base.Page_Load(sender, e);
@@ -217,6 +227,8 @@ namespace ZipClaim.WebForms.Client
         private void LoadData()
         {
             //DataCounters = Db.Db.Srvpl.GetDeviceCounterByDate(DateTime.Now, ContractorId);
+
+            
         }
 
         private void SetDefaults()

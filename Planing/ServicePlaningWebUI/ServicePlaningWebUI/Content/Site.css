@@ -862,3 +862,7 @@ div.table div.bg-white, a.bg-white {
 .label-empty {
     background: #ddd;
 }
+
+.text-smaller {
+    font-size:8pt;
+}

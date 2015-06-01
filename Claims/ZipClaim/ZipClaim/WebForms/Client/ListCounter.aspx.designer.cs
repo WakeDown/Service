@@ -112,6 +112,15 @@ namespace ZipClaim.WebForms.Client {
         protected global::System.Web.UI.WebControls.Literal lRowsCount;
         
         /// <summary>
+        /// pnlNoData элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl pnlNoData;
+        
+        /// <summary>
         /// pnlList элемент управления.
         /// </summary>
         /// <remarks>

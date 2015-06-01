@@ -137,6 +137,16 @@ namespace ZipClaim.Db
 
             if (!String.IsNullOrEmpty(value.ToString()))
             {
+                switch (value.ToString())
+                {
+                    case "1":
+                        value = "True";
+                        break;
+                    case "0":
+                        value = "False";
+                        break;
+                }
+
                 result = Convert.ToBoolean(value);
             }
 

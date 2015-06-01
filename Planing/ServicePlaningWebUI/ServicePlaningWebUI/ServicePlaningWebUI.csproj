@@ -254,6 +254,7 @@
     <Compile Include="Models\PaymentTariff.cs" />
     <Compile Include="Models\TariffFeature.cs" />
     <Compile Include="Models\User2UserRole.cs" />
+    <Compile Include="Objects\ListClass.cs" />
     <Compile Include="Objects\NetworkConnection.cs" />
     <Compile Include="Objects\WindowsImpersonationContextFacade.cs" />
     <Compile Include="WebForms\Addresses\Editor.aspx.cs">

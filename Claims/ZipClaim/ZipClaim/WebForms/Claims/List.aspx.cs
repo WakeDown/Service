@@ -475,9 +475,13 @@ namespace ZipClaim.WebForms.Claims
                 DateTime dt;
                 DateTime.TryParse(date, out dt);
 
-                if (dt != new DateTime())
+                if (dt != new DateTime() && dt.Year > 1990)
                 {
                     result = String.Format("{0:d} ({1:N0} дн.)", dt, ((DateTime.Now - dt).TotalDays));
+                }
+                else if (dt != new DateTime() && dt.Year == 1899)
+                {
+                    result = "не уствновлена";
                 }
                 else
                 {

@@ -2,6 +2,13 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphControlButtons" runat="server">
     <div class="form-horizontal val-form" role="form">
+         <div class="form-group">
+            <label for='<%=ddlEngeneerGroup.ClientID %>' class="col-sm-1 control-label">Организация</label>
+            <div class="col-sm-3">
+                <asp:DropDownList ID="ddlEngeneerGroup" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlEngeneerGroup_OnSelectedIndexChanged">
+                </asp:DropDownList>
+            </div>
+        </div>
         <div class="form-group">
             <label for='<%=ddlServiceEngeneer.ClientID %>' class="col-sm-1 control-label">Инженер</label>
             <div class="col-sm-3">

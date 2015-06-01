@@ -33,6 +33,10 @@ namespace SnmpScanner
         public string MsExchangeLogin;
         public string MsExchangePass;
 
+        public string ServerType;
+
+        public string MailCopyTo;
+
         public EmailSettings(bool defaultSettings)
         {
             var settings = new Settings();
@@ -44,6 +48,8 @@ namespace SnmpScanner
 
         private void LoadDefault()
         {
+            ServerType = ConfigurationManager.AppSettings["serverType"];
+
             Host = ConfigurationManager.AppSettings["smtpHost"];
 
             if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["smtpPort"]))
@@ -82,7 +88,11 @@ namespace SnmpScanner
             MsExchangeVersion = ConfigurationManager.AppSettings["msExchVers"];
             MsExchangeLogin = ConfigurationManager.AppSettings["msExchLogin"];
             string msExchPass = ConfigurationManager.AppSettings["msExchPass"];
-            MsExchangePass = String.IsNullOrEmpty(msExchPass) ? msExchPass : Cryptor.Decrypt(msExchPass, "Un1tGroup"); 
+            MsExchangePass = String.IsNullOrEmpty(msExchPass) ? msExchPass : Cryptor.Decrypt(msExchPass, "Un1tGroup");
+
+            MailCopyTo = ConfigurationManager.AppSettings["mailCopyTo"];
         }
+
+       
     }
 }

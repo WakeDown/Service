@@ -52,6 +52,8 @@ namespace ZipClaim.Models
         public string Manager { get; set; }
         public string EngeneerConclusion { get; set; }
         public string ManagerMail { get; set; }
+        public int? IdContract { get; set; }
+        public bool HideTop { get; set; }    
 
 
         public Claim()
@@ -115,6 +117,8 @@ namespace ZipClaim.Models
                 EngeneerConclusion = dr["engeneer_conclusion"].ToString();
                 ManagerMail = dr["manager_mail"].ToString();
                 ContractorSdNum = dr["contractor_sd_num"].ToString();
+                IdContract = GetValueIntOrNull(dr["id_contract"].ToString());
+                HideTop = GetValueBool(dr["hide_top"].ToString());
 
                 //SqlParameter pIdClaim = new SqlParameter() { ParameterName = "id_claim", Value = id, DbType = DbType.Int32 };
                 //dt = ExecuteQueryStoredProcedure(Zipcl.sp, "getClaimStateHistory", pIdClaim);

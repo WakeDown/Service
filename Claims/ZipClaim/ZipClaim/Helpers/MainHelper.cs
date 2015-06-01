@@ -22,7 +22,7 @@ namespace ZipClaim.Helpers
         private const string listDefaultDataTextField = "name";
         private const string ddlEmptyText = "--выберите значение--";
         public const string ddlEmptyValue = "-1";
-        private const string ddlSelectAllText = "--все--";
+        public const string ddlSelectAllText = "--все--";
         public const string ddlSelectAllValue = "-13";
         public const string rblSelectAllText = "все";
         public const string rblSelectAllValue = "-13";

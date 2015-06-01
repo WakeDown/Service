@@ -62,6 +62,7 @@
         <span class="label label-info">из них показано:
         <asp:Literal ID="lRowsCount" runat="server" Text="0"></asp:Literal></span>
     </h5>
+    <div id="pnlNoData" runat="server"></div>
     <div id="pnlList" runat="server"></div>
 <%--    <asp:PlaceHolder ID="phList" runat="server"></asp:PlaceHolder>--%>
     <%--<asp:Repeater ID="tblList" runat="server" DataSourceID="sdsList" OnLoad="tblList_OnLoad" OnItemDataBound="tblList_OnItemDataBound">

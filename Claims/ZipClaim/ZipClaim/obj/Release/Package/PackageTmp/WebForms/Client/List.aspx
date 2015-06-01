@@ -96,6 +96,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphList" runat="server">
+    <div id="pnlNoData" runat="server"></div>
             <h5><span class="label label-default">Показано записей:
         <asp:Literal ID="lRowsCount" runat="server" Text="0"></asp:Literal></span>
             </h5>

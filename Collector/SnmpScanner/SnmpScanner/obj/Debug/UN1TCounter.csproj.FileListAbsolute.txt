@@ -48,8 +48,10 @@ D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\UN
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\System.Configuration.Install.dll
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\System.Data.SqlServerCe.dll
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\System.ServiceProcess.dll
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\UN1TCounter.csprojResolveAssemblyReference.cache
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\SnmpScanner.Form1.resources
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\SnmpScanner.ProjectInstaller.resources
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\SnmpScanner.Properties.Resources.resources
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\UN1TCounter.csproj.GenerateResource.Cache
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\UN1TCounter.csprojResolveAssemblyReference.cache
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\Microsoft.Exchange.WebServices.dll
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\Microsoft.Exchange.WebServices.xml

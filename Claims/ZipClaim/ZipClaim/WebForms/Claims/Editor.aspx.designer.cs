@@ -544,6 +544,33 @@ namespace ZipClaim.WebForms.Claims {
         protected global::System.Web.UI.WebControls.LinkButton btnCopyInfo;
         
         /// <summary>
+        /// hfIdContract элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdContract;
+        
+        /// <summary>
+        /// counterReportError элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl counterReportError;
+        
+        /// <summary>
+        /// btnCountersReport элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnCountersReport;
+        
+        /// <summary>
         /// pnlDevicesListWarning элемент управления.
         /// </summary>
         /// <remarks>

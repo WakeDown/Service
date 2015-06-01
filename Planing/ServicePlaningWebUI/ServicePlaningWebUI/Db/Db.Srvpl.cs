@@ -14,6 +14,7 @@ namespace ServicePlaningWebUI.Db
             #region Константы
 
             public const string sp = "ui_service_planing";
+            public const string sp2 = "ui_service_planing_2";
 
             #endregion
 
@@ -28,6 +29,14 @@ namespace ServicePlaningWebUI.Db
                 DataTable dt = new DataTable();
 
                 dt = ExecuteQueryStoredProcedure(sp, action, sqlParams);
+                return dt;
+            }
+
+            public static DataTable GetSelectionList2(string action, params SqlParameter[] sqlParams)
+            {
+                DataTable dt = new DataTable();
+
+                dt = ExecuteQueryStoredProcedure(sp2, action, sqlParams);
                 return dt;
             }
 
@@ -361,7 +370,7 @@ namespace ServicePlaningWebUI.Db
                 SqlParameter pIdServiceCame = new SqlParameter() { ParameterName = "id_service_came", Value = idServiceCame, DbType = DbType.AnsiString };
                 SqlParameter pIdServiceClaim = new SqlParameter() { ParameterName = "id_service_claim", Value = idServiceClaim, DbType = DbType.AnsiString };
 
-                return GetSelectionList("getServiceClaimFullNameSelectionList", pSerialNum, pIdServiceCame, pIdServiceClaim);
+                return GetSelectionList2("getServiceClaimFullNameSelectionList", pSerialNum, pIdServiceCame, pIdServiceClaim);
             }
 
             #endregion
