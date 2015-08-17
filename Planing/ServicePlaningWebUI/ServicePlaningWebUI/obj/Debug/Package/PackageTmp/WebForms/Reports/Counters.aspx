@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms/Masters/List.master" AutoEventWireup="true" CodeBehind="Counters.aspx.cs" Inherits="ServicePlaningWebUI.WebForms.Reports.Counters" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms/Masters/List.master" AutoEventWireup="true" CodeBehind="Counters.aspx.cs" Inherits="ServicePlaningWebUI.WebForms.Reports.Counters" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphControlButtons" runat="server">
+<%--    <asp:Button ID="btnInExcel" runat="server" Text="в Excel" OnClick="btnInExcel_OnClick" />--%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphFilterBody" runat="server">
     <div class="form-horizontal val-form" role="form">
@@ -95,163 +96,179 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="cphList" runat="server">
     <asp:PlaceHolder ID="phServerMessage" runat="server"></asp:PlaceHolder>
-
-    <div class="table">
-        <div class="row row-total">
-            <div class="col-sm-3 bold align-right">ИТОГО</div>
-            <div class="col-sm-1 align-right">
-                <div class="col-sm-6 align-right"><span id="sDevCountTotal" runat="server" class="align-right"></span></div>
-                <div class="col-sm-6 align-right"><span id="sDevCountWithVolTotal" runat="server" class="align-right"></span></div>
-            </div>
-            <div class="col-sm-1 align-right"><span id="sCurVolTotal" runat="server"></span></div>
-            <div class="col-sm-1 align-right"><span id="sPrevVolTotal" runat="server"></span></div>
-            <div class="col-sm-1 align-right"><span id="sPrevPrevVolTotal" runat="server"></span></div>
-            <div class="col-sm-1 align-right"></div>
-            <div class="col-sm-1 align-right"></div>
-            <div class="col-sm-1 align-right"></div>
-            <div class="col-sm-1 align-right"></div>
-            <div class="col-sm-1 align-right"></div>
-        </div>
-    </div>
-    <asp:Repeater ID="tblCounterReport" runat="server" OnItemDataBound="tblCounterReport_OnItemDataBound" OnDataBinding="tblCounterReport_OnDataBinding">
-        <%--        DataSourceID="sdsCounterReport"--%>
-        <HeaderTemplate>
-            <div class="table table-striped">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div id="exclo1" class="exclo-container">
-                            1
-<%--                            <a id="exclo1" class="exclo-btn">1</a>--%>
-                        </div>
-                        <div id="exclo2" class="exclo-container">2
-<%--                            <a id="exclo2" class="exclo-btn">2</a>--%>
-                        </div>
-                        <div id="exclo3" class="exclo-container">3
-<%--                            <a id="exclo3" class="exclo-btn">3</a>--%>
-                        </div>
-                    </div>
-                    <div class="col-sm-1 bold align-right">Аппараты</div>
-                    <div class="col-sm-3 bold center">Объем печати</div>
-                    <div class="col-sm-3 bold center">Загрузка</div>
-                    <div class="col-sm-1 bold align-right"></div>
-                    <div class="col-sm-1 bold align-right">Последний</div>
+    <div id="pnlReport" runat="server">
+        <div class="table">
+            <div class="row row-total">
+                <div class="col-sm-3 bold align-right">ИТОГО</div>
+                <div class="col-sm-1 align-right">
+                    <div class="col-sm-6 align-right"><span id="sDevCountTotal" runat="server" class="align-right"></span></div>
+                    <div class="col-sm-6 align-right"><span id="sDevCountWithVolTotal" runat="server" class="align-right"></span></div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-1">
-                        <div class="col-sm-6">всего</div>
-                        <div class="col-sm-6">показания</div>
+                <div class="col-sm-1 align-right"><span id="sCurVolTotal" runat="server"></span></div>
+                <div class="col-sm-1 align-right"><span id="sPrevVolTotal" runat="server"></span></div>
+                <div class="col-sm-1 align-right"><span id="sPrevPrevVolTotal" runat="server"></span></div>
+                <div class="col-sm-1 align-right"></div>
+                <div class="col-sm-1 align-right"></div>
+                <div class="col-sm-1 align-right"></div>
+                <div class="col-sm-1 align-right"></div>
+                <div class="col-sm-1 align-right"></div>
+            </div>
+        </div>
+        <asp:Repeater ID="tblCounterReport" runat="server" OnItemDataBound="tblCounterReport_OnItemDataBound" OnDataBinding="tblCounterReport_OnDataBinding">
+            <%--        DataSourceID="sdsCounterReport"--%>
+            <HeaderTemplate>
+                <div class="table table-striped">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div id="exclo1" class="exclo-container">
+                                1
+                                <%--                            <a id="exclo1" class="exclo-btn">1</a>--%>
+                            </div>
+                            <div id="exclo2" class="exclo-container">
+                                2
+                                <%--                            <a id="exclo2" class="exclo-btn">2</a>--%>
+                            </div>
+                            <div id="exclo3" class="exclo-container">
+                                3
+                                <%--                            <a id="exclo3" class="exclo-btn">3</a>--%>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 bold align-right">Аппараты</div>
+                        <div class="col-sm-3 bold center">Объем печати</div>
+                        <div class="col-sm-3 bold center">Загрузка</div>
+                        <div class="col-sm-1 bold align-right"></div>
+                        <div class="col-sm-1 bold align-right">Последний</div>
                     </div>
-                    <div class="col-sm-1 align-right nowrap"><%# GetCurMonth().ToString("MMM yyyy") %></div>
-                    <div class="col-sm-1 align-right nowrap"><%# GetPrevMonth().ToString("MMM yyyy") %></div>
-                    <div class="col-sm-1 align-right nowrap"><%# GetPrevPrevMonth().ToString("MMM yyyy") %></div>
-                    <%--                    <div class="col-sm-1 bold align-right"><%# GetCurMonth().ToString("MMM yyyy") %></div>
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-1">
+                            <div class="col-sm-6">всего</div>
+                            <div class="col-sm-6">показания</div>
+                        </div>
+                        <div class="col-sm-1 align-right nowrap"><%# GetCurMonth().ToString("MMM yyyy") %></div>
+                        <div class="col-sm-1 align-right nowrap"><%# GetPrevMonth().ToString("MMM yyyy") %></div>
+                        <div class="col-sm-1 align-right nowrap"><%# GetPrevPrevMonth().ToString("MMM yyyy") %></div>
+                        <%--<div class="col-sm-1 bold align-right"><%# GetCurMonth().ToString("MMM yyyy") %></div>
                     <div class="col-sm-1 bold align-right"><%# GetPrevMonth().ToString("MMM yyyy") %></div>
                     <div class="col-sm-1 bold align-right"><%# GetPrevPrevMonth().ToString("MMM yyyy") %></div>
                     <div class="col-sm-1 bold align-right">средняя</div>--%>
+                        <div class="col-sm-3">
+                            <div class="col-sm-3 align-right nowrap"><%# GetCurMonth().ToString("MMM yyyy") %></div>
+                            <div class="col-sm-3 align-right nowrap"><%# GetPrevMonth().ToString("MMM yyyy") %></div>
+                            <div class="col-sm-3 align-right nowrap"><%# GetPrevPrevMonth().ToString("MMM yyyy") %></div>
+                            <div class="col-sm-3 align-right">средняя</div>
+                        </div>
+                        <div class="col-sm-1 bold align-right">Износ</div>
+                        <div class="col-sm-1 bold align-right">счетчик</div>
+                    </div>
+            </HeaderTemplate>
+            <ItemTemplate>
+
+                <asp:HiddenField ID="hfIdContractor" runat="server" Value='<%#Eval("Id") %>' />
+                <div class="row bg collapsed row-action" data-toggle="collapse" data-target='<%# String.Format("#contractList{0}", Container.ItemIndex) %>'>
                     <div class="col-sm-3">
-                        <div class="col-sm-3 align-right nowrap"><%# GetCurMonth().ToString("MMM yyyy") %></div>
-                        <div class="col-sm-3 align-right nowrap"><%# GetPrevMonth().ToString("MMM yyyy") %></div>
-                        <div class="col-sm-3 align-right nowrap"><%# GetPrevPrevMonth().ToString("MMM yyyy") %></div>
-                        <div class="col-sm-3 align-right">средняя</div>
+                        <%#Eval("name") %>
                     </div>
-                    <div class="col-sm-1 bold align-right">Износ</div>
-                    <div class="col-sm-1 bold align-right">счетчик</div>
-                </div>
-        </HeaderTemplate>
-        <ItemTemplate>
-            <asp:HiddenField ID="hfIdContractor" runat="server" Value='<%#Eval("Id") %>' />
-            <div class="row bg collapsed row-action" data-toggle="collapse" data-target='<%# String.Format("#contractList{0}", Container.ItemIndex) %>'>
-                <div class="col-sm-3">
-                    <%#Eval("name") %>
-                </div>
-                <div class="col-sm-1 align-right">
-                    <div class="col-sm-6 align-right">
-                        <%--<span id="sDevCount" runat="server" class="align-right"></span>--%>
-                        <%#Eval("ContractorDevCount") %>
+                    <div class="col-sm-1 align-right">
+                        <div class="col-sm-6 align-right">
+                            <%--<span id="sDevCount" runat="server" class="align-right"></span>--%>
+                            <%#Eval("ContractorDevCount") %>
+                        </div>
+                        <div class="col-sm-6 align-right"><span id="sDevCountWithVol" runat="server" class="align-right"></span></div>
                     </div>
-                    <div class="col-sm-6 align-right"><span id="sDevCountWithVol" runat="server" class="align-right"></span></div>
-                </div>
-                <div class="col-sm-1 align-right">
-                    <%# String.Format("{0:### ### ### ### ###}", Eval("ContractorCurVolTotal")) %>
-                    <%--<span id="sContractorCurVol" runat="server"></span>--%>
-                </div>
-                <div class="col-sm-1 align-right">
-                    <%# String.Format("{0:### ### ### ### ###}", Eval("ContractorPrevVolTotal")) %>
-                    <%--<span id="sContractorPrevVol" runat="server"></span>--%>
-                </div>
-                <div class="col-sm-1 align-right">
-                    <%# String.Format("{0:### ### ### ### ###}", Eval("ContractorPrevPrevVolTotal")) %>
-                    <%--<span id="sContractorPrevPrevVol" runat="server"></span>--%>
-                </div>
-                <%--                <div class="col-sm-1 align-right"><span id="sContractorCurLoading" runat="server"></span></div>
+                    <div class="col-sm-1 align-right">
+                        <%# String.Format("{0:### ### ### ### ###}", Eval("ContractorCurVolTotal")) %>
+                        <%--<span id="sContractorCurVol" runat="server"></span>--%>
+                    </div>
+                    <div class="col-sm-1 align-right">
+                        <%# String.Format("{0:### ### ### ### ###}", Eval("ContractorPrevVolTotal")) %>
+                        <%--<span id="sContractorPrevVol" runat="server"></span>--%>
+                    </div>
+                    <div class="col-sm-1 align-right">
+                        <%# String.Format("{0:### ### ### ### ###}", Eval("ContractorPrevPrevVolTotal")) %>
+                        <%--<span id="sContractorPrevPrevVol" runat="server"></span>--%>
+                    </div>
+                    <%--                <div class="col-sm-1 align-right"><span id="sContractorCurLoading" runat="server"></span></div>
                 <div class="col-sm-1 align-right"><span id="sContractorPrevLoading" runat="server"></span></div>
                 <div class="col-sm-1 align-right"><span id="sContractorPrevPrevLoading" runat="server"></span></div>
     <div class="col-sm-1"></div>--%>
-                <div class="col-sm-3">
-                    <div class="col-sm-3 align-right"><span id="sContractorCurLoading" runat="server"></span></div>
-                    <div class="col-sm-3 align-right"><span id="sContractorPrevLoading" runat="server"></span></div>
-                    <div class="col-sm-3 align-right"><span id="sContractorPrevPrevLoading" runat="server"></span></div>
+                    <div class="col-sm-3">
+                        <div class="col-sm-3 align-right"><span id="sContractorCurLoading" runat="server"></span></div>
+                        <div class="col-sm-3 align-right"><span id="sContractorPrevLoading" runat="server"></span></div>
+                        <div class="col-sm-3 align-right"><span id="sContractorPrevPrevLoading" runat="server"></span></div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-1"></div>
                 </div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-1"></div>
-            </div>
-            <div id='<%# String.Format("contractList{0}", Container.ItemIndex) %>' class="contractorContractList collapse">
-                <%-- класс contractorContractList не убирать, по нему работает множественное раскрытие --%>
-                <asp:Repeater ID="rtrContractorContractList" runat="server" OnItemDataBound="rtrContractorContractList_OnItemDataBound">
-                    <ItemTemplate>
-                        <asp:HiddenField ID="hfIdContract" runat="server" Value='<%#Eval("IdContract") %>' />
-                        <div class="row collapsed row-action" data-toggle="collapse" data-target='<%#String.Format("#deviceList{1}Ctr{0}", Eval("IdContractor"), Eval("IdContract")) %>'>
-                            <div class="col-sm-3">
-                                <span class="pad-l-sm"><%#Eval("Number") %></span>
-                            </div>
-                            <div class="col-sm-1 align-right">
-                                <div class="col-sm-6 align-right">
-                                    <%#Eval("ContractDevCount") %>
-                                    <%--                                    <span id="sContractDevCount" runat="server" class="align-right"></span>--%>
-                                    <%--                                    <%# GetItem(Container.DataItem ,6) %>--%>
+                <div id='<%# String.Format("contractList{0}", Container.ItemIndex) %>' class="contractorContractList collapse">
+                    <%-- класс contractorContractList не убирать, по нему работает множественное раскрытие --%>
+                    <asp:Repeater ID="rtrContractorContractList" runat="server" OnItemDataBound="rtrContractorContractList_OnItemDataBound">
+                        <ItemTemplate>
+                            <asp:HiddenField ID="hfIdContract" runat="server" Value='<%#Eval("IdContract") %>' />
+                            <div class="row collapsed row-action" data-toggle="collapse" data-target='<%#String.Format("#deviceList{1}Ctr{0}", Eval("IdContractor"), Eval("IdContract")) %>'>
+                                <div class="col-sm-3">
+                                    <span class="pad-l-sm"><%#Eval("Number") %></span>
                                 </div>
-                                <div class="col-sm-6 align-right"><span id="sContractDevCountWithVol" runat="server" class="align-right"></span></div>
+                                <div class="col-sm-1 align-right">
+                                    <div class="col-sm-6 align-right">
+                                        <%#Eval("ContractDevCount") %>
+                                        <%--                                    <span id="sContractDevCount" runat="server" class="align-right"></span>--%>
+                                        <%--                                    <%# GetItem(Container.DataItem ,6) %>--%>
+                                    </div>
+                                    <div class="col-sm-6 align-right"><span id="sContractDevCountWithVol" runat="server" class="align-right"></span></div>
 
-                            </div>
-                            <div class="col-sm-1 align-right">
-                                <%# String.Format("{0:### ### ### ### ###}", Eval("ContractCurVolTotal")) %>
-                                <%--<span id="sCurVol" runat="server"></span>--%>
-                            </div>
-                            <div class="col-sm-1 align-right">
-                                <%#String.Format("{0:### ### ### ### ###}", Eval("ContractPrevVolTotal")) %>
-                                <%--<span id="sPrevVol" runat="server"></span>--%>
-                            </div>
-                            <div class="col-sm-1 align-right">
-                                <%#String.Format("{0:### ### ### ### ###}", Eval("ContractPrevPrevVolTotal")) %>
-                                <%--<span id="sPrevPrevVol" runat="server"></span>--%>
-                            </div>
-                            <%--                            <div class="col-sm-1 align-right"><span id="sCurLoading" runat="server"></span></div>
+                                </div>
+                                <div class="col-sm-1 align-right">
+                                    <%# String.Format("{0:### ### ### ### ###}", Eval("ContractCurVolTotal")) %>
+                                    <%--<span id="sCurVol" runat="server"></span>--%>
+                                </div>
+                                <div class="col-sm-1 align-right">
+                                    <%#String.Format("{0:### ### ### ### ###}", Eval("ContractPrevVolTotal")) %>
+                                    <%--<span id="sPrevVol" runat="server"></span>--%>
+                                </div>
+                                <div class="col-sm-1 align-right">
+                                    <%#String.Format("{0:### ### ### ### ###}", Eval("ContractPrevPrevVolTotal")) %>
+                                    <%--<span id="sPrevPrevVol" runat="server"></span>--%>
+                                </div>
+                                <%--                            <div class="col-sm-1 align-right"><span id="sCurLoading" runat="server"></span></div>
                             <div class="col-sm-1 align-right"><span id="sPrevLoading" runat="server"></span></div>
                             <div class="col-sm-1 align-right"><span id="sPrevPrevLoading" runat="server"></span></div>
                             <div class="col-sm-1"></div>--%>
-                            <div class="col-sm-3">
-                                <div class="col-sm-3 align-right">
-                                    <span id="sCurLoading" runat="server"></span>
+                                <div class="col-sm-3">
+                                    <div class="col-sm-3 align-right">
+                                        <span id="sCurLoading" runat="server"></span>
+                                    </div>
+                                    <div class="col-sm-3 align-right"><span id="sPrevLoading" runat="server"></span></div>
+                                    <div class="col-sm-3 align-right"><span id="sPrevPrevLoading" runat="server"></span></div>
                                 </div>
-                                <div class="col-sm-3 align-right"><span id="sPrevLoading" runat="server"></span></div>
-                                <div class="col-sm-3 align-right"><span id="sPrevPrevLoading" runat="server"></span></div>
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-1"></div>
                             </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-1"></div>
-                        </div>
-                        <div id='<%# String.Format("deviceList{1}Ctr{0}", Eval("IdContractor"), Eval("IdContract")) %>' class="contractDeviceList collapse">
-                            <%-- класс contractDeviceList не убирать, по нему работает множественное раскрытие --%>
-                            <div id="phContractorContractsDevicesList" runat="server"></div>
-                        </div>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </div>
-        </ItemTemplate>
-        <FooterTemplate>
-            </div>
-        </FooterTemplate>
-    </asp:Repeater>
+                            <div id='<%# String.Format("deviceList{1}Ctr{0}", Eval("IdContractor"), Eval("IdContract")) %>' class="contractDeviceList collapse">
+                                <%-- класс contractDeviceList не убирать, по нему работает множественное раскрытие --%>
+                                <div id="phContractorContractsDevicesList" runat="server"></div>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </div>
+
+            </ItemTemplate>
+            <FooterTemplate>
+                </div>
+            </FooterTemplate>
+        </asp:Repeater>
+
+    </div>
+    <%--<asp:HiddenField ID="HdnValue" runat="server" />
+    <script type="text/javascript">
+        function ExportDivDataToExcel() {
+            var html = $("#pnlReport").html();
+            html = $.trim(html);
+            html = html.replace(/>/g, '&gt;');
+            html = html.replace(/</g, '&lt;');
+            $("input[id$='HdnValue']").val(html);
+        }
+    </script>--%>
     <%--    <asp:SqlDataSource ID="sdsCounterReport" runat="server" ConnectionString="<%$ ConnectionStrings:unitConnectionString %>" SelectCommand="ui_service_planing" SelectCommandType="StoredProcedure" CancelSelectOnNullParameter="false">
         <SelectParameters>
             <asp:Parameter DefaultValue="getCounterReportContractorList" Name="action" />

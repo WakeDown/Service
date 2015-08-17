@@ -135,7 +135,7 @@ namespace ServicePlaningWebUI.Models
             SqlParameter pId = new SqlParameter() { ParameterName = "id_device", Value = Id, DbType = DbType.Int32 };
             SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
 
-            ExecuteStoredProcedure(Db.Db.Srvpl.sp, "closeAllOptions4Device", pId, pIdCreator);
+            ExecuteStoredProcedure(Srvpl.sp, "closeAllOptions4Device", pId, pIdCreator);
         }
 
         public void Delete(int id, int idCreator)

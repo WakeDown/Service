@@ -283,6 +283,15 @@ namespace ServicePlaningWebUI.WebForms.Contracts {
         protected global::System.Web.UI.WebControls.LinkButton btnProlong;
         
         /// <summary>
+        /// btnSave элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnSave;
+        
+        /// <summary>
         /// btnSaveAndBack элемент управления.
         /// </summary>
         /// <remarks>

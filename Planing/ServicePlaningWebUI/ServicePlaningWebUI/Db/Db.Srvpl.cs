@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.UI;
 
 namespace ServicePlaningWebUI.Db
 {
@@ -58,6 +59,16 @@ namespace ServicePlaningWebUI.Db
                 DataTable dt = new DataTable();
 
                 dt = ExecuteQueryStoredProcedure(sp, "getContractorShortSelectionList", pFilterText, pIdContractor, pOrderByName, pShowInn, pIdCity, pAddress);
+                return dt;
+            }
+
+            public static DataTable GetSerialNumList(string filterText)
+            {
+                SqlParameter pFilterText = new SqlParameter() { ParameterName = "filter_text", Value = filterText, DbType = DbType.AnsiString };
+
+                DataTable dt = new DataTable();
+
+                dt = ExecuteQueryStoredProcedure(sp, "getSerialNumList", pFilterText);
                 return dt;
             }
 
@@ -449,6 +460,22 @@ namespace ServicePlaningWebUI.Db
 
             #endregion
 
+            public static DataTable CheckDeviceTotalCounterIsNotTooBig(int idClaim, int counter, DateTime dateCame)
+            {
+                SqlParameter pIdClaim = new SqlParameter() { ParameterName = "id_service_claim", Value = idClaim, DbType = DbType.Int32 };
+                SqlParameter pCounter = new SqlParameter() { ParameterName = "counter", Value = counter, DbType = DbType.Int32 };
+                SqlParameter pDateCame = new SqlParameter() { ParameterName = "date_came", Value = dateCame, DbType = DbType.DateTime };
+
+                DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "checkDeviceTotalCounterIsNotTooBig", pIdClaim, pCounter, pDateCame);
+                //bool flag = false;
+
+                //if (dt.Rows.Count > 0)
+                //{
+                //    flag = dt.Rows[0]["result"].ToString().Equals("1");
+                //}
+
+                return dt;
+            }
 
             internal static DataTable GetAddressesSelectionList()
             {
@@ -591,7 +618,7 @@ namespace ServicePlaningWebUI.Db
                 SqlParameter pIdDevice = new SqlParameter() { ParameterName = "id_device", Value = idDevice, DbType = DbType.Int32 };
                 SqlParameter pIdContract = new SqlParameter() { ParameterName = "id_contract", Value = idContract, DbType = DbType.Int32 };
 
-                var dt = ExecuteQueryStoredProcedure(Srvpl.sp, "getContract2Devices", pIdDevice, pIdContract);
+                var dt = ExecuteQueryStoredProcedure(sp, "getContract2Devices", pIdDevice, pIdContract);
                 return dt;
             }
         }

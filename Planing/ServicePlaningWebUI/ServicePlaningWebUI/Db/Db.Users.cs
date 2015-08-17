@@ -152,11 +152,22 @@ namespace ServicePlaningWebUI.Db
 
                     string expression = String.Format("sid in ({0})", String.Join(",", sids));
 
-                    dt = dtUsers.Select(expression, "name asc").CopyToDataTable();
+                    var res = dtUsers.Select(expression, "name asc");
+
+                    if (res != null && res.Count() > 0)
+                    {
+                        dt = res.CopyToDataTable();
+                    }
+                    else
+                    {
+                        dt=new DataTable();
+                    }
+
                 }
                 else
                 {
-                    dt = dtUsers;
+                    dt = new DataTable();
+                    //dt = dtUsers;
                 }
 
                 return dt;

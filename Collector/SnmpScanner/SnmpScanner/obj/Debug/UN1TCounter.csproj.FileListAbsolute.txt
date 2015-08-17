@@ -52,6 +52,7 @@ D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\Sn
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\SnmpScanner.ProjectInstaller.resources
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\SnmpScanner.Properties.Resources.resources
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\UN1TCounter.csproj.GenerateResource.Cache
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\UN1TCounter.csprojResolveAssemblyReference.cache
 D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\Microsoft.Exchange.WebServices.dll
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\Microsoft.Exchange.WebServices.xml
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\S22.Imap.dll
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\bin\Debug\S22.Imap.xml
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\SnmpScanner\obj\Debug\UN1TCounter.csprojResolveAssemblyReference.cache

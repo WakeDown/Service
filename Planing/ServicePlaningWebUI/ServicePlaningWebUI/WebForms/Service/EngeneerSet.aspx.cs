@@ -69,7 +69,8 @@ namespace ServicePlaningWebUI.WebForms.Service
         private void FillLists()
         {
             //Заполняем список групп (Организаций) инженеров
-            var lstEngeneerGroups = AdHelper.GetGroupListFromAdUnit("OU=engeneer-groups,OU=DSU,OU=System-Groups,OU=UNIT");
+            var lstEngeneerGroups = AdHelper.GetGroupListFromAdUnit("OU=engeneer-groups,OU=Service,OU=System-Groups,OU=UNIT");
+            lstEngeneerGroups = lstEngeneerGroups.OrderBy(n => n.Name).ToList();
             MainHelper.DdlFill(ref ddlEngeneerGroup, lstEngeneerGroups, true, MainHelper.ListFirstItemType.SelectAll);
 
             string defVal = "S-1-5-21-1970802976-3466419101-4042325969-4014";

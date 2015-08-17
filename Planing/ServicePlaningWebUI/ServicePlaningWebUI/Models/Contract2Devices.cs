@@ -107,6 +107,14 @@ namespace ServicePlaningWebUI.Models
             Save(false);
         }
 
+        public static void SaveServiceAdmin(int id, int idServoceAdmin)
+        {
+            SqlParameter pId = new SqlParameter() { ParameterName = "id_contract2devices", Value = id, DbType = DbType.Int32 };
+            SqlParameter pIdServiceAdmin = new SqlParameter() { ParameterName = "id_service_admin", Value = idServoceAdmin, DbType = DbType.Int32 };
+
+            DataTable dt = ExecuteQueryStoredProcedure(Srvpl.sp, "saveContract2DeviceServiceAdmin", pId, pIdServiceAdmin);
+        }
+
         public void Save(bool addScheduleDates2ServicePlan, bool isHandlingDevicesContract = false)
         {
             SqlParameter pId = new SqlParameter() { ParameterName = "id_contract2devices", Value = Id, DbType = DbType.Int32 };

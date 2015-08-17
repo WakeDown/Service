@@ -11,26 +11,32 @@
             <div class="col-sm-10">
                 <%--<asp:DropDownList ID="ddlServiceClaim" runat="server" CssClass="form-control">
                     </asp:DropDownList>--%>
-<%--                <asp:UpdatePanel ID="upClaimList" runat="server">
+                <%--                <asp:UpdatePanel ID="upClaimList" runat="server">
                     <ContentTemplate>--%>
                 <script type="text/javascript">
                     function EnterEvent(e) {
                         if (e.keyCode == 13) {
                             __doPostBack('<%=btnClaimSelection.UniqueID%>', "");
-        }
-    }
+                        }
+                    }
                 </script>
-                        <asp:TextBox ID="txtClaimSelection" runat="server" CssClass="form-control input-sm" placeholder="поиск" MaxLength="50" 
-                            onkeypress="return EnterEvent(event)"
-                            ></asp:TextBox>
-                <asp:Button ID="btnClaimSelection" runat="server" style="display:none" Text="Button" OnClick="btnClaimSelection_Click" />
+                <div class="input-group">
+
+                    <asp:TextBox ID="txtClaimSelection" runat="server" CssClass="form-control" placeholder="поиск" MaxLength="50"
+                        onkeypress="return EnterEvent(event)"></asp:TextBox>
+                    <div class="input-group-addon">
+                        <asp:LinkButton ID="btnShowSerialNums" runat="server" type="submit" class="btn btn-success btn-xs" data-toggle="tooltip" title="" OnClick="btnShowSerialNums_Click">серийники</asp:LinkButton>
+                    </div>
+                </div>
+                <asp:Button ID="btnClaimSelection" runat="server" Style="display: none" Text="Button" OnClick="btnClaimSelection_Click" />
                 <%--OnTextChanged="txtClaimSelection_TextChanged"  AutoPostBack="True"--%>
-                        <asp:ListBox ID="lbClaim" runat="server" Height="150px" CssClass="full-width input-sm" OnSelectedIndexChanged="lbClaim_OnSelectedIndexChanged" AutoPostBack="True"></asp:ListBox>
-                        <span class="help-block">
-                            <%--<asp:RequiredFieldValidator ID="rfvDdlServiceClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="ddlServiceClaim" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
-                            <asp:RequiredFieldValidator ID="rfvLbClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="lbClaim" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
-                        </span>
-<%--                    </ContentTemplate>
+                <asp:ListBox ID="lbSerialNums" runat="server" Height="150px" CssClass="full-width input-sm" OnSelectedIndexChanged="lbSerialNums_OnSelectedIndexChanged" AutoPostBack="True" Visible="False"></asp:ListBox>
+                <asp:ListBox ID="lbClaim" runat="server" Height="150px" CssClass="full-width input-sm" OnSelectedIndexChanged="lbClaim_OnSelectedIndexChanged" AutoPostBack="True"></asp:ListBox>
+                <span class="help-block">
+                    <%--<asp:RequiredFieldValidator ID="rfvDdlServiceClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="ddlServiceClaim" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
+                    <asp:RequiredFieldValidator ID="rfvLbClaim" runat="server" ErrorMessage="Выберите заявку" Display="Dynamic" ControlToValidate="lbClaim" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
+                </span>
+                <%--                    </ContentTemplate>
                 </asp:UpdatePanel>--%>
             </div>
         </div>
@@ -64,59 +70,97 @@
                 </span>
             </div>
         </div>
-        <div class="form-group">
-            <label for='<%=txtCounter.ClientID %>' class="col-sm-2 control-label required-mark">Счетчик</label>
-            <div class="col-sm-3">
-                <div class="input-group">
-                    <asp:TextBox ID="txtCounter" runat="server" CssClass="form-control" MaxLength="15"></asp:TextBox>
-                    <%--<span class="input-group-btn">
-                        <span class="btn btn-default datepicker-btn"><i class="glyphicon glyphicon-calendar"></i></span>
-                    </span>--%>
-                </div>
-                <span class="help-block">
-                    <asp:RequiredFieldValidator ID="rfvTxtCounter" runat="server" ErrorMessage="Заполните поле &laquo;Счетчик&raquo;" Display="Dynamic" ControlToValidate="txtCounter" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
-                    <asp:CompareValidator ID="cvTxtCounter" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="txtCounter" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for='<%=txtCounterColour.ClientID %>' class="col-sm-2 control-label">Счетчик(цветной)</label>
-            <div class="col-sm-3">
-                <div class="input-group">
-                    <asp:TextBox ID="txtCounterColour" runat="server" CssClass="form-control" MaxLength="15"></asp:TextBox>
-                    <%--<span class="input-group-btn">
-                        <span class="btn btn-default datepicker-btn"><i class="glyphicon glyphicon-calendar"></i></span>
-                    </span>--%>
-                </div>
-                <span class="help-block">
-                    <%--                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Заполните поле &laquo;Счетчик&raquo;" Display="Dynamic" ControlToValidate="txtCounter" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
-                    <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="txtCounter" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>
-                </span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for='<%=txtDateCame.ClientID %>' class="col-sm-2 control-label required-mark">Дата обслуживания</label>
-            <div class="col-sm-3">
-                <div class="input-group">
+        <%--        <script type="text/javascript">
+            function checkCounter() {
 
-                    <asp:TextBox ID="txtDateCame" runat="server" CssClass="form-control"></asp:TextBox>
-                    <%--<span class="input-group-btn">
+                //var counter = $("#txtCounter").val();
+                var url = "<%=String.Format("{0}/Check", FriendlyUrl.Resolve("~/WebForms/Service/Service.asmx")) %>";
+                alert(url);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "text",
+                    success: function (msg) {
+                        alert(1);
+                        //if (msg != null && msg != '') {
+                        //    $('#counterNoteMessage').show();
+                        //    $('#counterNoteMessage').innerText = msg;
+                        //} else { $('#counterNoteMessage').hide(); }
+
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+            }
+        </script>--%>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div class="form-group">
+                    <label for='<%=txtDateCame.ClientID %>' class="col-sm-2 control-label required-mark">Дата обслуживания</label>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+
+                            <asp:TextBox ID="txtDateCame" runat="server" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtDateCame_OnTextChanged"></asp:TextBox>
+                            <%--<span class="input-group-btn">
                         <span class="btn btn-default datepicker-btn"><i class="glyphicon glyphicon-calendar"></i></span>
                     </span>--%>
-                </div>
-                <span class="help-block">
-                    
+                        </div>
+                        <span class="help-block">
+
                             <asp:RequiredFieldValidator ID="rfvЕxtDateCame" runat="server" ErrorMessage="Заполните поле &laquo;Дата обслуживания&raquo;" Display="Dynamic" ControlToValidate="txtDateCame" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
                             <asp:CompareValidator ID="cvЕxtDateCame" runat="server" ErrorMessage="Введите дату" CssClass="text-danger" ControlToValidate="txtDateCame" Type="Date" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>
-                    <asp:UpdatePanel ID="upDateCame" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <asp:RangeValidator ID="rvDateCame" runat="server" ErrorMessage="Выберите другую дату" ControlToValidate="txtDateCame" ValidationGroup="vgForm" CssClass="text-danger" Type="Date" Display="Dynamic" SetFocusOnError="True" Enabled="False" MinimumValue="01.01.1900" MaximumValue="03.03.3333"></asp:RangeValidator>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+                            <asp:UpdatePanel ID="upDateCame" runat="server" UpdateMode="Conditional">
+                                <ContentTemplate>
+                                    <asp:RangeValidator ID="rvDateCame" runat="server" ErrorMessage="Выберите другую дату" ControlToValidate="txtDateCame" ValidationGroup="vgForm" CssClass="text-danger" Type="Date" Display="Dynamic" SetFocusOnError="True" Enabled="False" MinimumValue="01.01.1900" MaximumValue="03.03.3333"></asp:RangeValidator>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
 
-                </span>
-            </div>
-        </div>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for='<%=txtCounter.ClientID %>' class="col-sm-2 control-label required-mark">Счетчик</label>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <asp:TextBox ID="txtCounter" runat="server" CssClass="form-control" MaxLength="15" AutoPostBack="true" OnTextChanged="txtCounter_OnTextChanged"></asp:TextBox>
+                            <%--<span class="input-group-btn">
+                        <span class="btn btn-default datepicker-btn"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </span>--%>
+                        </div>
+
+                        <span class="help-block">
+                            <asp:RequiredFieldValidator ID="rfvTxtCounter" runat="server" ErrorMessage="Заполните поле &laquo;Счетчик&raquo;" Display="Dynamic" ControlToValidate="txtCounter" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
+                            <asp:CompareValidator ID="cvTxtCounter" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="txtCounter" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>
+                        </span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for='<%=txtCounterColour.ClientID %>' class="col-sm-2 control-label">Счетчик(цветной)</label>
+                    <div class="col-sm-3">
+                        <div class="input-group">
+                            <asp:TextBox ID="txtCounterColour" runat="server" CssClass="form-control" MaxLength="15" AutoPostBack="true" OnTextChanged="txtCounterColour_OnTextChanged"></asp:TextBox>
+                            <%--<span class="input-group-btn">
+                        <span class="btn btn-default datepicker-btn"><i class="glyphicon glyphicon-calendar"></i></span>
+                    </span>--%>
+                        </div>
+                        <span class="help-block">
+                            <%--                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Заполните поле &laquo;Счетчик&raquo;" Display="Dynamic" ControlToValidate="txtCounter" InitialValue='' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>--%>
+                            <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Введите число" CssClass="text-danger" ControlToValidate="txtCounter" Type="Integer" Operator="DataTypeCheck" Display="Dynamic" SetFocusOnError="True" ValidationGroup="vgForm"></asp:CompareValidator>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <blockquote class="bg-warning" id="counterNoteMessage" runat="server" visible="false"></blockquote>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
         <div class="col-sm-offset-2 col-sm-10">
             <asp:PlaceHolder ID="phServerMessage" runat="server"></asp:PlaceHolder>
         </div>

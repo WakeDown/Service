@@ -1,0 +1,32 @@
+﻿@using System.Net.Mime
+@model IEnumerable<ServiceClaim.Models.ClassifierCaterory>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Editor.cshtml";
+}
+@section PanelHead
+{
+    Классификатор работ
+}
+
+@section PanelBody
+{
+    <p>
+        @Html.Partial("ImportExcel")
+        @*<button>Выгрузить в Excel</button>*@
+
+    </p>
+
+    @if (Model.Any())
+    {
+        <table class="table table-bordered">
+            @foreach (var cat in Model)
+            {
+                <tr>
+                    <td>@cat.Number @cat.Name</td>
+                    <td></td>
+                </tr>
+            }
+        </table>
+    }
+}

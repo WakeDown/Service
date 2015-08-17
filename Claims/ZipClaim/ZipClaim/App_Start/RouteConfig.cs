@@ -32,6 +32,9 @@ namespace ZipClaim
             routes.MapPageRoute("ClientAccess", "Settings/ClientAccess", "~/WebForms/Settings/ClientAccess.aspx");
             routes.MapPageRoute("ManagerOperator", "Settings/ManagerOperator", "~/WebForms/Settings/ManagerOperator.aspx");
 
+            routes.MapPageRoute("ClaimReport", "Reports/ClaimReport", "~/WebForms/Reports/ClaimReport.aspx");
+            //
+
             routes.MapPageRoute("Error", "Error", "~/WebForms/Error.aspx");
             routes.MapPageRoute("ErrorGrp", "ErrorGrp", "~/WebForms/ErrorGrp.aspx");
 

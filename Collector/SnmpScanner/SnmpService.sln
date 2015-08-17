@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterUninstaller", "Count
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterStart", "CounterStart\CounterStart.csproj", "{7FC8A86D-04E4-4D75-8602-47CC10B994B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CounterInstallerNoStart", "CounterInstallerNoStart\CounterInstallerNoStart.csproj", "{4A9279C8-2EC8-41CC-855B-1EAA6867AD08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7FC8A86D-04E4-4D75-8602-47CC10B994B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FC8A86D-04E4-4D75-8602-47CC10B994B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC8A86D-04E4-4D75-8602-47CC10B994B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A9279C8-2EC8-41CC-855B-1EAA6867AD08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A9279C8-2EC8-41CC-855B-1EAA6867AD08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A9279C8-2EC8-41CC-855B-1EAA6867AD08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A9279C8-2EC8-41CC-855B-1EAA6867AD08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

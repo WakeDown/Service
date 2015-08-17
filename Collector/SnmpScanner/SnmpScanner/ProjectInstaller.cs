@@ -44,9 +44,12 @@ namespace SnmpScanner
 
         private void serviceInstaller1_AfterInstall(object sender, InstallEventArgs e)
         {
-            using (ServiceController sc = new ServiceController(serviceInstaller1.ServiceName))
+            if (Program.StartService)
             {
-                sc.Start();
+                using (ServiceController sc = new ServiceController(serviceInstaller1.ServiceName))
+                {
+                    sc.Start();
+                }
             }
         }
 

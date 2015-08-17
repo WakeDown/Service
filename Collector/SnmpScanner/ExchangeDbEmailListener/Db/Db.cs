@@ -21,7 +21,8 @@ namespace ExchangeDbEmailListener.Db
             using (var conn = unitConn)
             using (var cmd = new SqlCommand(spName, conn)
             {
-                CommandType = CommandType.StoredProcedure
+                CommandType = CommandType.StoredProcedure,
+                CommandTimeout = 10000
             })
             {
                 if (!string.IsNullOrEmpty(action) && !string.IsNullOrWhiteSpace(action))

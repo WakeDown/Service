@@ -71,6 +71,7 @@
                         <li id="liClaims" runat="server" visible="False"><a href='<%= FriendlyUrl.Href("~/Claims") %>'><i class="fa fa-wrench fa-fw"></i>Заявки</a></li>
                         <li id="liZipHistory" runat="server" visible="False"><a href='<%= FriendlyUrl.Href("~/Claims/ZipHistory") %>'><i class="fa fa-clock-o fa-fw"></i>История</a></li>
                         <li id="liSupply" runat="server" visible="False"><a href='<%= FriendlyUrl.Href("~/Claims/Supply") %>'><i class="fa fa-truck fa-fw"></i>Снабжение</a></li>
+                        <li id="liReports" runat="server" visible="False"><a href='<%= FriendlyUrl.Href("~/Reports/ClaimReport") %>'><i class="fa fa-bank fa-fw"></i>Отчет</a></li>
                         <%--<li><a href='<%= FriendlyUrl.Href("~/Contracts") %>'><i class="fa fa-briefcase fa-fw"></i>Договоры</a></li>
                         <li>
                                 <a  href='<%= FriendlyUrl.Href("~/Devices") %>'><i class="fa fa-print fa-fw"></i>Оборудование</a>

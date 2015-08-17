@@ -1,0 +1,37 @@
+﻿@using System.Linq
+@using System.ServiceModel.Configuration
+@model System.Collections.Generic.IEnumerable<ServiceClaim.Models.Claim>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <a class="btn btn-primary" href="@Url.Action("New")"><i class="fa fa-plus-circle"></i> новая</a>
+</p>
+
+@if (Model.Any())
+{
+    <table id="claimList" class="table table-bordered sel-list">
+        <tr>
+            <th class="min-width">№</th>
+            <th>Контрагент</th>
+        </tr>
+        @foreach (var claim in Model)
+        {
+            <tr claimid="@claim.Id">
+                <th>@claim.Id</th>
+                <td>@claim.Contractor.FullName</td>
+            </tr>
+        }
+    </table>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#claimList tr').click(function() {
+                window.location = '@Url.Action("Index")/'+ $(this).attr('claimid');
+            });
+        });
+    </script>
+}
+

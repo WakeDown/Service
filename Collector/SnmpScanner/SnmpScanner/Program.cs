@@ -22,9 +22,11 @@ namespace SnmpScanner
 
     static class Program
     {
-        public const string progVersion = "1.1";
+        public const string progVersion = "1.2";
         public static bool _threadMustStop;
         public static bool _dbIsBuzy;
+
+        public static bool StartService = false;
 
         public static Settings AppSettings
         {
@@ -69,6 +71,11 @@ namespace SnmpScanner
                             StartWinService();
                             break;
                         case "install":
+                            StartService = true;
+                            MessageBox.Show(SelfInstaller.InstallMe());
+                            break;
+                        case "installnostart":
+                            StartService = false;
                             MessageBox.Show(SelfInstaller.InstallMe());
                             break;
                         case "uninstall":
