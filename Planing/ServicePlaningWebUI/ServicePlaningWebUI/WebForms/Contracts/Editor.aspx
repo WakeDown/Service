@@ -187,7 +187,7 @@
         <div class="form-group">
 
             <div class="col-sm-offset-2 col-sm-10">
-                <%--<asp:LinkButton ID="btnSave" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="сохранить" OnClick="btnSave_Click" ValidationGroup="vgForm"><i class="fa fa-save fa-lg"></i>&nbsp;<i class="fa fa-mail-reply fa-sm"></i></asp:LinkButton>--%>
+                <asp:LinkButton ID="btnSave" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="сохранить" OnClick="btnSave_Click" ValidationGroup="vgForm"><i class="fa fa-save fa-lg"></i></asp:LinkButton>
                 <asp:LinkButton ID="btnSaveAndBack" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="сохранить и перейти к списку договоров" OnClick="btnSaveAndBack_Click" ValidationGroup="vgForm"><i class="fa fa-save fa-lg"></i>&nbsp;<i class="fa fa-mail-reply fa-sm"></i></asp:LinkButton>
                 <asp:LinkButton ID="btnSaveAndAddNew" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="сохранить и очистить" OnClick="btnSaveAndAddNew_Click" ValidationGroup="vgForm"><i class="fa fa-save fa-lg"></i>&nbsp;<i class="fa fa-plus fa-sm"></i></asp:LinkButton>
                 <asp:LinkButton ID="btnSaveAndAddDevices" runat="server" type="submit" class="btn btn-primary btn-lg" data-toggle="tooltip" title="сохранить и добавить оборудование" OnClick="btnSaveAndAddDevices_Click" ValidationGroup="vgForm"><i class="fa fa-save fa-lg"></i>&nbsp;<i class="fa fa-print fa-sm"></i></asp:LinkButton>

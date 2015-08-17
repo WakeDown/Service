@@ -22,6 +22,15 @@ namespace ServicePlaningWebUI.WebForms.Service {
         protected global::System.Web.UI.WebControls.TextBox txtClaimSelection;
         
         /// <summary>
+        /// btnShowSerialNums элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnShowSerialNums;
+        
+        /// <summary>
         /// btnClaimSelection элемент управления.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace ServicePlaningWebUI.WebForms.Service {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnClaimSelection;
+        
+        /// <summary>
+        /// lbSerialNums элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ListBox lbSerialNums;
         
         /// <summary>
         /// lbClaim элемент управления.
@@ -85,49 +103,13 @@ namespace ServicePlaningWebUI.WebForms.Service {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDdlServiceEngeneer;
         
         /// <summary>
-        /// txtCounter элемент управления.
+        /// UpdatePanel1 элемент управления.
         /// </summary>
         /// <remarks>
         /// Автоматически создаваемое поле.
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCounter;
-        
-        /// <summary>
-        /// rfvTxtCounter элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTxtCounter;
-        
-        /// <summary>
-        /// cvTxtCounter элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator cvTxtCounter;
-        
-        /// <summary>
-        /// txtCounterColour элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCounterColour;
-        
-        /// <summary>
-        /// CompareValidator1 элемент управления.
-        /// </summary>
-        /// <remarks>
-        /// Автоматически создаваемое поле.
-        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
         /// txtDateCame элемент управления.
@@ -173,6 +155,60 @@ namespace ServicePlaningWebUI.WebForms.Service {
         /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RangeValidator rvDateCame;
+        
+        /// <summary>
+        /// txtCounter элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCounter;
+        
+        /// <summary>
+        /// rfvTxtCounter элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTxtCounter;
+        
+        /// <summary>
+        /// cvTxtCounter элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvTxtCounter;
+        
+        /// <summary>
+        /// txtCounterColour элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCounterColour;
+        
+        /// <summary>
+        /// CompareValidator1 элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CompareValidator1;
+        
+        /// <summary>
+        /// counterNoteMessage элемент управления.
+        /// </summary>
+        /// <remarks>
+        /// Автоматически создаваемое поле.
+        /// Для изменения переместите объявление поля из файла конструктора в файл кода программной части.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl counterNoteMessage;
         
         /// <summary>
         /// phServerMessage элемент управления.

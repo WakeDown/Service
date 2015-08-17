@@ -3,3 +3,8 @@ D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\Coun
 D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterStart\bin\Debug\UN1TCounterSetup.pdb
 D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterStart\obj\Debug\UN1TCounterSetup.exe
 D:\GoogleDrive\Дела\Проекты\GitHub\Service\Collector\SnmpScanner\CounterStart\obj\Debug\UN1TCounterSetup.pdb
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterStart\bin\Debug\UN1TCounterSetup.exe.config
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterStart\bin\Debug\UN1TCounterSetup.exe
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterStart\bin\Debug\UN1TCounterSetup.pdb
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterStart\obj\Debug\UN1TCounterSetup.exe
+D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterStart\obj\Debug\UN1TCounterSetup.pdb

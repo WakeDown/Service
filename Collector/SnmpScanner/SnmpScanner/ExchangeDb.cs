@@ -63,11 +63,17 @@ namespace SnmpScanner
             if (settings.ServerType == "Другой")//Если сервер Другой то шлем по SMTP
             {
                 SendMailSmtp(subject, body, settings);
-                if (settings.Save2SentFolder)
+                try
                 {
-                    SaveMail2SentFolder(subject, body, settings);
+                    if (settings.Save2SentFolder)
+                    {
+                        SaveMail2SentFolder(subject, body, settings);
+                    }
                 }
-
+                catch
+                {
+                    //throw new Exception(String.Format("Письмо было отправлено, но не удалось сохранить письмо в папку Отправленные.\r\nПричина: {0}", ex.Message));
+                }
                 return;
             }
             else if (settings.ServerType == "MS Exchange")//Если это Exchange
@@ -93,8 +99,9 @@ namespace SnmpScanner
                     ExchangeVersion.TryParse(settings.MsExchangeVersion, out ver);
                     _service = new ExchangeService(ver);
                 }
-                catch
+                catch(Exception ex)
                 {
+                    Log.Write(ex.Message);
                     _service = new ExchangeService();
                 }
             }
@@ -103,7 +110,6 @@ namespace SnmpScanner
                 _service = new ExchangeService();    
             }
             
-
             if (!String.IsNullOrEmpty(settings.MsExchangeLogin))
             {
                 string login = settings.MsExchangeLogin.Remove(settings.MsExchangeLogin.IndexOf('@'));
@@ -233,8 +239,9 @@ namespace SnmpScanner
                 canDelete = true;
                 result = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Write(ex.Message);
                 canDelete = false;
                 result = false;
                 //exchangeSuccess = false;

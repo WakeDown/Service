@@ -176,3 +176,5 @@ D:\GoogleDrive\Dev\GitHub\Service\Claims\ZipClaim\ZipClaim\bin\zh-Hant\System.Sp
 D:\GoogleDrive\Dev\GitHub\Service\Claims\ZipClaim\ZipClaim\obj\Release\ZipClaim.csprojResolveAssemblyReference.cache
 D:\GoogleDrive\Dev\GitHub\Service\Claims\ZipClaim\ZipClaim\obj\Release\ZipClaim.dll
 D:\GoogleDrive\Dev\GitHub\Service\Claims\ZipClaim\ZipClaim\obj\Release\ZipClaim.pdb
+D:\GoogleDrive\Dev\GitHub\Service\Claims\ZipClaim\ZipClaim\bin\ClosedXML.dll
+D:\GoogleDrive\Dev\GitHub\Service\Claims\ZipClaim\ZipClaim\bin\ClosedXML.xml

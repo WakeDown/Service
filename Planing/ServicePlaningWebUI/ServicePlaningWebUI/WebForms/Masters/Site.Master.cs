@@ -100,7 +100,7 @@ namespace ServicePlaningWebUI.WebForms.Masters
                 }
 
                 if (!UserIsSysAdmin && UserIsReport && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/PlanExecute")) &&
-                    !Request.Path.Equals(FriendlyUrl.Href("~/Reports/Payment")) /*&& !Request.Path.Equals(FriendlyUrl.Href("~/Reports/Counters")) && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/CountersDetail"))*/)
+                    !Request.Path.Equals(FriendlyUrl.Href("~/Reports/Payment")) && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/Counters")) && !Request.Path.Equals(FriendlyUrl.Href("~/Reports/CountersDetail")))
                 {
                     Response.Redirect(FriendlyUrl.Href("~/Reports/PlanExecute"));
                 }
@@ -123,7 +123,7 @@ namespace ServicePlaningWebUI.WebForms.Masters
         {
             if (UserIsSysAdmin)
             {
-                liSettings.Visible = liPayment.Visible = liReports.Visible = liPlanExec.Visible = liCounters.Visible = true;
+                liSettings.Visible = liPayment.Visible = liReports.Visible = liPlanExec.Visible = liCounters.Visible = liContract2device.Visible = true;
             }
 
             if (UserIsSysAdmin || UserIsServiceAdmin)

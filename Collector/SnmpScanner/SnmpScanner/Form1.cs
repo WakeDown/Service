@@ -492,19 +492,18 @@ namespace SnmpScanner
         private bool ValidateSmtpSettings(EmailSettings settings = null)
         {
             bool valid = false;
-
             try
             {
-                EmailSettings emailSettings = settings ?? new EmailSettings(true);
-                ExchangeDb.SendMail("Тестовое сообщение", "Проверка отправки сообщения на сервер ГК ЮНИТ", emailSettings);//isTest
+            EmailSettings emailSettings = settings ?? new EmailSettings(true);
+            ExchangeDb.SendMail("Тестовое сообщение", "Проверка отправки сообщения на сервер ГК ЮНИТ", emailSettings);//isTest
 
-                valid = true;
+            valid = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log.Write(ex.Message);
                 valid = false;
             }
-
             return valid;
         }
 

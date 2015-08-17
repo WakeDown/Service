@@ -204,6 +204,7 @@ namespace ZipClaim.WebForms.Masters
             pnlClientFeed.Visible = UserIsClient;
             pnlSd.Visible = !UserIsClient;
             liDownloadSettings.Visible = UserIsClient && ClientCounterView;
+            liReports.Visible = UserIsSysAdmin || UserIsManager;
         }
 
         private void SetUserName()

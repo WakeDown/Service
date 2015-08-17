@@ -73,6 +73,7 @@
                         <%--<li><a href='<%= FriendlyUrl.Href("~/Service/Plan") %>'><i class="fa fa-calendar fa-fw"></i>План</a></li>--%>
                         <li id="liService" runat="server" Visible="false"><a href='<%= FriendlyUrl.Href("~/") %>'><i class="fa fa-wrench fa-fw"></i>Сервис</a></li>
                         <li id="liContracts" runat="server" Visible="false"><a href='<%= FriendlyUrl.Href("~/Contracts") %>'><i class="fa fa-briefcase fa-fw"></i>Договоры</a></li>
+                        
                         <li id="liDevices" runat="server" Visible="false">
                                 <a  href='<%= FriendlyUrl.Href("~/Devices") %>'><i class="fa fa-print fa-fw"></i>Оборудование</a>
                                 <%--<a class="dropdown-toggle" data-toggle="dropdown">
@@ -85,6 +86,7 @@
                                 </ul>--%>
                             
                         </li>
+                        <li id="liContract2device" runat="server" Visible="false"><a href='<%= FriendlyUrl.Href("~/Contracts/Devices") %>'><i class="fa fa-print fa-fw"></i>Оборудование на договоре</a></li>
                         <%--<li class="dropdown">--%>
 <%--                            <div class="btn-group">--%>
                         <li id="liReports" runat="server">

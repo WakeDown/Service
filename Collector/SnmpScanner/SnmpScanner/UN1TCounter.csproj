@@ -59,7 +59,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="S22.Imap">
-      <HintPath>..\..\..\Samples\S22.Imap\S22.Imap.dll</HintPath>
+      <HintPath>..\packages\S22.ImapWithUTF8.3.6.1\lib\net40\S22.Imap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -104,6 +104,7 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\IpRange.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="PjlCommander.cs" />

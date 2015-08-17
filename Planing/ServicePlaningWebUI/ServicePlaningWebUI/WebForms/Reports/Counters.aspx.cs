@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -107,23 +108,6 @@ namespace ServicePlaningWebUI.WebForms.Reports
             bool? hasCames = MainHelper.RblGetValueBool(ref rblHasCames, true);
 
             DeviceList = Db.Db.Srvpl.GetCounterReportContractorContractDeviceList(null, idManager, dateMonth, wearBegin, wearEnd, loadingBegin, loadingEnd, lstVendor, hasCames);
-            //DeviceData = Db.Db.Srvpl.GetCounterReportContractorContractDeviceData(null, idManager, dateMonth);
-
-            //if (wearBegin.HasValue || wearEnd.HasValue)
-            //{
-            //    //Фильтруем список данных по аппаратам, чтобы не мучть SQL фильтрами
-            //    //DeviceData = FilterDeviceDataList(DeviceList, deviceData);
-
-            //}
-            //else
-            //{
-            //    //DeviceData = deviceData.Select();
-            //}
-
-
-            //ContractsList = Db.Db.Srvpl.GetCounterReportContractorContractList(null, idManager, dateMonth);
-
-            //var groupbyfilter = from d in objClsDB.MyDataSet.Tables["Category"].AsEnumerable() group d by d["CatName"];
 
             //Список контрагентов формируем из списка выводимых аппаратов, чтобы не мучть SQL запросы фильтрами
             var contractorList = from d in DeviceList.AsEnumerable()
@@ -150,8 +134,9 @@ namespace ServicePlaningWebUI.WebForms.Reports
 
             FillTotalRow();
         }
-
-        DataTable DeviceList { get; set; }
+        
+            
+            DataTable DeviceList { get; set; }
         //DataRow[] DeviceData { get; set; }
         //DataTable DeviceData { get; set; }
         //DataTable ContractsList { get; set; }
@@ -537,6 +522,85 @@ $('.contractDeviceList').collapse('show');
 }});");
 
             ScriptManager.RegisterStartupScript(this, GetType(), "exclo3", script, true);
+        }
+
+        protected void btnInExcel_OnClick(object sender, EventArgs e)
+        {
+            int? idManager = MainHelper.DdlGetSelectedValueInt(ref ddlServiceManager);
+            DateTime? dateMonth = MainHelper.TxtGetTextDateTime(ref txtDateMonth);
+            int? wearBegin = MainHelper.TxtGetTextInt32(ref txtWearBegin, true);
+            int? wearEnd = MainHelper.TxtGetTextInt32(ref txtWearEnd, true);
+            int? loadingBegin = MainHelper.TxtGetTextInt32(ref txtLoadingBegin, true);
+            int? loadingEnd = MainHelper.TxtGetTextInt32(ref txtLoadingEnd, true);
+            string lstVendor = MainHelper.ChkListGetCheckedValuesString(ref chklVendor);
+            bool? hasCames = MainHelper.RblGetValueBool(ref rblHasCames, true);
+
+            DeviceList = Db.Db.Srvpl.GetCounterReportContractorContractDeviceList(null, idManager, dateMonth, wearBegin, wearEnd, loadingBegin, loadingEnd, lstVendor, hasCames);
+
+            //Список контрагентов формируем из списка выводимых аппаратов, чтобы не мучть SQL запросы фильтрами
+            var contractorList = from d in DeviceList.AsEnumerable()
+                                 group d by new { Id = d.Field<int>("id_contractor"), Name = d.Field<string>("contractor_name") } into grp
+                                 select new
+                                 {
+                                     Id = grp.Key.Id,
+                                     Name = grp.Key.Name,
+                                     ContractorDevCount = grp.Count(),
+                                     ContractorCurVol = grp.Sum(v => !String.IsNullOrEmpty(v["cur_vol"].ToString()) ? (int)v["cur_vol"] : 0),
+                                     ContractorPrevVol = grp.Sum(v => !String.IsNullOrEmpty(v["prev_vol"].ToString()) ? (int)v["prev_vol"] : 0),
+                                     ContractorPrevPrevVol = grp.Sum(v => !String.IsNullOrEmpty(v["prev_prev_vol"].ToString()) ? (int)v["prev_prev_vol"] : 0),
+                                     ContractorCurVolColor = grp.Sum(v => !String.IsNullOrEmpty(v["cur_vol_color"].ToString()) ? (int)v["cur_vol_color"] : 0),
+                                     ContractorPrevVolColor = grp.Sum(v => !String.IsNullOrEmpty(v["prev_vol_color"].ToString()) ? (int)v["prev_vol_color"] : 0),
+                                     ContractorPrevPrevVolColor = grp.Sum(v => !String.IsNullOrEmpty(v["prev_prev_vol_color"].ToString()) ? (int)v["prev_prev_vol_color"] : 0),
+                                     ContractorCurVolTotal = grp.Sum(v => !String.IsNullOrEmpty(v["cur_vol_color"].ToString()) ? (int)v["cur_vol_color"] : 0) + grp.Sum(v => !String.IsNullOrEmpty(v["cur_vol"].ToString()) ? (int)v["cur_vol"] : 0),
+                                     ContractorPrevVolTotal = grp.Sum(v => !String.IsNullOrEmpty(v["prev_vol_color"].ToString()) ? (int)v["prev_vol_color"] : 0) + grp.Sum(v => !String.IsNullOrEmpty(v["prev_vol"].ToString()) ? (int)v["prev_vol"] : 0),
+                                     ContractorPrevPrevVolTotal = grp.Sum(v => !String.IsNullOrEmpty(v["prev_prev_vol_color"].ToString()) ? (int)v["prev_prev_vol_color"] : 0) + grp.Sum(v => !String.IsNullOrEmpty(v["prev_prev_vol"].ToString()) ? (int)v["prev_prev_vol"] : 0)
+                                 };
+            contractorList= contractorList.OrderBy(r => r.Name);
+
+            foreach (var ctr in contractorList)
+            {
+                
+            }
+
+            //Response.Clear();
+            //Response.Buffer = true;
+            //Response.AddHeader("content-disposition", "attachment;filename=RepeaterExport.xlsx");
+            //Response.Charset = "";
+            //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            //StringWriter sw = new StringWriter();
+            //HtmlTextWriter hw = new HtmlTextWriter(sw);
+            //pnlReport.RenderControl(hw);
+            //Response.Output.Write(sw.ToString());
+            //Response.Flush();
+            //Response.Close();
+
+            //Response.Clear();
+            //Response.AddHeader("content-disposition", "attachment;filename=FileName.xlsx");
+            //Response.Charset = "";
+            //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            //System.IO.StringWriter stringWrite = new System.IO.StringWriter();
+            //System.Web.UI.HtmlTextWriter htmlWrite = new HtmlTextWriter(stringWrite);
+            //pnlReport.RenderControl(htmlWrite);
+            //Response.Write(stringWrite.ToString());
+            //Response.End();
+            //string fileName = "CounterReport";
+            //string html = HdnValue.Value;
+            //html = html.Replace("&gt;", ">");
+            //html = html.Replace("&lt;", "<");
+            //HttpContext.Current.Response.ClearContent();
+            //HttpContext.Current.Response.AddHeader("content-disposition", "attachment;filename=" + fileName + "_" + DateTime.Now.ToString("M_dd_yyyy_H_M_s") + ".xls");
+            //HttpContext.Current.Response.ContentType = "application/xls";
+            //HttpContext.Current.Response.Write(html);
+            //HttpContext.Current.Response.Flush();
+            //HttpContext.Current.Response.Close();
+            //HttpContext.Current.Response.End();
+
+        }
+
+        public override void VerifyRenderingInServerForm(System.Web.UI.Control control)
+        {
+            //confirms that an HtmlForm control is rendered for the
+            //specified ASP.NET server control at run time.
         }
     }
 }

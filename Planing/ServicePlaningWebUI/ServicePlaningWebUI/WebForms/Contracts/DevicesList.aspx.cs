@@ -29,6 +29,8 @@ namespace ServicePlaningWebUI.WebForms.Contracts
             FilterLinks.Add(new FilterLink("cont", txtFilterContactName));
             FilterLinks.Add(new FilterLink("sadm", ddlFilterServiceAdmin));
             FilterLinks.Add(new FilterLink("objn", txtFilterObjectName));
+            FilterLinks.Add(new FilterLink("ctrtr", ddlContractor));
+            FilterLinks.Add(new FilterLink("rcn", txtRowsCount, "30"));
 
             BtnSearchClientId = btnSearch.ClientID;
         }
@@ -101,7 +103,7 @@ namespace ServicePlaningWebUI.WebForms.Contracts
         private void FillLists()
         {
             //==Form
-           
+
 
             //////if (CheckedDevices)
             //////{
@@ -121,11 +123,14 @@ namespace ServicePlaningWebUI.WebForms.Contracts
 
 
             //==Filter
-            MainHelper.DdlFill(ref ddlFilterContractNumber, Db.Db.Srvpl.GetContractSelectionList(), true);
+            MainHelper.DdlFill(ref ddlContractor, Db.Db.Srvpl.GetContractorFilterSelectionList(), true, MainHelper.ListFirstItemType.SelectAll);
+            MainHelper.DdlFill(ref ddlFilterContractNumber, Db.Db.Srvpl.GetContractSelectionList(), true, MainHelper.ListFirstItemType.SelectAll);
             MainHelper.DdlFill(ref ddlFilterModel, Db.Db.Srvpl.GetDeviceModelSelectionList(), true, MainHelper.ListFirstItemType.SelectAll);
             MainHelper.DdlFill(ref ddlFilterServiceIntervals, Db.Db.Srvpl.GetServiceIntervalSelectionList(), true, MainHelper.ListFirstItemType.SelectAll);
             MainHelper.DdlFill(ref ddlFilterCity, Db.Db.Unit.GetCitiesSelectionList(), true, MainHelper.ListFirstItemType.SelectAll);
-            MainHelper.DdlFill(ref ddlFilterServiceAdmin, Db.Db.Users.GetUsersSelectionList(serviceAdminRightGroup), true, MainHelper.ListFirstItemType.SelectAll);
+            var saList = Db.Db.Users.GetUsersSelectionList(serviceAdminRightGroup);
+            MainHelper.DdlFill(ref ddlFilterServiceAdmin, saList, true, MainHelper.ListFirstItemType.SelectAll);
+            MainHelper.DdlFill(ref ddlNewServiceAdmin, saList, true, MainHelper.ListFirstItemType.Nullable); 
         }
 
         //////protected void btnSave_Click(object sender, EventArgs e)
@@ -340,6 +345,13 @@ namespace ServicePlaningWebUI.WebForms.Contracts
             //</вешаем обработчики>
             //</Отметки>
 
+
+            //<Фильтрация списка по вводимому тексту>
+            script = String.Format(@"$(function() {{$('#{0}').filterByText($('#{1}'), true);}});", ddlContractor.ClientID, txtContractorInn.ClientID);
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "filterContractorListByInn", script, true);
+            //</Фильтрация списка>
+
             //////if (CheckedDevices)
             //////{
             //////    //<Чекбокс с квадратиком (tristate checkbox)>
@@ -445,6 +457,37 @@ namespace ServicePlaningWebUI.WebForms.Contracts
             int[] ids = result.Select(c2d => Convert.ToInt32(c2d)).ToArray();
 
             return ids;
+        }
+
+        protected void btnChangeServiceAdmin_OnClick(object sender, EventArgs e)
+        {
+            int? idSa = MainHelper.DdlGetSelectedValueInt(ref ddlNewServiceAdmin, true);
+
+            if (idSa.HasValue)
+            {
+                int[] ctr2DevIds = GetCheckedDeviceIds();
+                ChangeServiceAdmin(ctr2DevIds, idSa.Value);
+            }
+        }
+
+        private void ChangeServiceAdmin(int[] ctr2DevIds, int newIdServiceAdmin)
+        {
+            if (ctr2DevIds.Any())
+            {
+                foreach (int ctr2devId in ctr2DevIds)
+                {
+                    try
+                    {
+                        Contract2Devices.SaveServiceAdmin(ctr2devId, newIdServiceAdmin);
+                    }
+                    catch (Exception ex)
+                    {
+                        ServerMessageDisplay(new[] { phListServerMessage }, ex.Message, true);
+                    }
+                }
+
+                RedirectWithParams();
+            }
         }
     }
 }

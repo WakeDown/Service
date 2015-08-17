@@ -129,6 +129,8 @@ namespace ServicePlaningWebUI.WebForms.Service
             MainHelper.TxtSetEmptyText(ref txtDescr);
             MainHelper.TxtSetEmptyText(ref txtCounterColour);
             lbClaim.Items.Clear();
+
+            counterNoteMessage.Visible = false;
         }
 
         private void Save()
@@ -285,6 +287,103 @@ namespace ServicePlaningWebUI.WebForms.Service
                     DateTime.DaysInMonth(planingDate.Year, planingDate.Month)).ToShortDateString();
 
             rvDateCame.ErrorMessage = String.Format("Необходимо выбрать дату месяца {0:MMMM}", planingDate);
+        }
+
+        protected void txtCounterColour_OnTextChanged(object sender, EventArgs e)
+        {
+            DoCheckCounter();
+            
+        }
+
+        private void DoCheckCounter()
+        {
+            int? counterMustBe;
+            bool flag = CheckCounter(out counterMustBe);
+
+            DisplayCounterNote(flag, counterMustBe);
+        }
+
+        protected void txtCounter_OnTextChanged(object sender, EventArgs e)
+        {
+            DoCheckCounter();
+        }
+
+        protected void txtDateCame_OnTextChanged(object sender, EventArgs e)
+        {
+            DoCheckCounter();
+        }
+        
+
+        private void DisplayCounterNote(bool flag, int? counterMustBe)
+        {
+            counterNoteMessage.Visible = flag;
+            if (flag) counterNoteMessage.InnerText = String.Format("Вы уверены что ввели правильное значение счетчиков? Ожидаемое значение: {0}", counterMustBe.HasValue ? counterMustBe.Value.ToString() :  "не удалось определить");
+        }
+
+        private bool CheckCounter(out int? counterMustBe)
+        {
+            //Если введенное значение счетчиков  превышает значение за месяц более чем на 50 % то true
+            bool flag = false;
+            counterMustBe = null;
+
+            int? counter = MainHelper.TxtGetTextInt32(ref txtCounter, true);
+            int? counterColor = MainHelper.TxtGetTextInt32(ref txtCounterColour, true);
+            DateTime? dateCame = MainHelper.TxtGetTextDateTime(ref txtDateCame, true);
+
+            if ((counter.HasValue || counterColor.HasValue) && dateCame.HasValue)
+            {
+                int totalCounter = counter ?? 0;
+                totalCounter += counterColor ?? 0;
+                int idServiceClaim = MainHelper.LbGetSelectedValueInt(ref lbClaim);
+
+                var dt = Db.Db.Srvpl.CheckDeviceTotalCounterIsNotTooBig(idServiceClaim, totalCounter, dateCame.Value);
+
+                if (dt.Rows.Count > 0)
+                {
+                    flag = dt.Rows[0]["result"].ToString().Equals("1");
+                    counterMustBe = Db.Db.GetValueIntOrNull(dt.Rows[0]["counter_must_be"].ToString());
+                }
+            }
+
+            return flag;
+        }
+
+        protected void btnShowSerialNums_Click(object sender, EventArgs e)
+        {
+            lbSerialNums.Items.Clear();
+
+            string serial = MainHelper.TxtGetText(ref txtClaimSelection);
+            if (!String.IsNullOrEmpty(serial))
+            {
+                lbSerialNums.Visible = true;
+                var dt = Db.Db.Srvpl.GetSerialNumList(serial);
+                if (dt.Rows.Count > 0)
+                {
+                    MainHelper.LbFill(ref lbSerialNums, dt);
+                    //lbSerialNums.DataSource = dt;
+                    //lbSerialNums.DataTextField = "name";
+                    //lbSerialNums.DataBind();
+                    
+                }
+                else
+                {
+                    lbSerialNums.Items.Add(new ListItem(){Value = "не найдено соответствий"});
+                }
+            }
+            else
+            {
+                lbSerialNums.Visible = false;
+                
+                //lbSerialNums.DataSource = null;
+                //lbSerialNums.DataBind();
+            }
+        }
+
+        protected void lbSerialNums_OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            string serial = lbSerialNums.SelectedItem.Text;
+            txtClaimSelection.Text = serial;
+            FillClaimList(serial);
         }
     }
 }

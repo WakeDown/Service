@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Routing;
+using System.Web.Services.Protocols;
 using Microsoft.AspNet.FriendlyUrls;
 
 namespace ServicePlaningWebUI.App_Start
@@ -56,6 +57,9 @@ namespace ServicePlaningWebUI.App_Start
 
             routes.MapPageRoute("OutExecReport", "OutExecRep", "~/WebForms/Output/ExecReport.aspx");
 
+            //routes.MapServiceRoute("ServiceAsmx", "ServiceAsmx", "~/WebForms/Service/Service.asmx");
+            //routes.MapServiceRoute("ServiceAsmxCheck", "ServiceAsmx/Check", "~/WebForms/Service/Service.asmx/Check");
+
             //routes.MapPageRoute("Instruction", "Instruction", "~/WebForms/Instruction.aspx");
 
             #region Pictures
@@ -76,6 +80,35 @@ namespace ServicePlaningWebUI.App_Start
             routes.MapPageRoute("Instruction", "Instruction", "~/Docs/Instruction.doc");
 
             #endregion
+        }
+        public static Route MapServiceRoute(this RouteCollection routes, string routeName, string url, string virtualPath)
+        {
+            if (routes == null)
+                throw new ArgumentNullException("routes");
+            Route route = new Route(url, new RouteValueDictionary() { { "controller", null }, { "action", null } }, new ServiceRouteHandler(virtualPath));
+            routes.Add(routeName, route);
+            return route;
+        }
+        public class ServiceRouteHandler : IRouteHandler
+        {
+            private readonly string _virtualPath;
+            private readonly WebServiceHandlerFactory _handlerFactory = new WebServiceHandlerFactory();
+
+            public ServiceRouteHandler(string virtualPath)
+            {
+                if (virtualPath == null)
+                    throw new ArgumentNullException("virtualPath");
+                if (!virtualPath.StartsWith("~/"))
+                    throw new ArgumentException("Virtual path must start with ~/", "virtualPath");
+                _virtualPath = virtualPath;
+            }
+
+            public IHttpHandler GetHttpHandler(RequestContext requestContext)
+            {
+                // Note: can't pass requestContext.HttpContext as the first parameter because that's
+                // type HttpContextBase, while GetHandler wants HttpContext.
+                return _handlerFactory.GetHandler(HttpContext.Current, requestContext.HttpContext.Request.HttpMethod, _virtualPath, requestContext.HttpContext.Server.MapPath(_virtualPath));
+            }
         }
     }
 }

@@ -50,6 +50,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\AspNet.ScriptManager.jQuery.2.1.1\lib\net45\AspNet.ScriptManager.jQuery.dll</HintPath>
     </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>..\..\..\..\..\..\..\Work\Components\Office\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -147,11 +150,14 @@
     <Content Include="WebForms\Claims\Supply.aspx" />
     <Content Include="WebForms\Client\CounterDetail.aspx" />
     <Content Include="WebForms\Client\ListCounter.aspx" />
+    <Content Include="WebForms\Reports\ClaimReport.aspx" />
     <Content Include="WebForms\Settings\ClientAccess.aspx" />
     <Content Include="WebForms\Settings\ManagerOperator.aspx" />
     <Content Include="WebForms\Settings\PriceImport.aspx" />
     <Content Include="WebForms\Settings\ZipGroups.aspx" />
-    <None Include="Properties\PublishProfiles\Production.pubxml" />
+    <None Include="Properties\PublishProfiles\1. Dev.pubxml" />
+    <None Include="Properties\PublishProfiles\2. Test.pubxml" />
+    <None Include="Properties\PublishProfiles\3. Production.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\filter-exp-mem.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -420,6 +426,13 @@
     </Compile>
     <Compile Include="WebForms\Masters\Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WebForms\Reports\ClaimReport.aspx.cs">
+      <DependentUpon>ClaimReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForms\Reports\ClaimReport.aspx.designer.cs">
+      <DependentUpon>ClaimReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForms\Settings\ClientAccess.aspx.cs">
       <DependentUpon>ClientAccess.aspx</DependentUpon>
