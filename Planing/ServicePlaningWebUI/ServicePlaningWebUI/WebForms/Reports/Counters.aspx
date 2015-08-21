@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/WebForms/Masters/List.master" AutoEventWireup="true" CodeBehind="Counters.aspx.cs" Inherits="ServicePlaningWebUI.WebForms.Reports.Counters" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cphControlButtons" runat="server">
-<%--    <asp:Button ID="btnInExcel" runat="server" Text="в Excel" OnClick="btnInExcel_OnClick" />--%>
+    <asp:Button ID="btnInExcel" runat="server" Text="в Excel" OnClick="btnInExcel_OnClick" CssClass="btn btn-primary" />
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphFilterBody" runat="server">
     <div class="form-horizontal val-form" role="form">
