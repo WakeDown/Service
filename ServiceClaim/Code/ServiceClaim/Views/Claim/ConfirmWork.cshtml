@@ -3,7 +3,7 @@
 @using ServiceClaim.Objects
 @model ServiceClaim.Models.Claim
 
-@using (Html.BeginForm("StateSet", "Claim", FormMethod.Post, new { @id = "StateSetForm", @class = "form-horizontal", data_toggle = "validator", role = "form" }))
+@using (Html.BeginForm("ConfirmWork", "Claim", FormMethod.Post, new { @id = "ConfirmWorkForm", @class = "form-horizontal", data_toggle = "validator", role = "form" }))
 {
     @Html.HiddenFor(m => m.Id)
     @*<div class="row">
@@ -31,7 +31,7 @@
                             </p>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default" value="ClaimWorkCancel" name="ClaimWorkCancel">Отклонить</button>
+                            <button type="submit" class="btn btn-default" value="ClaimWorkCancel" name="ClaimWorkCancel">Сохранить</button>
                         </div>
                     </div>
                 </div>

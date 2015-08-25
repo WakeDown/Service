@@ -226,12 +226,11 @@
     <Content Include="Views\Error\HandledError.cshtml" />
     <Content Include="Views\ClientAccess\New.cshtml" />
     <Content Include="Views\Claim\StateNew.cshtml" />
-    <Content Include="Views\Claim\StateNewadd.cshtml" />
+    <Content Include="Views\Claim\SpecialistSelect.cshtml" />
     <Content Include="Views\ClientAccess\Edit.cshtml" />
     <Content Include="Views\ClientAccess\ClientSheet.cshtml" />
-    <Content Include="Views\Claim\StateSet.cshtml" />
+    <Content Include="Views\Claim\ConfirmWork.cshtml" />
     <Content Include="Views\Claim\StateTechWork.cshtml" />
-    <Content Include="Views\Claim\StateServadmWork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

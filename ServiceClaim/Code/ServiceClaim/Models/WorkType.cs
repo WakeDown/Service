@@ -21,7 +21,7 @@ namespace ServiceClaim.Models
             {
                 //int fixStr= 5 - SysName.Count();
                 //string space = new String(' ', fixStr);
-                return $"{SysName};{Name}";
+                return $"{SysName, 5} - {Name}";
             }
         }
 

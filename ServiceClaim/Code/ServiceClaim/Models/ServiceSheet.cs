@@ -18,6 +18,8 @@ namespace ServiceClaim.Models
         public string ZipClaimNumber { get; set; }
         public int? CounterMono { get; set; }
         public int? CounterColor { get; set; }
+        public bool NoTechWork { get; set; }
+        
 
         public ServiceSheet()
         {

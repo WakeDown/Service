@@ -70,7 +70,7 @@ namespace ServiceClaim.Controllers
                 var model = new Claim();
                 model.Id = id.Value;
                 model.Descr = descr;
-                bool complete = model.SaveAndGoNextState(out responseMessage);
+                bool complete = model.Save(out responseMessage);
                 if (!complete) throw new Exception(responseMessage.ErrorMessage);
             }
             catch (Exception ex)
@@ -79,24 +79,24 @@ namespace ServiceClaim.Controllers
             }
             return Json(new { });
         }
-        public JsonResult ClaimEnd(int? id, string descr)
-        {
-            try
-            {
-                if (!id.HasValue) throw new ArgumentException("Не указана заявка!");
-                ResponseMessage responseMessage;
-                var model = new Claim();
-                model.Id = id.Value;
-                model.Descr = descr;
-                bool complete = model.SaveAndGoEndState(out responseMessage);
-                if (!complete) throw new Exception(responseMessage.ErrorMessage);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { errorMessage = ex.Message });
-            }
-            return Json(new { });
-        }
+        //public JsonResult ClaimEnd(int? id, string descr)
+        //{
+        //    try
+        //    {
+        //        if (!id.HasValue) throw new ArgumentException("Не указана заявка!");
+        //        ResponseMessage responseMessage;
+        //        var model = new Claim();
+        //        model.Id = id.Value;
+        //        model.Descr = descr;
+        //        bool complete = model.SaveAndGoEndState(out responseMessage);
+        //        if (!complete) throw new Exception(responseMessage.ErrorMessage);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { errorMessage = ex.Message });
+        //    }
+        //    return Json(new { });
+        //}
 
         public ActionResult List()
         {
@@ -167,7 +167,7 @@ namespace ServiceClaim.Controllers
             try
             {
                 ResponseMessage responseMessage;
-                bool complete = model.SaveAndGoNextState(out responseMessage);
+                bool complete = model.Go(out responseMessage);
                 if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
                 //return RedirectToAction("Index", new { id = responseMessage.Id });
@@ -182,12 +182,12 @@ namespace ServiceClaim.Controllers
         }
 
         [HttpPost]
-        public ActionResult StateNewadd(Claim model)
+        public ActionResult SpecialistSelect(Claim model)
         {
             try
             {
                 ResponseMessage responseMessage;
-                bool complete = model.SaveAndGoNextState(out responseMessage);
+                bool complete = model.Go(out responseMessage);
                 if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
                 //return RedirectToAction("Index", new { id = responseMessage.Id });
@@ -203,14 +203,14 @@ namespace ServiceClaim.Controllers
 
         [HttpPost]
        
-        public ActionResult StateSet(Claim model)
+        public ActionResult ConfirmWork(Claim model)
         {
             try
             {
                 if (!String.IsNullOrEmpty(Request.Form["ClaimWorkConfirm"]))
                 {
                     ResponseMessage responseMessage;
-                    bool complete = model.SaveAndGoNextState(out responseMessage);
+                    bool complete = model.Go(out responseMessage);
                     if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
                     //return RedirectToAction("Index", new { id = responseMessage.Id });
@@ -219,7 +219,7 @@ namespace ServiceClaim.Controllers
                 {
                     ResponseMessage responseMessage;
                     model.Descr = Request.Form["ClaimWorkCancelDescr"];
-                    bool complete = model.GoBackState(out responseMessage);
+                    bool complete = model.GoBack(out responseMessage);
                     if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
                     //return RedirectToAction("Index", new { id = responseMessage.Id });
@@ -235,15 +235,23 @@ namespace ServiceClaim.Controllers
         }
 
         [HttpPost]
-        public ActionResult StateTechWork(ServiceSheet model)
+        public ActionResult StateTechWork(Claim model)
         {
             try
             {
-                ResponseMessage responseMessage;
-                bool complete = model.Save(out responseMessage);
-                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+                if (!String.IsNullOrEmpty(Request.Form["ClaimWorkConfirm"]))
+                {
+                    
+                
+                }
+                else if (!String.IsNullOrEmpty(Request.Form["ClaimWorkCancel"]))
+                {
+                    model.ServiceSheet4Save.NoTechWork = true;
+                }
 
-                //return RedirectToAction("Index", new { id = responseMessage.Id });
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
             }
             catch (Exception ex)
             {
@@ -253,5 +261,24 @@ namespace ServiceClaim.Controllers
 
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        public ActionResult StateServadmSetWait(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+        
     }
 }

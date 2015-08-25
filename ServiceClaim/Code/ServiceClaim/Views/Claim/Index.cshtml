@@ -35,21 +35,17 @@
                 {
                     @Html.Partial("StateNew", Model)
                 }
-                @if (Model.State.SysName.ToUpper().Equals("NEWADD"))
+                @if (Model.State.SysName.ToUpper().Equals("NEWADD")|| Model.State.SysName.ToUpper().Equals("SRVADMWORK") || Model.State.SysName.ToUpper().Equals("SERVADMSETWAIT") || Model.State.SysName.ToUpper().Equals("SERVENGSETWAIT"))
                 {
-                    @Html.Partial("StateNewadd", Model)
+                    @Html.Partial("SpecialistSelect", Model)
                 }
-                @if (Model.State.SysName.ToUpper().Equals("SET"))
+                @if (Model.State.SysName.ToUpper().Equals("SET") ||  Model.State.SysName.ToUpper().Equals("SERVADMSET") || Model.State.SysName.ToUpper().Equals("SRVENGSET"))
                 {
-                    @Html.Partial("StateSet", Model)
+                    @Html.Partial("ConfirmWork", Model)
                 }
                 @if (Model.State.SysName.ToUpper().Equals("TECHWORK"))
                 {
-                    @Html.Partial("StateTechWork", new ServiceSheet() {IdClaim=Model.Id})
-                }
-                @if (Model.State.SysName.ToUpper().Equals("SRVADMWORK"))
-                {
-                    @Html.Partial("StateServadmWork", Model)
+                    @Html.Partial("StateTechWork", Model)
                 }
             </div>
 
@@ -131,7 +127,7 @@
             });
         }
 
-        function claimEnd() {
+        @*function claimEnd() {
             var id = @Model.Id;
             var descr = $('#descr').val();
             $.ajax({
@@ -144,6 +140,6 @@
                     }
                 }
             });
-        }
+        }*@
     </script>
 }

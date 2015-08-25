@@ -21,10 +21,11 @@ namespace ServiceClaim.Models
         public EmployeeSm Admin { get; set; }
         public EmployeeSm Engeneer { get; set; }
         public ClaimState State { get; set; }
-        public int IdWorkType { get; set; }
+        public int? IdWorkType { get; set; }
         public WorkType WorkType { get; set; }
         public string SpecialistSid { get; set; }
         public EmployeeSm Specialist { get; set; }
+        public ServiceSheet ServiceSheet4Save { get; set; }
 
         //public IEnumerable<Claim2ClaimState> StateHistory { get; set; }
 
@@ -32,6 +33,7 @@ namespace ServiceClaim.Models
 
         public Claim()
         {
+            ServiceSheet4Save=new ServiceSheet();
             //Contractor=new Contractor();
             //Contract = new Contract();
             //Device=new Device();
@@ -39,7 +41,7 @@ namespace ServiceClaim.Models
             //Engeneer=new EmployeeSm();
         }
 
-        public Claim(int id)
+        public Claim(int id):this()
         {
             Uri uri = new Uri(String.Format("{0}/Claim/Get?id={1}", OdataServiceUri, id));
             string jsonString = GetJson(uri);
@@ -82,29 +84,37 @@ namespace ServiceClaim.Models
             return result;
         }
 
-        public bool SaveAndGoNextState(out ResponseMessage responseMessage)
+        //public bool SaveAndGoNextState(out ResponseMessage responseMessage)
+        //{
+        //    Uri uri = new Uri(String.Format("{0}/Claim/SaveAndGoNextState", OdataServiceUri));
+        //    string json = JsonConvert.SerializeObject(this);
+        //    bool result = PostJson(uri, json, out responseMessage);
+        //    return result;
+        //}
+
+        public bool Go(out ResponseMessage responseMessage)
         {
-            Uri uri = new Uri(String.Format("{0}/Claim/SaveAndGoNextState", OdataServiceUri));
+            Uri uri = new Uri(String.Format("{0}/Claim/Go", OdataServiceUri));
             string json = JsonConvert.SerializeObject(this);
             bool result = PostJson(uri, json, out responseMessage);
             return result;
         }
 
-        public bool GoBackState(out ResponseMessage responseMessage)
+        public bool GoBack(out ResponseMessage responseMessage)
         {
-            Uri uri = new Uri(String.Format("{0}/Claim/GoBackState", OdataServiceUri));
+            Uri uri = new Uri(String.Format("{0}/Claim/GoBack", OdataServiceUri));
             string json = JsonConvert.SerializeObject(this);
             bool result = PostJson(uri, json, out responseMessage);
             return result;
         }
 
-        public bool SaveAndGoEndState(out ResponseMessage responseMessage)
-        {
-            Uri uri = new Uri(String.Format("{0}/Claim/SaveAndGoEndState", OdataServiceUri));
-            string json = JsonConvert.SerializeObject(this);
-            bool result = PostJson(uri, json, out responseMessage);
-            return result;
-        }
+        //public bool SaveAndGoEndState(out ResponseMessage responseMessage)
+        //{
+        //    Uri uri = new Uri(String.Format("{0}/Claim/SaveAndGoEndState", OdataServiceUri));
+        //    string json = JsonConvert.SerializeObject(this);
+        //    bool result = PostJson(uri, json, out responseMessage);
+        //    return result;
+        //}
 
         public IEnumerable<Claim2ClaimState> GetStateHistory()
         {
