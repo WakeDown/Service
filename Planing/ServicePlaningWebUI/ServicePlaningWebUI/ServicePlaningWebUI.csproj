@@ -277,12 +277,15 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\AktScan.cs" />
     <Compile Include="Models\City.cs" />
+    <Compile Include="Models\ClassifierCaterory.cs" />
     <Compile Include="Models\SpecPrice.cs" />
     <Compile Include="Models\PaymentTariff.cs" />
     <Compile Include="Models\TariffFeature.cs" />
     <Compile Include="Models\User2UserRole.cs" />
+    <Compile Include="Objects\DbModel.cs" />
     <Compile Include="Objects\ListClass.cs" />
     <Compile Include="Objects\NetworkConnection.cs" />
+    <Compile Include="Objects\ResponseMessage.cs" />
     <Compile Include="Objects\WindowsImpersonationContextFacade.cs" />
     <Compile Include="WebForms\Addresses\Editor.aspx.cs">
       <DependentUpon>Editor.aspx</DependentUpon>

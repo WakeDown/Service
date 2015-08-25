@@ -29,7 +29,8 @@ namespace ServiceClaim
                         "~/Scripts/bootstrap-datepicker.ru.js",
                         //"~/Scripts/bootstrap-timepicker.js",
                       "~/Scripts/validator.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/site.js"));
 
             //bundles.Add(new ScriptBundle("~/bundles/common").Include(
             //            "~/Scripts/site.js"));

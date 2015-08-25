@@ -73,6 +73,7 @@ namespace ServicePlaningWebUI.WebForms.DeviceModels
             MainHelper.DdlFill(ref ddlDeviceImprint, Db.Db.Srvpl.GetDeviceImprintSelectionList(), true);
             MainHelper.DdlFill(ref ddlPrintType, Db.Db.Srvpl.GetPrintTypeSelectionList(), true);
             MainHelper.DdlFill(ref ddlCartridgeType, Db.Db.Srvpl.GetCartridgeTypeSelectionList(), true);
+            MainHelper.DdlFill(ref ddlClassifier, ClassifierCaterory.GetLowerList(), true, MainHelper.ListFirstItemType.Nullable, "Id", "Number");
             //MainHelper.DdlFill(ref ddlDeviceImprint, Db.Db.Srvpl.GetDeviceImprintSelectionList(), true);
             //MainHelper.DdlFill(ref ddlPrintType, Db.Db.Srvpl.GetPrintTypeSelectionList(), true);
             //MainHelper.DdlFill(ref ddlCartridgeType, Db.Db.Srvpl.GetCartridgeTypeSelectionList(), true);
@@ -137,6 +138,7 @@ namespace ServicePlaningWebUI.WebForms.DeviceModels
             deviceModel.IdCartridgeType = MainHelper.DdlGetSelectedValueInt(ref ddlCartridgeType, true);
             deviceModel.IdCreator = User.Id;
             deviceModel.MaxVolume = MainHelper.TxtGetTextInt32(ref txtMaxVolume,true);
+            deviceModel.IdClassifierCategory = MainHelper.DdlGetSelectedValueInt(ref ddlClassifier, true);
 
             return deviceModel;
         }

@@ -8,10 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/common")
+    
 </head>
 <body>
     <div class="navbar navbar-default navbar-fixed-top">
@@ -30,7 +27,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Заявки", "List", "Claim")</li>
-                    @*<li><a href="@Url.Action("Index", "Claim", new {id=1})">Edit</a></li>*@
+                    <li><a href="@Url.Action("List", "Classifier")">Классификатор</a></li>
+                    <li>@Html.ActionLink("Доступы клиентов", "List", "ClientAccess")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-text">Вы вошли как <strong id="userName">@ViewBag.CurUser.ShortName</strong></li>
@@ -38,34 +36,37 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["Environment"]))
-        {
-            <blockquote class="bg-warning">
-                @ConfigurationManager.AppSettings["Environment"]<br />
-                <small>@ConfigurationManager.AppSettings["OdataServiceUri"]</small>
-            </blockquote>
-        }
-        @RenderBody()
-        <hr />
-        <footer>
-            <div class="pull-left">
-                <h5>
-                    2015 @if (DateTime.Now.Year > 2015)
-                    {
-                        @String.Format("- {0}", DateTime.Now.Year)
-                        ;
-                    }
-                    &copy; UN1T
-                    <br />
-                    <small>v&nbsp;1.0</small>
-                </h5>
-            </div>
-            <div class="pull-right">
-                <h5><small><a href='http://support.unitgroup.ru' target="_blank">Техподдержка</a></small></h5>
-            </div>
-        </footer>
-    </div>
+<div class="container body-content">
+    @if (!String.IsNullOrEmpty(ConfigurationManager.AppSettings["Environment"]))
+    {
+        <blockquote class="bg-warning">
+            @ConfigurationManager.AppSettings["Environment"]<br/>
+            <small>@ConfigurationManager.AppSettings["OdataServiceUri"]</small>
+        </blockquote>
+    }
+    @RenderBody()
+    <hr/>
+    <footer>
+        <div class="pull-left">
+            <h5>
+                2015 @if (DateTime.Now.Year > 2015)
+                     {
+                         @String.Format("- {0}", DateTime.Now.Year)
+                     }
+                &copy; UN1T
+                <br/>
+                <small>v&nbsp;1.0</small>
+            </h5>
+        </div>
+        <div class="pull-right">
+            <h5><small><a href='http://support.unitgroup.ru' target="_blank">Техподдержка</a></small></h5>
+        </div>
+    </footer>
+</div>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/common")
     @RenderSection("scripts", required: false)
 </body>
 </html>

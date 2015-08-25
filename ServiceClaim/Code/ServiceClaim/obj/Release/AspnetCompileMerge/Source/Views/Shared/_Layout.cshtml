@@ -30,7 +30,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Заявки", "List", "Claim")</li>
-                    @*<li><a href="@Url.Action("Index", "Claim", new {id=1})">Edit</a></li>*@
+                    <li><a href="@Url.Action("List", "Classifier")">Классификатор</a></li>
+                    <li>@Html.ActionLink("Доступы клиентов", "List", "ClientAccess")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="navbar-text">Вы вошли как <strong id="userName">@ViewBag.CurUser.ShortName</strong></li>
@@ -54,7 +55,6 @@
                     2015 @if (DateTime.Now.Year > 2015)
                     {
                         @String.Format("- {0}", DateTime.Now.Year)
-                        ;
                     }
                     &copy; UN1T
                     <br />

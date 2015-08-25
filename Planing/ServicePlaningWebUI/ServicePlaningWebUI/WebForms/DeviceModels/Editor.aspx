@@ -91,6 +91,16 @@
                 </span>
             </div>
         </div>
+        <div class="form-group">
+            <label for='<%=ddlClassifier.ClientID %>' class="col-sm-2 control-label">№ подтипа (классификатор)</label>
+            <div class="col-sm-10">
+                <asp:DropDownList ID="ddlClassifier" runat="server" CssClass="form-control">
+                </asp:DropDownList>
+                <%--<span class="help-block">
+                    <asp:RequiredFieldValidator ID="rfvDdlDeviceImprint" runat="server" ErrorMessage="Выберите отпечаток" Display="Dynamic" ControlToValidate="ddlDeviceImprint" InitialValue='-1' SetFocusOnError="True" CssClass="text-danger" ValidationGroup="vgForm"></asp:RequiredFieldValidator>
+                </span>--%>
+            </div>
+        </div>
         <div class="col-sm-offset-2 col-sm-10">
             <asp:PlaceHolder ID="phServerMessage" runat="server"></asp:PlaceHolder>
         </div>
@@ -133,6 +143,7 @@
                 </ItemTemplate>
             </asp:TemplateField>--%>
             <asp:BoundField DataField="name" SortExpression="name" HeaderText="Модель" />
+            <asp:BoundField DataField="classifier_category_number" SortExpression="classifier_category_number" HeaderText="№ подтипа" />
             <asp:TemplateField ItemStyle-CssClass="min-width">
                 <ItemTemplate>
                     <asp:LinkButton ID="btnDelete" runat="server" OnClick="btnDelete_OnClick" CommandArgument='<%#Eval("id_device_model") %>' OnClientClick="return DeleteConfirm('модель')" CssClass="btn btn-link" data-toggle="tooltip" title="удалить"><i class="fa fa-trash-o fa-lg"></i></asp:LinkButton>

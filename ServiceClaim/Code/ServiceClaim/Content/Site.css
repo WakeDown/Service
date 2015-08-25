@@ -21,6 +21,11 @@
     border-bottom-left-radius: 4px;
 }
 
+select {
+    font-family:monospace,monospace;
+  font-size:1em;
+}
+
 .navbar {
     box-shadow: 0 0 25px #333;
     margin-bottom: 0px !important;
@@ -125,11 +130,6 @@ ul.tree {
     top: 3px;
 }
 
-table .btn {
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
 
 .table-stuff {
     padding: 0;
@@ -195,4 +195,38 @@ table .btn {
 .sel-list tr:hover {
     cursor: pointer;
     background-color: #fcf8e3;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.pad-6 {
+    padding: 6px;
+}
+
+.pad-t-15 {
+    padding-top: 15px;
+}
+
+.text-middle {
+    vertical-align: middle;
+}
+
+.text-sm {
+    font-size: 0.9em;
+}
+
+.text-xs {
+    font-size: 0.7em;
+}
+
+.info-top {
+    position: relative;
+    top: -8px;
+    cursor: help;
+}
+
+.label-badge {
+    border-radius: 1em;
 }
