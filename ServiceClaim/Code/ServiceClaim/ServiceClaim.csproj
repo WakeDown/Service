@@ -21,6 +21,8 @@
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +43,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Select.HtmlToPdf, Version=1.2.0.0, Culture=neutral, PublicKeyToken=e0ae9f6e27a97018, processorArchitecture=MSIL">
+      <HintPath>..\packages\Select.HtmlToPdf.1.2.0.0\lib\net40\Select.HtmlToPdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.DirectoryServices" />
@@ -117,6 +123,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ClaimController.cs" />
     <Compile Include="Controllers\ClassifierController.cs" />
+    <Compile Include="Controllers\ClientAccessController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -126,18 +133,26 @@
     <Compile Include="Models\Claim2ClaimState.cs" />
     <Compile Include="Models\ClaimState.cs" />
     <Compile Include="Models\Classifier.cs" />
+    <Compile Include="Models\ClassifierAttributes.cs" />
     <Compile Include="Models\ClassifierCaterory.cs" />
+    <Compile Include="Models\ClassifierItem.cs" />
+    <Compile Include="Models\ClientAccess.cs" />
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DeviceSearchResult.cs" />
     <Compile Include="Models\EmployeeSm.cs" />
+    <Compile Include="Models\ListResult.cs" />
+    <Compile Include="Models\ServiceSheet.cs" />
+    <Compile Include="Models\UserList.cs" />
+    <Compile Include="Models\WorkType.cs" />
     <Compile Include="Objects\AdGroup.cs" />
     <Compile Include="Objects\AdUser.cs" />
     <Compile Include="Objects\AdUserGroup.cs" />
     <Compile Include="Objects\BaseController.cs" />
     <Compile Include="Objects\DbList.cs" />
     <Compile Include="Objects\DbModel.cs" />
+    <Compile Include="Objects\MultipleButtonAttribute.cs" />
     <Compile Include="Objects\ResponseMessage.cs" />
     <Compile Include="Objects\WindowsImpersonationContextFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -164,6 +179,7 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Scripts\bootstrapValidator.js" />
     <None Include="Properties\PublishProfiles\2. TEST.pubxml" />
+    <None Include="Properties\PublishProfiles\3. Production.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -177,6 +193,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\validator.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -204,6 +221,17 @@
     <Content Include="Views\Claim\StateHistorySmall.cshtml" />
     <Content Include="Views\Classifier\List.cshtml" />
     <Content Include="Views\Classifier\ImportExcel.cshtml" />
+    <Content Include="Views\Classifier\Attributes.cshtml" />
+    <Content Include="Views\ClientAccess\List.cshtml" />
+    <Content Include="Views\Error\HandledError.cshtml" />
+    <Content Include="Views\ClientAccess\New.cshtml" />
+    <Content Include="Views\Claim\StateNew.cshtml" />
+    <Content Include="Views\Claim\StateNewadd.cshtml" />
+    <Content Include="Views\ClientAccess\Edit.cshtml" />
+    <Content Include="Views\ClientAccess\ClientSheet.cshtml" />
+    <Content Include="Views\Claim\StateSet.cshtml" />
+    <Content Include="Views\Claim\StateTechWork.cshtml" />
+    <Content Include="Views\Claim\StateServadmWork.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -240,6 +268,13 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Select.HtmlToPdf.1.2.0.0\build\Select.HtmlToPdf.targets" Condition="Exists('..\packages\Select.HtmlToPdf.1.2.0.0\build\Select.HtmlToPdf.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Select.HtmlToPdf.1.2.0.0\build\Select.HtmlToPdf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Select.HtmlToPdf.1.2.0.0\build\Select.HtmlToPdf.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

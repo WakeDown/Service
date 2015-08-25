@@ -24,3 +24,6 @@ D:\GoogleDrive\Dev\GitHub\Service\ServiceClaim\Code\ServiceClaim\bin\Newtonsoft.
 D:\GoogleDrive\Dev\GitHub\Service\ServiceClaim\Code\ServiceClaim\obj\Release\ServiceClaim.dll
 D:\GoogleDrive\Dev\GitHub\Service\ServiceClaim\Code\ServiceClaim\obj\Release\ServiceClaim.pdb
 D:\GoogleDrive\Dev\GitHub\Service\ServiceClaim\Code\ServiceClaim\obj\Release\ServiceClaim.csprojResolveAssemblyReference.cache
+D:\GoogleDrive\Dev\GitHub\Service\ServiceClaim\Code\ServiceClaim\bin\Select.Html.dep
+D:\GoogleDrive\Dev\GitHub\Service\ServiceClaim\Code\ServiceClaim\bin\Select.HtmlToPdf.dll
+D:\GoogleDrive\Dev\GitHub\Service\ServiceClaim\Code\ServiceClaim\bin\Select.HtmlToPdf.xml

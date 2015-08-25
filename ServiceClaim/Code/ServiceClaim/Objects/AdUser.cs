@@ -63,17 +63,26 @@ namespace ServiceClaim.Objects
             return res;
         }
 
+        public bool InGroup(params AdGroup[] groups)
+        {
+            bool result = false;
+
+            if (String.IsNullOrEmpty(Sid) || !AdGroups.Any()) return false;
+            if (UserIsAdmin()) return true;
+            foreach (AdGroup group in groups)
+            {
+                result = AdGroups.Contains(group);
+                if (result) break;
+            }
+            return result;
+        }
+
         public bool UserIsAdmin()
         {
             if (String.IsNullOrEmpty(Sid) || !AdGroups.Any()) return false;
             return AdGroups.Contains(AdGroup.SuperAdmin);
         }
 
-        public bool UserCanCreateClaim()
-        {
-            return true;
-            //if (String.IsNullOrEmpty(Sid) || !AdGroups.Any()) return false;
-            //return AdGroups.Contains(AdGroup.SuperAdmin);
-        }
+        
     }
 }

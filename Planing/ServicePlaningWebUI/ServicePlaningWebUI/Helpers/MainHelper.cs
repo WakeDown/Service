@@ -160,7 +160,7 @@ namespace ServicePlaningWebUI.Helpers
         /// <param name="ddl"></param>
         /// <param name="list"></param>
         /// <param name="appendFirstItem">Добваить нулевое значение</param>
-        public static void DdlFill(ref DropDownList ddl, object list, bool appendFirstItem = false, ListFirstItemType firstItemType = ListFirstItemType.Nullable)
+        public static void DdlFill(ref DropDownList ddl, object list, bool appendFirstItem = false, ListFirstItemType firstItemType = ListFirstItemType.Nullable, string valueField = listDefaultDataValueField, string textField = listDefaultDataTextField)
         {
             ddl.Items.Clear();
             bool appDatBouItems = ddl.AppendDataBoundItems;//Запоминаем текущее значение, чтобы потом восстановить
@@ -185,8 +185,8 @@ namespace ServicePlaningWebUI.Helpers
                 ddl.Items.Add(li);
             }
 
-            ddl.DataTextField = listDefaultDataTextField;
-            ddl.DataValueField = listDefaultDataValueField;
+            ddl.DataTextField = textField;
+            ddl.DataValueField = valueField;
             ddl.DataSource = list;
             ddl.DataBind();
 

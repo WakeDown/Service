@@ -32,16 +32,20 @@ namespace ServiceClaim.Objects
                     StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
                     result = reader.ReadToEnd();
                 }
+
+
             }
             catch (WebException ex)
             {
                 WebResponse errorResponse = ex.Response;
+                String errorText = String.Empty;
                 using (Stream responseStream = errorResponse.GetResponseStream())
                 {
-                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
-                    String errorText = reader.ReadToEnd();
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    errorText = reader.ReadToEnd();
                 }
-                throw;
+                
+                throw new Exception(errorText);
             }
 
             return result;

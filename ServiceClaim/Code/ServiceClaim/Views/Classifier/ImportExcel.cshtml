@@ -6,12 +6,16 @@
         <tr>
             <td>
                 <input type="file" name="file" class="pull-left" />
-
             </td>
-            <td rowspan="2"><button class="btn btn-success" type="submit">Загрузить в базу</button></td>
+            <td rowspan="2"><button class="btn btn-success" type="submit"><i class="fa fa-save"></i> Загрузить в базу</button></td>
         </tr>
         <tr>
-            <td class="small">только XLS и XLSX файлы</td>
+            <td><small>только XLS и XLSX файлы</small></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-danger">
+                <small>@TempData["ServerErrorExcel"]</small>
+            </td>
         </tr>
     </table>
 }

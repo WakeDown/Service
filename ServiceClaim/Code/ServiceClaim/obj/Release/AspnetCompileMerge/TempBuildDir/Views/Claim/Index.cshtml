@@ -22,12 +22,18 @@
                 <div class="row"><label class="col-lg-2 text-right">Контрагент</label> <span class="col-lg-10">@Model.Contractor.FullName</span></div>
                 <div class="row"><label class="col-lg-2 text-right">Договор</label> <span class="col-lg-10">@Model.Contract.Number</span></div>
                 <div class="row"><label class="col-lg-2 text-right">Аппарат</label> <span class="col-lg-10">@Model.Device.ExtendedName</span></div>
+                @if (Model.State.SysName.ToUpper().Equals("NEW"))
+                {
+                    @Html.Partial("StateNew", Model)
+                }
             </div>
 
             <div class="row">
                 @*<label class="col-lg-2 text-right">Комментарий</label>*@
                 <div class="col-lg-12">
-                    @if (!Model.State.SysName.ToUpper().Equals("END"))
+
+
+                    @*@if (!Model.State.SysName.ToUpper().Equals("END"))
                     {
                         <p>
                             <textarea id="descr" class="form-control required-mark" rows="3" required="required" placeholder="Ваш комментарий"></textarea>
@@ -37,7 +43,7 @@
                             <button id="clContinue" class="btn btn-success">Передать</button>
                             <button id="clEnd" class="btn btn-danger">Закрыть</button>
                         </div>
-                    }
+                    }*@
                 </div>
             </div>
             <p>

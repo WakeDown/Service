@@ -7,6 +7,19 @@ namespace ServiceClaim.Objects
 {
     public enum AdGroup
     {
-        SuperAdmin
+        None,
+        ZipClaimClient,
+        ZipClaimClientCounterView,
+        ZipClaimClientZipView,
+        SuperAdmin,
+        ServiceAdmin,
+        ServiceManager,
+        ServiceEngeneer,
+        ServiceOperator,
+        ServiceControler,
+        ServiceTech,
+        //---доступы
+        ServiceClaimClassifier,
+        ServiceClaimClientAccess
     }
 }
