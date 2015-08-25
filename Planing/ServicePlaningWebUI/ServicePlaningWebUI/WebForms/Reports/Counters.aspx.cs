@@ -592,6 +592,12 @@ $('.contractDeviceList').collapse('show');
             int row = 3, col = 1;
             XLColor green = XLColor.FromArgb(223, 240, 216), red = XLColor.FromArgb(242, 222, 222), yellow = XLColor.FromArgb(252, 248, 227);
             repSh = exRep.Worksheets.Add("Список");
+            repSh.SheetView.Freeze(2,1);
+            repSh.Style.Font.FontSize = 10;
+            repSh.Range(1,1 , 2,12).Style.Fill.BackgroundColor = XLColor.PaleCornflowerBlue;
+            
+          
+          
             foreach (var ctrs in contractorList.OrderBy(r => r.Name))
             {
                 int? ctrsDvWAv = 0;
@@ -609,7 +615,7 @@ $('.contractDeviceList').collapse('show');
                 col++;
                 if (!String.IsNullOrEmpty(ctrs.ContractorPrevPrevVolTotal.ToString()) && int.Parse(ctrs.ContractorPrevPrevVolTotal.ToString()) > 0) { repSh.Cell(row, col).Value = ctrs.ContractorPrevPrevVolTotal; }
                 
-                repSh.Row(row).Style.Font.SetFontSize(14);
+               
                 row++;
                 col = startCol;
                 var contracts = from d in DeviceList.Select(String.Format("id_contractor = {0}", ctrs.Id.ToString())).AsEnumerable()
@@ -679,12 +685,13 @@ $('.contractDeviceList').collapse('show');
                         ctsDvWAv += curVol != null || prevVol != null || prevPrevVol != null ? 1 : 0;
                         //ctsDvWAv += GetLoadingAverage(curLoading, prevLoading, prevPrevLoading) != null ? 1 : 0;
                         col++;
-                        repSh.Cell(row, col).Value = dv[6];
                         double wear;
                         double.TryParse(dv[6].ToString(), out wear);
+                        if (wear != 0) {repSh.Cell(row,col).Value = wear;}
                         repSh.Cell(row, col).Style.Fill.BackgroundColor = wear > 1 ? red : wear > 0.8 ? yellow : XLColor.NoColor;
                         col++;
-                        repSh.Cell(row, col).Value = dv[4];
+                        if (!string.IsNullOrEmpty(dv[4].ToString()) && int.Parse(dv[4].ToString()) > 0) {repSh.Cell(row,col).Value = dv[4];}
+                       
                         col = startCol;
                         row++;
                     }
@@ -708,6 +715,7 @@ $('.contractDeviceList').collapse('show');
             repSh.Range(1,7 , row,11).Style.NumberFormat.Format = "0%";
             repSh.Range(2, 4, 2, 9).Style.DateFormat.Format = "mmm yyyy";
             repSh.Columns().AdjustToContents();
+            repSh.Row(1).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             repSh.Range(1, 2, 1, 3).Merge().Value = "Аппараты";
             repSh.Range(1, 4, 1, 6).Merge().Value = "Объем печати";
             repSh.Range(1, 7, 1, 10).Merge().Value = "Загрузка";
@@ -719,9 +727,8 @@ $('.contractDeviceList').collapse('show');
             repSh.Cell(2, 3).Value = "Показания";
             repSh.Cell(2, 10).Value = "средняя";
            // repSh.Range(1, 7, 1, 10).w
-        //    repSh.Columns(4, 9).Width = 12;
-            
-            
+            repSh.Columns(7, 9).Width = 9;
+            repSh.Range(2, 1, row, 12).SetAutoFilter();
             repSh.CollapseRows();
             MemoryStream fs = new MemoryStream();
             exRep.SaveAs(fs);
