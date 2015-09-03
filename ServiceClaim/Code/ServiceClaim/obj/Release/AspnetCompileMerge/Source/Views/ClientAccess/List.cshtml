@@ -7,7 +7,7 @@
 }
 
 <p>
-    <a class="btn btn-primary" href="@Url.Action("New")">Добавить</a>
+    <a class="btn btn-primary" href="@Url.Action("New")">Новый</a>
 </p>
 
 @if (Model.Any())
@@ -31,8 +31,8 @@
             <tr>
                 <td><a class="btn btn-link nopadding" href="@Url.Action("Edit", new {id = ca.Id})"><i class="fa fa-edit"></i></a></td>
                 <th>@i</th>
-                <td>@ca.FullName
-                    <div><small>@ca.Name</small>
+                <td>@ca.Name
+                    <div><small>@ca.FullName</small>
                     </div>
                 </td>
                 <td>@ca.Login</td>
@@ -43,17 +43,18 @@
             </tr>
         }
     </table>
+    @section scripts{
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("[name='delele-ca']").click(deleteClientAccess);
+            });
 
-    <script type="text/javascript">
-        
-            
-            $("[name='delele-ca']").click(deleteClientAccess);
-
-        function deleteClientAccess() {
-            if (!confirm('Вы действительно хотите отключить клиента от линого кабинета Сервис?')) return;
-            var id = $(this).attr('caid');
-            //alert(id);
-            $.post("@Url.Action("Delete", "ClientAccess")", { id: id }, function () { window.location.reload(); });
-        }
-    </script>
+            function deleteClientAccess() {
+                if (!confirm('Вы действительно хотите отключить клиента от линого кабинета Сервис?')) return;
+                var id = $(this).attr('caid');
+                //alert(id);
+                $.post("@Url.Action("Delete", "ClientAccess")", { id: id }, function() { window.location.reload(); });
+            }
+        </script>
+    }
 }

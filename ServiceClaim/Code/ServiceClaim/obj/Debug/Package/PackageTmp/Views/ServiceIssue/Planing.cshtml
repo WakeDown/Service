@@ -1,0 +1,61 @@
+﻿@using ServiceClaim.Models
+
+@{
+    ViewBag.Title = "Планирование поездки";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+
+<div class="row">
+    <p>
+            <div class="col-lg-2">
+                <input id="month" type="text" class="form-control" value="@String.Format("{0:MMMM yyyy}", DateTime.Now)" />
+                <span class="help-block with-errors"></span>
+            </div>
+    </p>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <table>
+            @foreach (ServiceIssuePlaningResult.ServiceIssuePlaningCityItem city in ViewBag.IssueList)
+            {
+                <tr>
+                    <td colspan="3">@city.Name</td>
+                </tr>
+                foreach (ServiceIssuePlaningResult.ServiceIssuePlaningCityItem.ServiceIssuePlaningAddressItem address in city.AddressList)
+                {
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="2">@address.Name</td>
+                    </tr>
+                    foreach (ServiceIssuePlaningResult.ServiceIssuePlaningCityItem.ServiceIssuePlaningAddressItem.ServiceIssuePlaningClientItem client  in address.ClientList)
+                    {
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>@client.Name</td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+    </div>
+    <div class="col-lg-10">
+        назначение
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function() {
+            $('#month').datepicker({
+                minViewMode: 'months',
+                orientation: 'bottom',
+                format: "MM yyyy",
+                autoclose: true,
+                language: "ru"
+            });
+        });
+    </script>
+}

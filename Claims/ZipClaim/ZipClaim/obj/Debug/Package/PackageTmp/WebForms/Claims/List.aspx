@@ -181,9 +181,9 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-primary btn-sm" OnClick="btnSearch_OnClick" ValidationGroup="vgFilter"><i class="glyphicon glyphicon-search"></i>&nbsp;найти</asp:LinkButton>
-                <asp:LinkButton ID="btnSaveUserFilter" runat="server" class="btn btn-primary btn-sm" OnClick="btnSaveUserFilter_OnClick" ValidationGroup="vgFilter"><i class="fa fa-save"></i>&nbsp;сохранить</asp:LinkButton>
+                <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-warning btn-sm" OnClick="btnSearch_OnClick" ValidationGroup="vgFilter"><i class="glyphicon glyphicon-search"></i>&nbsp;найти</asp:LinkButton>
                 <a type="button" class="btn btn-default btn-sm" href='javascript:void(0)' onclick="FilterClear();"><i class="glyphicon glyphicon-repeat"></i>&nbsp;очистить</a>
+                <asp:LinkButton ID="btnSaveUserFilter" runat="server" class="btn btn-primary btn-sm" OnClick="btnSaveUserFilter_OnClick" ValidationGroup="vgFilter"><i class="fa fa-save"></i>&nbsp;сохранить</asp:LinkButton>
             </div>
         </div>
     </div>
@@ -311,7 +311,7 @@
             <asp:QueryStringParameter QueryStringField="oper" Name="id_operator" DefaultValue="" ConvertEmptyStringToNull="True" />
             <asp:QueryStringParameter QueryStringField="sadm" Name="id_service_admin" DefaultValue='' ConvertEmptyStringToNull="True" />
             <asp:QueryStringParameter QueryStringField="ctrtr" Name="id_contractor" DefaultValue="" ConvertEmptyStringToNull="True" />
-            <asp:QueryStringParameter QueryStringField="state" Name="lst_claim_states" DefaultValue="1,3,4,5,6,8,9, 10, 11, 12,13, 21" ConvertEmptyStringToNull="True" />
+            <asp:QueryStringParameter QueryStringField="state" Name="lst_claim_states" DefaultValue="1,3,4,5,6,8,9,10,11,12,13,21,22" ConvertEmptyStringToNull="True" />
              <asp:QueryStringParameter QueryStringField="etste" Name="lst_et_claim_states" DefaultValue="" ConvertEmptyStringToNull="True" />
              <asp:QueryStringParameter QueryStringField="wayst" Name="lst_waybill_claim_states" DefaultValue="" ConvertEmptyStringToNull="True" />
             <asp:QueryStringParameter QueryStringField="dst" Name="date_begin" DefaultValue="" ConvertEmptyStringToNull="True" DbType="DateTime" />

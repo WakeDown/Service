@@ -19,7 +19,10 @@ namespace ServiceClaim.Models
         public int? CounterMono { get; set; }
         public int? CounterColor { get; set; }
         public bool NoTechWork { get; set; }
-        
+        public int? CounterTotal { get; set; }
+        public bool NoCounter { get; set; }
+        public string Descr { get; set; }
+        public bool CounterUnavailable { get; set; }
 
         public ServiceSheet()
         {
@@ -44,6 +47,10 @@ namespace ServiceClaim.Models
             ZipClaimNumber = model.ZipClaimNumber;
             CounterMono = model.CounterMono;
             CounterColor = model.CounterColor;
+            CounterTotal = model.CounterTotal;
+            NoCounter = model.NoCounter;
+            Descr = model.Descr;
+            CounterUnavailable = model.CounterUnavailable;
         }
 
         public static ListResult<ServiceSheet> GetList(int? idClaim = null, int? idClaim2ClaimState = null)

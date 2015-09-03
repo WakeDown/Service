@@ -57,10 +57,16 @@
 {
     <script type="text/javascript">
         $(document).ready(function() {
-            $('#ctrFind').keypress(function(e) {
-                if (e.which !== 13) return;
-                displayCtrs();
+            $('caForm').keypress(function (e) {
+                if (e.which === 13) {
+                    return false;
+                }
             });
+                $('#ctrFind').keypress(function(e) {
+                    if (e.which === 13) {
+                        displayCtrs();
+                    }
+                });
             //$('#ctrList').click(function() {
             //    $('#ctrListSelName').val($(this).val());
             //});
@@ -74,6 +80,7 @@
                 return;
             }
             $('#ctrListCount').text('');
+            $('#ctrFind').prop("disabled", true);
             $.ajax({
                 url: '@Url.Action("GetCtors")',
                 method: 'POST',
@@ -81,7 +88,7 @@
                 success: function(data) {
                     var $ctrList = $('#ctrList');
                     $ctrList.find('option').remove();
-
+                    
                     if (data) {
                         if (data.length > 0) {
                             for (var i = 0; i < data.length; i++) {
@@ -96,7 +103,10 @@
                         $('#ctrListCount').text(0);
                     }
 
-
+                    $('#ctrFind').prop("disabled", false);
+                },
+                error: function() {
+                    $('#ctrFind').prop("disabled", false);
                 }
             });
         }

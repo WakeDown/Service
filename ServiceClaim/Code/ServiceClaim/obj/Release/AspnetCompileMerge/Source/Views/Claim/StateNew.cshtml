@@ -1,7 +1,7 @@
 ﻿@using ServiceClaim.Models
 @model ServiceClaim.Models.Claim
 
-@using (Html.BeginForm("StateNew", "Claim", FormMethod.Post, new { @id = "clForm", @class = "form-horizontal", data_toggle = "validator", role = "form" }))
+@using (Html.BeginForm("StateNew", "Claim", FormMethod.Post, new { @id = "StateNewForm", @class = "form-horizontal", data_toggle = "validator", role = "form" }))
 {
     @*<p>
             @Html.DropDownListFor(m=>m.WorkType, WorkType.GetSelectionList())

@@ -34,6 +34,7 @@ namespace ZipClaim.Models
         public bool DisplayPriceState { get; set; }
         public bool DisplayDoneState { get; set; }
         public bool DisplaySendState { get; set; }
+        public bool DisplayZipConfirmState { get; set; }
         public bool DisplayPriceSet { get; set; }
         public bool DisplayCancelState { get; set; }
         public string ServiceDeskNum { get; set; }
@@ -102,6 +103,7 @@ namespace ZipClaim.Models
                 DisplayPriceState = GetValueBool(dr["display_price_states"]);
                 DisplayDoneState = GetValueBool(dr["display_done_state"]);
                 DisplaySendState = GetValueBool(dr["display_send_state"]);
+                DisplayZipConfirmState = GetValueBool(dr["display_zip_confirm_state"]);
                 DisplayPriceSet = GetValueBool(dr["display_price_set"]);
                 DisplayCancelState = GetValueBool(dr["display_cancel_state"]);
                 ServiceDeskNum = dr["service_desk_num"].ToString();
@@ -209,6 +211,14 @@ namespace ZipClaim.Models
             SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
 
             DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "setClaimPriceFailState", pId, pIdCreator);
+        }
+
+        public void SetZipConfirmState()
+        {
+            SqlParameter pId = new SqlParameter() { ParameterName = "id_claim", Value = Id, DbType = DbType.Int32 };
+            SqlParameter pIdCreator = new SqlParameter() { ParameterName = "id_creator", Value = IdCreator, DbType = DbType.Int32 };
+
+            DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "setClaimZipConfirmState", pId, pIdCreator);
         }
 
         public void SetSendState()

@@ -124,6 +124,7 @@
     <Compile Include="Controllers\ClaimController.cs" />
     <Compile Include="Controllers\ClassifierController.cs" />
     <Compile Include="Controllers\ClientAccessController.cs" />
+    <Compile Include="Controllers\ContractorAccessController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -139,10 +140,16 @@
     <Compile Include="Models\ClientAccess.cs" />
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Contractor.cs" />
+    <Compile Include="Models\ContractorAccess.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DeviceSearchResult.cs" />
     <Compile Include="Models\EmployeeSm.cs" />
+    <Compile Include="Controllers\ServiceIssueController.cs" />
     <Compile Include="Models\ListResult.cs" />
+    <Compile Include="Models\PlanServiceIssue.cs" />
+    <Compile Include="Models\ServiceIssue.cs" />
+    <Compile Include="Models\ServiceIssuePlaningItem.cs" />
+    <Compile Include="Models\ServiceIssuePlaningResult.cs" />
     <Compile Include="Models\ServiceSheet.cs" />
     <Compile Include="Models\UserList.cs" />
     <Compile Include="Models\WorkType.cs" />
@@ -180,6 +187,8 @@
     <Content Include="Scripts\bootstrapValidator.js" />
     <None Include="Properties\PublishProfiles\2. TEST.pubxml" />
     <None Include="Properties\PublishProfiles\3. Production.pubxml" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -225,12 +234,25 @@
     <Content Include="Views\ClientAccess\List.cshtml" />
     <Content Include="Views\Error\HandledError.cshtml" />
     <Content Include="Views\ClientAccess\New.cshtml" />
-    <Content Include="Views\Claim\StateNew.cshtml" />
+    <Content Include="Views\Claim\SetWorkType.cshtml" />
     <Content Include="Views\Claim\SpecialistSelect.cshtml" />
     <Content Include="Views\ClientAccess\Edit.cshtml" />
     <Content Include="Views\ClientAccess\ClientSheet.cshtml" />
     <Content Include="Views\Claim\ConfirmWork.cshtml" />
-    <Content Include="Views\Claim\StateTechWork.cshtml" />
+    <Content Include="Views\Claim\ServiceSheetTech.cshtml" />
+    <Content Include="Views\Claim\StateEngOutWait.cshtml" />
+    <Content Include="Views\Claim\ServiceSheet.cshtml" />
+    <Content Include="Views\Claim\TechConfirm.cshtml" />
+    <Content Include="Views\Claim\StateDone.cshtml" />
+    <Content Include="Views\ContractorAccess\List.cshtml" />
+    <Content Include="Views\ContractorAccess\New.cshtml" />
+    <Content Include="Views\ContractorAccess\AccessSheet.cshtml" />
+    <Content Include="Views\Claim\SetServEngOnWork.cshtml" />
+    <Content Include="Views\ServiceIssue\Planing.cshtml" />
+    <Content Include="Views\Claim\ZipCheck.cshtml" />
+    <Content Include="Views\Claim\ZipConfirm.cshtml" />
+    <Content Include="Views\Claim\ZipOrder.cshtml" />
+    <Content Include="Views\Claim\ZipOrderConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

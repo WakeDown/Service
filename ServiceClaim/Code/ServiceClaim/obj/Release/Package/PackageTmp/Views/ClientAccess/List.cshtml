@@ -7,7 +7,7 @@
 }
 
 <p>
-    <a class="btn btn-primary" href="@Url.Action("New")">Добавить</a>
+    <a class="btn btn-primary" href="@Url.Action("New")">Новый</a>
 </p>
 
 @if (Model.Any())
@@ -15,7 +15,7 @@
     int i = 0;
 
     <table class="table table-bordered">
-        <tr>
+        <tr class="bg-primary">
             <th class="min-width"></th>
             <th class="min-width">№</th>
             <th>Название</th>

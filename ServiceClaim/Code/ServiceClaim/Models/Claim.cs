@@ -21,19 +21,41 @@ namespace ServiceClaim.Models
         public EmployeeSm Admin { get; set; }
         public EmployeeSm Engeneer { get; set; }
         public ClaimState State { get; set; }
+        public DateTime DateStateChange { get; set; }
         public int? IdWorkType { get; set; }
         public WorkType WorkType { get; set; }
         public string SpecialistSid { get; set; }
         public EmployeeSm Specialist { get; set; }
         public ServiceSheet ServiceSheet4Save { get; set; }
+        public DateTime DateCreate { get; set; }
+        public ServiceIssue ServiceIssue4Save { get; set; }
 
-        //public IEnumerable<Claim2ClaimState> StateHistory { get; set; }
+        public string StateChangeDateDiffStr
+        {
+            get
+            {
+                string result = "";
+                double mins  = (DateTime.Now - DateStateChange).TotalMinutes;
+                int hrs = (int) mins/60;
+                int mns = (int) mins%60;
+                //if (hrs == 0)
+                //{
+                //    result = String.Format("{0}м", mns);
+                //}
+                //else
+                //{
+                    result = String.Format("{0}ч. {1}м", hrs, mns);
+                //}
+                return result;
+            }
+        }
 
         public string Descr { get; set; }
 
         public Claim()
         {
             ServiceSheet4Save=new ServiceSheet();
+            ServiceIssue4Save=new ServiceIssue();
             //Contractor=new Contractor();
             //Contract = new Contract();
             //Device=new Device();
@@ -66,6 +88,8 @@ namespace ServiceClaim.Models
             WorkType = model.WorkType;
             SpecialistSid = model.SpecialistSid;
             Specialist = model.Specialist;
+            DateCreate = model.DateCreate;
+            DateStateChange = model.DateStateChange;
         }
 
         public static ListResult<Claim> GetList(int? idAdmin = null, int? idEngeneer = null, DateTime? dateStart = null, DateTime? dateEnd = null, int? topRows = null)
@@ -123,6 +147,14 @@ namespace ServiceClaim.Models
             var model = JsonConvert.DeserializeObject<IEnumerable<Claim2ClaimState>>(jsonString);
             return model;
         }
+        public static IEnumerable<KeyValuePair<string, string>> GetWorkTypeSpecialistSelectionList(int idWorkType)
+        {
+            Uri uri = new Uri(String.Format("{0}/Claim/GetWorkTypeSpecialistSelectionList?idWorkType={1}", OdataServiceUri, idWorkType));
+            string jsonString = GetJson(uri);
+            var model = JsonConvert.DeserializeObject<IEnumerable<KeyValuePair<string, string>>>(jsonString);
+
+            return model;
+        }
 
         public SelectList GetCurrentClaimSpecialistSelectionList()
         {
@@ -132,6 +164,7 @@ namespace ServiceClaim.Models
 
             return new SelectList(model, "Key", "Value");
         }
+
         
     }
 }

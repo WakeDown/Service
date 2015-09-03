@@ -52,6 +52,9 @@
         .bold {
             font-weight: 700;
         }
+        .text-nowrap {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -68,11 +71,11 @@
             </tr>
             <tr>
                 <td class="bold">Логин</td>
-                <td>@Model.Login</td>
+                <td>@Model.Login&nbsp;</td>
             </tr>
             <tr>
                 <td class="bold">Пароль</td>
-                <td>@Model.Password</td>
+                <td>@Model.Password&nbsp;</td>
             </tr>
         </table>
         <hr class="line"/>

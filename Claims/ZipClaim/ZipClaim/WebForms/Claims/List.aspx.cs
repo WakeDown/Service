@@ -92,7 +92,7 @@ namespace ZipClaim.WebForms.Claims
             FilterLinks.Add(new FilterLink("engr", ddlEngeneer, User.Id.ToString()));
             FilterLinks.Add(new FilterLink("snum", txtSerialNum));
             FilterLinks.Add(new FilterLink("ctrtr", ddlContractor));
-            FilterLinks.Add(new FilterLink("state", chklClaimState, "1,3,4,5,6,8,9,10,11,12,13,21"));
+            FilterLinks.Add(new FilterLink("state", chklClaimState, "1,3,4,5,6,8,9,10,11,12,13,21,22"));
             //FilterLinks.Add(new FilterLink("etste", chklEtClaimState));//, "10,11,12,13"
             FilterLinks.Add(new FilterLink("wayst", chklWaybillClaimState));//, "14,15,16,18,19,20"
             FilterLinks.Add(new FilterLink("mngr", ddlManager, User.Id.ToString()));

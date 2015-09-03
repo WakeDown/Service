@@ -149,7 +149,7 @@
                     <asp:QueryStringParameter QueryStringField="snum" Name="serial_num" DefaultValue="" ConvertEmptyStringToNull="True" />
                     <asp:QueryStringParameter QueryStringField="mngr" Name="id_manager" DefaultValue="" ConvertEmptyStringToNull="True" />
                     <asp:QueryStringParameter QueryStringField="engr" Name="id_engeneer" DefaultValue='' ConvertEmptyStringToNull="True" />
-                    <asp:QueryStringParameter QueryStringField="state" Name="lst_claim_states" DefaultValue="1,3,4,5,6,8,9, 10, 11, 12,13" ConvertEmptyStringToNull="True" />
+                    <asp:QueryStringParameter QueryStringField="state" Name="lst_claim_states" DefaultValue="1,3,4,5,6,8,9,10,11,12,13" ConvertEmptyStringToNull="True" />
                     <asp:QueryStringParameter QueryStringField="etste" Name="lst_et_claim_states" DefaultValue="" ConvertEmptyStringToNull="True" />
                     <asp:QueryStringParameter QueryStringField="wayst" Name="lst_waybill_claim_states" DefaultValue="" ConvertEmptyStringToNull="True" />
                     <asp:QueryStringParameter QueryStringField="dst" Name="date_begin" DefaultValue="" ConvertEmptyStringToNull="True" DbType="DateTime" />

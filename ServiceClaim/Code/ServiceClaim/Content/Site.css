@@ -197,6 +197,10 @@ ul.tree {
     background-color: #fcf8e3;
 }
 
+.sel-list tr.bg-primary:hover {
+    background-color: #337ab7;
+}
+
 .text-nowrap {
     white-space: nowrap;
 }
@@ -229,4 +233,67 @@ ul.tree {
 
 .label-badge {
     border-radius: 1em;
+}
+
+.small {
+    font-size: 0.8em;
+    color: #999;
+}
+
+blockquote.bg-warning {
+    border-color: #f0ad4e;
+}
+
+blockquote.bg-danger {
+    border-color: #d9534f;
+}
+
+blockquote.bg-success {
+    border-color: #3c763d;
+}
+
+.spinner {
+  display: inline-block;
+  opacity: 0;
+  max-width: 0;
+
+  -webkit-transition: opacity 0.25s, max-width 0.45s; 
+  -moz-transition: opacity 0.25s, max-width 0.45s;
+  -o-transition: opacity 0.25s, max-width 0.45s;
+  transition: opacity 0.25s, max-width 0.45s; /* Duration fixed since we animate additional hidden width */
+}
+
+.spinner.on-input {
+    z-index:999;
+    position:absolute;
+    top: 7px;
+    left: 10px;
+}
+
+.spinner.on-element {
+    z-index:999;
+    position:absolute;
+}
+
+.spinner.active {
+    cursor:progress;
+  opacity: 1;
+  max-width: 50px; /* More than it will ever come, notice that this affects on animation duration */
+}
+
+.planing-sel-list {
+    
+}
+.planing-sel-list .pad-1 {
+    margin-left: 15px;
+}
+
+.planing-sel-list .pad-2 {
+    margin-left: 15px;
+    font-size: 0.9em;
+}
+
+.planing-sel-list .pad-3 {
+    margin-left: 15px;
+    font-size: 0.9em;
 }

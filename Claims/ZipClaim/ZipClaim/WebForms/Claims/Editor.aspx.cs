@@ -32,6 +32,8 @@ namespace ZipClaim.WebForms.Claims
         private string serviceAdminRightGroup = ConfigurationManager.AppSettings["serviceAdminRightGroup"];
         private string serviceOperatorRightGroup = ConfigurationManager.AppSettings["serviceOperatorRightGroup"];
         private string sysAdminRightGroup = ConfigurationManager.AppSettings["sysAdminRightGroup"];
+        private string techRightGroup = ConfigurationManager.AppSettings["techRightGroup"];
+        private const string techRightGroupVSKey = "techRightGroupVSKey";
         private const string serviceManagerRightGroupVSKey = "serviceManagerRightGroupVSKey";
         private const string serviceOperatorRightGroupVSKey = "serviceOperatorRightGroupVSKey";
         private const string sysAdminRightGroupVSKey = "sysAdminRightGroupVSKey";
@@ -56,6 +58,12 @@ namespace ZipClaim.WebForms.Claims
 
                 return id;
             }
+        }
+
+        protected bool UserIsTech
+        {
+            get { return (bool)ViewState[techRightGroupVSKey]; }
+            set { ViewState[techRightGroupVSKey] = value; }
         }
 
         protected bool UserIsManager
@@ -123,6 +131,7 @@ namespace ZipClaim.WebForms.Claims
                 UserIsManager = Db.Db.Users.CheckUserRights(User.Login, serviceManagerRightGroup);
                 UserIsOperator = Db.Db.Users.CheckUserRights(User.Login, serviceOperatorRightGroup);
                 UserIsSysAdmin = Db.Db.Users.CheckUserRights(User.Login, sysAdminRightGroup);
+                UserIsTech = Db.Db.Users.CheckUserRights(User.Login, techRightGroup);
 
                 FillLists();
 
@@ -200,7 +209,7 @@ namespace ZipClaim.WebForms.Claims
                                             btnSetStateDone.Visible =
                                                 btnSetStatePriceSet.Visible =
                                                     pnlCancelComment.Visible =
-                                                        txtServiceDeskNum.Enabled = btnRequestPrice.Visible = btnDelete.Visible = false;
+                                                        txtServiceDeskNum.Enabled = btnRequestPrice.Visible = btnDelete.Visible = btnZipConfirm.Visible = false;
 
             string currLogin = User.Login;
             bool userIsEngeneer = Db.Db.Users.CheckUserRights(currLogin, serviceEngeneersRightGroup);
@@ -280,6 +289,14 @@ namespace ZipClaim.WebForms.Claims
                                     tblClaimUnitList.Columns[11].Visible = tblClaimUnitList.Columns[12].Visible = true;
 
                 pnlSumCount.Visible = true;
+            }
+
+            if (UserIsSysAdmin || UserIsTech)
+            {
+                if (hfDisplayZipConfirmState.Value.Equals("True"))
+                {
+                    btnZipConfirm.Visible = true;
+                }
             }
 
             DisplayOftenSelectedParts();
@@ -425,6 +442,7 @@ namespace ZipClaim.WebForms.Claims
             MainHelper.HfSetValue(ref hfDisplayPriceSet, claim.DisplayPriceSet);
             MainHelper.HfSetValue(ref hfDisplayPriceStates, claim.DisplayPriceState);
             MainHelper.HfSetValue(ref hfDisplaySendState, claim.DisplaySendState);
+            MainHelper.HfSetValue(ref hfDisplayZipConfirmState, claim.DisplayZipConfirmState);
             MainHelper.HfSetValue(ref hfDisplayCancelState, claim.DisplayCancelState);
 
             MainHelper.HfSetValue(ref hfIdDevice, claim.IdDevice);
@@ -463,6 +481,7 @@ namespace ZipClaim.WebForms.Claims
             {
                 pnlZipState.Attributes.Clear();
                 pnlZipState.Attributes.Add("class", dt.Rows[0]["zip_state"].ToString());
+                hfZipStateSysName.Value = dt.Rows[0]["zip_state_sys_name"].ToString();
             }
 
             if (claim.Id > 0)
@@ -933,7 +952,7 @@ $('#oftenSelectedPanel').collapse('hide');
             }
         }
 
-        protected void btnSetStateSend_Click(object sender, EventArgs e)
+        protected void btnZipConfirm_Click(object sender, EventArgs e)
         {
             try
             {
@@ -945,6 +964,42 @@ $('#oftenSelectedPanel').collapse('hide');
                     Claim claim = new Claim(Id);
                     claim.IdCreator = User.Id;
                     claim.SetSendState();
+                    //RedirectWithParams();
+                    Response.Redirect(ListUrl);
+
+                }
+                else
+                {
+                    ServerMessageDisplay(new[] { phServerMessage },
+                        "Для передачи заявки в работу необходимо заполнить список ЗИПов", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                ServerMessageDisplay(new[] { phServerMessage }, ex.Message, true);
+            }
+        }
+        
+
+        protected void btnSetStateSend_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Не даем Передать в работу если не заполнен список
+                if (tblClaimUnitList.Rows.Count > 1) //Там есть срока для вставки нового ЗИПа, ее не считаем
+                {
+
+                    //int id = Convert.ToInt32((sender as LinkButton).CommandArgument);
+                    Claim claim = new Claim(Id);
+                    claim.IdCreator = User.Id;
+                    if (hfZipStateSysName.Value.ToUpper().Equals("LESSZIP"))
+                    {
+                        claim.SetZipConfirmState();
+                    }
+                    else
+                    {
+                        claim.SetSendState();
+                    }
                     //RedirectWithParams();
                     Response.Redirect(ListUrl);
 

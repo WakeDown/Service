@@ -1,4 +1,5 @@
 ﻿@using System.Linq
+@using ServiceClaim.Models
 @model ServiceClaim.Models.Claim
 
 @{
@@ -22,9 +23,45 @@
                 <div class="row"><label class="col-lg-2 text-right">Контрагент</label> <span class="col-lg-10">@Model.Contractor.FullName</span></div>
                 <div class="row"><label class="col-lg-2 text-right">Договор</label> <span class="col-lg-10">@Model.Contract.Number</span></div>
                 <div class="row"><label class="col-lg-2 text-right">Аппарат</label> <span class="col-lg-10">@Model.Device.ExtendedName</span></div>
+                @if (Model.WorkType != null && !String.IsNullOrEmpty(Model.WorkType.Name))
+                {
+                    <div class="row"><label class="col-lg-2 text-right">Тип работ</label> <span class="col-lg-10">@Model.WorkType.SysName - @Model.WorkType.Name</span></div>
+                }
+                @if (Model.Specialist != null && !String.IsNullOrEmpty(Model.Specialist.DisplayName))
+                {
+                    <div class="row"><label class="col-lg-2 text-right">Специалист</label> <span class="col-lg-10">@Model.Specialist.DisplayName</span></div>
+                }
                 @if (Model.State.SysName.ToUpper().Equals("NEW"))
                 {
                     @Html.Partial("StateNew", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("NEWADD") || Model.State.SysName.ToUpper().Equals("SRVADMWORK") || Model.State.SysName.ToUpper().Equals("SERVADMSETWAIT") || Model.State.SysName.ToUpper().Equals("SERVENGSETWAIT"))
+                {
+                    @Html.Partial("SpecialistSelect", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("TECHSET"))
+                {
+                    @Html.Partial("TechConfirm", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("SERVADMSET") || Model.State.SysName.ToUpper().Equals("SRVENGSET"))
+                {
+                    @Html.Partial("ConfirmWork", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("TECHWORK"))
+                {
+                    @Html.Partial("StateTechWork", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("SERVENGOUTWAIT"))
+                {
+                    @Html.Partial("StateEngOutWait", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("SRVENGWORK"))
+                {
+                    @Html.Partial("ServiceSheet", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("DONE"))
+                {
+                    @Html.Partial("StateDone", Model)
                 }
             </div>
 
@@ -106,7 +143,7 @@
             });
         }
 
-        function claimEnd() {
+        @*function claimEnd() {
             var id = @Model.Id;
             var descr = $('#descr').val();
             $.ajax({
@@ -119,6 +156,6 @@
                     }
                 }
             });
-        }
+        }*@
     </script>
 }

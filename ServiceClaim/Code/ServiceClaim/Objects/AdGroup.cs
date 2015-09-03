@@ -18,6 +18,7 @@ namespace ServiceClaim.Objects
         ServiceOperator,
         ServiceControler,
         ServiceTech,
+        ServiceClaimContractorAccess,
         //---доступы
         ServiceClaimClassifier,
         ServiceClaimClientAccess

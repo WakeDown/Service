@@ -11,7 +11,7 @@
 }
 @section PanelBody
 {
-    @using (Html.BeginForm("New", "Claim", FormMethod.Post, new { @id = "clForm", @class = "form-horizontal", data_toggle = "validator", role = "form" }))
+    @using (Html.BeginForm("New", "Claim", FormMethod.Post, new { @id = "clForm", @class = "form-horizontal", role = "form" }))
     {
         <div class="form-group">
             <label class="col-lg-2 control-label" for="ctrFind">Контрагент</label>
@@ -111,6 +111,7 @@
             $('#ctrList').change(setCtrContNdev);
             $('#contList').change(setContВev);
             $('#devList').change(setDevCtrNcont);
+            $('#ctrFind').focus();
         });
 
         //function fidLists(e) {

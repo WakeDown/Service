@@ -62,6 +62,8 @@ namespace ZipClaim.Models
                 IIdentity WinId = HttpContext.Current.User.Identity;
                 WindowsIdentity wi = (WindowsIdentity)WinId;
                 string sid = wi.User.Value;
+                //sid = "S-1-5-21-1970802976-3466419101-4042325969-2275"; //Поплеухина
+                //sid = "S-1-5-21-1970802976-3466419101-4042325969-3360"; //Кареева
                 //sid = "S-1-5-21-1970802976-3466419101-4042325969-4496";//Москаленко
                 //sid = "S-1-5-21-1970802976-3466419101-4042325969-2275";
                 //sid = "S-1-5-21-1970802976-3466419101-4042325969-3704";//UN1T

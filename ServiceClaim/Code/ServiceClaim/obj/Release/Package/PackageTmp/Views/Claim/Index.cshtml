@@ -33,23 +33,55 @@
                 }
                 @if (Model.State.SysName.ToUpper().Equals("NEW"))
                 {
-                    @Html.Partial("StateNew", Model)
+                    @Html.Partial("SetWorkType", Model)
                 }
-                @if (Model.State.SysName.ToUpper().Equals("NEWADD"))
+                @if (Model.State.SysName.ToUpper().Equals("NEWADD") || Model.State.SysName.ToUpper().Equals("SRVADMWORK") || Model.State.SysName.ToUpper().Equals("SERVADMSETWAIT") || Model.State.SysName.ToUpper().Equals("SERVENGSETWAIT"))
                 {
-                    @Html.Partial("StateNewadd", Model)
+                    @Html.Partial("SpecialistSelect", Model)
                 }
-                @if (Model.State.SysName.ToUpper().Equals("SET"))
+                @if (Model.State.SysName.ToUpper().Equals("TECHSET"))
                 {
-                    @Html.Partial("StateSet", Model)
+                    @Html.Partial("TechConfirm", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("SERVADMSET") || Model.State.SysName.ToUpper().Equals("SRVENGSET"))
+                {
+                    @Html.Partial("ConfirmWork", Model)
                 }
                 @if (Model.State.SysName.ToUpper().Equals("TECHWORK"))
                 {
-                    @Html.Partial("StateTechWork", new ServiceSheet() {IdClaim=Model.Id})
+                    @Html.Partial("ServiceSheetTech", Model)
                 }
-                @if (Model.State.SysName.ToUpper().Equals("SRVADMWORK"))
+                @if (Model.State.SysName.ToUpper().Equals("SERVENGOUTWAIT"))
                 {
-                    @Html.Partial("StateServadmWork", Model)
+                    @Html.Partial("StateEngOutWait", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("SRVENGWENT"))
+                {
+                    @Html.Partial("SetServEngOnWork", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("SRVENGWORK"))
+                {
+                    @Html.Partial("ServiceSheet", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("ZIPCHECK"))
+                {
+                    @Html.Partial("ZipCheck", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("ZIPCHECKED"))
+                {
+                    @Html.Partial("ZipConfirm", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("ZIPCONFIRMED"))
+                {
+                    @Html.Partial("ZipOrder", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("ZIPORDERED"))
+                {
+                    @Html.Partial("ZipOrderConfirm", Model)
+                }
+                @if (Model.State.SysName.ToUpper().Equals("DONE"))
+                {
+                    @Html.Partial("StateDone", Model)
                 }
             </div>
 
@@ -131,7 +163,7 @@
             });
         }
 
-        function claimEnd() {
+        @*function claimEnd() {
             var id = @Model.Id;
             var descr = $('#descr').val();
             $.ajax({
@@ -144,6 +176,6 @@
                     }
                 }
             });
-        }
+        }*@
     </script>
 }

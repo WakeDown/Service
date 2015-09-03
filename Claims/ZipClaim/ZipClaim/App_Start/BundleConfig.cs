@@ -50,6 +50,8 @@ namespace ZipClaim
             bundles.Add(new ScriptBundle("~/bundles/tristate").Include("~/Scripts/tristate-{version}.js"));
             //bundles.Add(new ScriptBundle("~/bundles/zeroclipboard").Include("~/Scripts/ZeroClipboard.js"));
             bundles.Add(new ScriptBundle("~/bundles/site").Include("~/Scripts/Site.js"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

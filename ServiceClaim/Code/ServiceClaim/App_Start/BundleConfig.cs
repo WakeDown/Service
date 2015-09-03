@@ -42,6 +42,7 @@ namespace ServiceClaim
                       "~/Content/bootstrap-datepicker3.css",
                       "~/Content/bootstrap-timepicker.min.css",
                       "~/Content/site.css"));
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

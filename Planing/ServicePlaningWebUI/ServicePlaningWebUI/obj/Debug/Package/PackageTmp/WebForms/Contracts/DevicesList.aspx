@@ -172,7 +172,7 @@
                 <asp:QueryStringParameter DefaultValue="" QueryStringField="cont" Name="contact_name" ConvertEmptyStringToNull="true" />
                 <asp:QueryStringParameter DefaultValue="" QueryStringField="sadm" Name="id_service_admin" ConvertEmptyStringToNull="true" />
                 <asp:QueryStringParameter DefaultValue="" QueryStringField="objn" Name="object_name" ConvertEmptyStringToNull="true" />
-                <asp:QueryStringParameter Name="rows_count" QueryStringField="rcnt" DefaultValue="30" ConvertEmptyStringToNull="True" DbType="Int32" />
+                <asp:QueryStringParameter Name="rows_count" QueryStringField="rcn" DefaultValue="30" ConvertEmptyStringToNull="True" DbType="Int32" />
             </SelectParameters>
         </asp:SqlDataSource>
     </asp:Panel>

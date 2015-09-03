@@ -614,7 +614,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <asp:HiddenField ID="hfZipStateSysName" runat="server" />
                             <h4 id="pnlZipState" runat="server">&nbsp;&nbsp;&nbsp;</h4>
                             <h5>
                                 <span id="pnlSumCount" runat="server" visible="False">
@@ -628,7 +628,7 @@
                                 <Columns>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="btnClaimUnitDelete" runat="server" OnClick="btnClaimUnitDelete_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' OnClientClick="return DeleteConfirm('ЗИП')" CssClass="btn btn-link" data-toggle="tooltip" title="удалить" Visible='<%# !String.IsNullOrEmpty(Eval("id_claim_unit").ToString()) && ((Eval("active_state").ToString() == "0" && Eval("id_engeneer").ToString() == User.Id.ToString()) || UserIsSysAdmin) %>' TabIndex="1000"><i class="fa fa-trash-o fa-lg"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnClaimUnitDelete" runat="server" OnClick="btnClaimUnitDelete_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' OnClientClick="return DeleteConfirm('ЗИП')" CssClass="btn btn-link" data-toggle="tooltip" title="удалить" Visible='<%# !String.IsNullOrEmpty(Eval("id_claim_unit").ToString()) && ((Eval("active_state").ToString() == "0" && Eval("id_engeneer").ToString() == User.Id.ToString()) || (UserIsTech && hfDisplayZipConfirmState.Value.Equals("True")) || UserIsSysAdmin) %>' TabIndex="1000"><i class="fa fa-trash-o fa-lg"></i></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
@@ -773,7 +773,7 @@
                                             <asp:LinkButton ID="btnSave" runat="server" CommandName="Update" RowIndex='<%#Container.DataItemIndex %>' OnClick="btnSave_OnClick" CommandArgument='<%#Eval("id_claim_unit") %>' CssClass="btn btn-link" data-toggle="tooltip" title="сохранить"><i class="fa fa-save fa-lg"></i></asp:LinkButton>
                                         </EditItemTemplate>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="btnEdit" runat="server" CommandName="Edit" CommandArgument='<%#Eval("id_claim_unit") %>' CssClass="btn btn-link" data-toggle="tooltip" title="изменить" Visible='<%# !String.IsNullOrEmpty(Eval("id_claim_unit").ToString()) && ((Eval("active_state").ToString() == "0" && Eval("id_engeneer").ToString() == User.Id.ToString()) || (Eval("active_state").ToString() == "1" && (UserIsManager || UserIsOperator)) || UserIsSysAdmin) %>' ValidationGroup="vgEdit"><i class="fa fa-edit fa-lg"></i></asp:LinkButton>
+                                            <asp:LinkButton ID="btnEdit" runat="server" CommandName="Edit" CommandArgument='<%#Eval("id_claim_unit") %>' CssClass="btn btn-link" data-toggle="tooltip" title="изменить" Visible='<%# !String.IsNullOrEmpty(Eval("id_claim_unit").ToString()) && ((Eval("active_state").ToString() == "0" && Eval("id_engeneer").ToString() == User.Id.ToString()) || (Eval("active_state").ToString() == "1" && Eval("manager_can_edit").ToString().Equals("1") && (UserIsManager || UserIsOperator))|| (UserIsTech && hfDisplayZipConfirmState.Value.Equals("True")) || UserIsSysAdmin) %>' ValidationGroup="vgEdit"><i class="fa fa-edit fa-lg"></i></asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
@@ -804,6 +804,8 @@
                 <div class="pull-right">
                     <asp:HiddenField ID="hfDisplaySendState" runat="server" />
                     <asp:LinkButton ID="btnSetStateSend" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Передать в работу" OnClick="btnSetStateSend_Click"><i class="fa fa-share fa-2x"></i></asp:LinkButton>
+                    <asp:HiddenField ID="hfDisplayZipConfirmState" runat="server" />
+                    <asp:LinkButton ID="btnZipConfirm" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Утвердить ЗИП" OnClick="btnZipConfirm_Click"><i class="fa fa-check fa-2x"></i></asp:LinkButton>
                     <asp:LinkButton ID="btnDelete" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Удалить заявку" OnClick="btnDelete_Click" OnClientClick="return DeleteConfirm('заявку')"><i class="fa fa-trash-o fa-2x"></i></asp:LinkButton>
                     <asp:HiddenField ID="hfDisplayPriceSet" runat="server" />
                     <asp:LinkButton ID="btnSetStatePriceSet" runat="server" class="btn btn-primary btn-lg" data-toggle="tooltip" title="Цены указаны" OnClick="btnSetStatePriceSet_Click"><i class="fa fa-money fa-2x"></i></asp:LinkButton>

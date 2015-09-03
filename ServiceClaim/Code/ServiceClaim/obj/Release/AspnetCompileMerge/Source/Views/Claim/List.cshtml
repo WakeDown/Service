@@ -24,16 +24,16 @@
         </tr>
         @foreach (var claim in Model.List)
         {
-            <tr claimid="@claim.Id">
+            <tr claimid="@claim.Id" onclick="window.location = '@Url.Action("Index")/@claim.Id';">
                 <th>@claim.Id</th>
                 <td>@claim.Contractor.FullName</td>
                 <td style="background-color: #@claim.State.BackgroundColor; color: #@claim.State.ForegroundColor">@claim.State.Name</td>
             </tr>
         }
     </table>
-
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
+            
             $('#claimList tr').click(function() {
                 window.location = '@Url.Action("Index")/'+ $(this).attr('claimid');
             });

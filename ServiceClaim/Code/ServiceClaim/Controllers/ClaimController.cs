@@ -153,16 +153,15 @@ namespace ServiceClaim.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetDevices(int? idContractor = null, string contractorName = null, int? idContract = null, string contractNumber = null, int? idDevice = null, string deviceName = null)
+        public JsonResult GetDevices(int? idContractor = null, string contractorName = null, int? idContract = null, string contractNumber = null, int? idDevice = null, string deviceName = null, string serialNum = null)
         {
-            var result = Device.GetSearchList(idContractor, contractorName, idContract, contractNumber, idDevice, deviceName);
-
+            var result = Device.GetSearchList(idContractor, contractorName, idContract, contractNumber, idDevice, deviceName, serialNum);
             return Json(result);
         }
 
        
         [HttpPost]
-        public ActionResult StateNew(Claim model)
+        public ActionResult SetWorkType(Claim model)
         {
             try
             {
@@ -170,16 +169,15 @@ namespace ServiceClaim.Controllers
                 bool complete = model.Go(out responseMessage);
                 if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
-                //return RedirectToAction("Index", new { id = responseMessage.Id });
+                return RedirectToAction("List", new { id = responseMessage.Id });
             }
             catch (Exception ex)
             {
                 TempData["ServerError"] = ex.Message;
-                return RedirectToAction("Index", new {id=model.Id});
+                return RedirectToAction("List", new {id=model.Id});
             }
-
-            return RedirectToAction("List");
         }
+        
 
         [HttpPost]
         public ActionResult SpecialistSelect(Claim model)
@@ -187,22 +185,22 @@ namespace ServiceClaim.Controllers
             try
             {
                 ResponseMessage responseMessage;
+                //model.ServiceIssue4Save.Descr = model.Descr;
+                //model.ServiceIssue4Save.IdClaim = model.Id;
+                //model.SpecialistSid = model.SpecialistSid;
                 bool complete = model.Go(out responseMessage);
                 if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
-                //return RedirectToAction("Index", new { id = responseMessage.Id });
+                return RedirectToAction("Index", new { id = responseMessage.Id });
             }
             catch (Exception ex)
             {
                 TempData["ServerError"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
-
-            return RedirectToAction("List");
         }
 
         [HttpPost]
-       
         public ActionResult ConfirmWork(Claim model)
         {
             try
@@ -213,12 +211,12 @@ namespace ServiceClaim.Controllers
                     bool complete = model.Go(out responseMessage);
                     if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
-                    //return RedirectToAction("Index", new { id = responseMessage.Id });
+                    return RedirectToAction("Index", new { id = responseMessage.Id });
                 }
                 else if (!String.IsNullOrEmpty(Request.Form["ClaimWorkCancel"]))
                 {
                     ResponseMessage responseMessage;
-                    model.Descr = Request.Form["ClaimWorkCancelDescr"];
+                    //model.Descr = Request.Form["ClaimWorkCancelDescr"];
                     bool complete = model.GoBack(out responseMessage);
                     if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
@@ -235,16 +233,16 @@ namespace ServiceClaim.Controllers
         }
 
         [HttpPost]
-        public ActionResult StateTechWork(Claim model)
+        public ActionResult ServiceSheetTech(Claim model)
         {
             try
             {
-                if (!String.IsNullOrEmpty(Request.Form["ClaimWorkConfirm"]))
+                if (!String.IsNullOrEmpty(Request.Form["ServiceSheetSave"]))
                 {
                     
                 
                 }
-                else if (!String.IsNullOrEmpty(Request.Form["ClaimWorkCancel"]))
+                else if (!String.IsNullOrEmpty(Request.Form["ServiceSheetCancel"]))
                 {
                     model.ServiceSheet4Save.NoTechWork = true;
                 }
@@ -279,6 +277,171 @@ namespace ServiceClaim.Controllers
 
             return RedirectToAction("List");
         }
+
+        [HttpPost]
+        public ActionResult StateEngOutWait(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult ServiceSheet(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult StateDone(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult SetServEngOnWork(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult ZipCheck(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public ActionResult ZipConfirm(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
         
+            [HttpPost]
+        public ActionResult ZipOrder(Claim model)
+        {
+            try
+            {
+                ResponseMessage responseMessage;
+                bool complete = model.Go(out responseMessage);
+                if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+
+       
+        [HttpPost]
+        public ActionResult ZipOrderConfirm(Claim model)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(Request.Form["ZipOrderConfirm"]))
+                {
+                    ResponseMessage responseMessage;
+                    bool complete = model.Go(out responseMessage);
+                    if (!complete) throw new Exception(responseMessage.ErrorMessage);
+
+                    return RedirectToAction("Index", new { id = responseMessage.Id });
+                }
+                else if (!String.IsNullOrEmpty(Request.Form["ZipOrderCancel"]))
+                {
+                    ResponseMessage responseMessage;
+                    //model.Descr = Request.Form["ClaimWorkCancelDescr"];
+                    bool complete = model.GoBack(out responseMessage);
+                    if (!complete) throw new Exception(responseMessage.ErrorMessage);
+
+                    //return RedirectToAction("Index", new { id = responseMessage.Id });
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ServerError"] = ex.Message;
+                return RedirectToAction("Index", new { id = model.Id });
+            }
+
+            return RedirectToAction("List");
+        }
+
+        [HttpPost]
+        public JsonResult GetWorkTypeSpecialistSelectionList(int idWorkType)
+        {
+            var list = Claim.GetWorkTypeSpecialistSelectionList(idWorkType);
+            return Json(list);
+        }
     }
 }
