@@ -108,6 +108,18 @@ namespace ZipClaim.WebForms.Claims
         private void SetDafaultValues()
         {
             MainHelper.DdlSetSelectedValue(ref ddlEngeneer, User.Id);
+
+            //Устанавливает параметры инженера и админа
+            if (!String.IsNullOrEmpty(Request.QueryString["esid"]))
+            {
+                int engId = Db.Db.Users.GetUserBySid(Request.QueryString["esid"]).Id;
+                MainHelper.DdlSetSelectedValue(ref ddlEngeneer, engId);
+            }
+            if (!String.IsNullOrEmpty(Request.QueryString["asid"]))
+            {
+                int admId = Db.Db.Users.GetUserBySid(Request.QueryString["asid"]).Id;
+                MainHelper.DdlSetSelectedValue(ref ddlServiceAdmin, admId);
+            }
         }
 
         protected new void Page_Load(object sender, EventArgs e)
@@ -149,6 +161,10 @@ namespace ZipClaim.WebForms.Claims
                 {
                     FillContractorList();
                 }
+
+                //При переходе из ServiceClaim для заказа ЗИП передается id заявки в параметре srvid
+                hfServSheetId.Value = Request.QueryString["ssid"];
+                hfIdServClaim.Value = Request.QueryString["servid"];
             }
 
             //sdsList.UpdateParameters["id_creator"].DefaultValue = User.Id.ToString();
@@ -422,6 +438,8 @@ namespace ZipClaim.WebForms.Claims
             claim.ContractNum = lblContractNumber.Text;
             claim.ContractType = lblContractType.Text;
             claim.ContractorSdNum = MainHelper.TxtGetText(ref txtContractorSdNum);
+            claim.ServiceIdServSheet = MainHelper.HfGetValue(ref hfServSheetId);
+            claim.ServiceIdClaim = MainHelper.HfGetValue(ref hfIdServClaim);
 
             claim.IdCreator = User.Id;
 

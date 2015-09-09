@@ -20,9 +20,10 @@ namespace ServiceClaim.Models
         public int? CounterColor { get; set; }
         public bool NoTechWork { get; set; }
         public int? CounterTotal { get; set; }
-        public bool NoCounter { get; set; }
+        public bool? NoCounter { get; set; }
         public string Descr { get; set; }
-        public bool CounterUnavailable { get; set; }
+        public bool? CounterUnavailable { get; set; }
+        public string CounterDescr { get; set; }
 
         public ServiceSheet()
         {

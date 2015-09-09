@@ -14,9 +14,9 @@
     @using (Html.BeginForm("New", "Claim", FormMethod.Post, new { @id = "clForm", @class = "form-horizontal", role = "form" }))
     {
         <div class="form-group">
-            <label class="col-lg-2 control-label" for="ctrFind">Контрагент</label>
+            <label class="col-lg-2 control-label" for="ctrFind">Клиент</label>
             <div class="col-lg-2">
-                <input id="ctrFind" type="text" placeholder="поиск контрагента" class="form-control"/>
+                <input id="ctrFind" type="text" placeholder="поиск клиента" class="form-control"/>
                 <small class="text-danger"></small>
             </div>
             <div class="col-lg-4">
@@ -50,9 +50,9 @@
             <label class="col-lg-2 control-label" for="devFind">Аппарат</label>
             <div class="col-lg-2">
                 <p>
-                    <input id="devFind" type="text" placeholder="поиск аппарата" class="form-control" />
+                    <input id="devFind" type="text" placeholder="поиск аппарата" class="form-control"/>
+                    <input id="devSnFind" type="text" placeholder="cерийный номер" class="form-control" />
                 </p>
-                <div id="vendorFilterCntnr"></div>
             </div>
             <div class="col-lg-4">
                 <div class="input-group" style="width: 100%">
@@ -63,13 +63,23 @@
                         <span id="devListCount" class="label label-info"></span>
                     </div>
                 </div>
+                <p>
+                    <div id="vendorFilterCntnr"></div>
+                </p>
             </div>
             <div class="col-lg-2"><span class="help-block with-errors"></span></div>
         </div>
         <div class="form-group">
             <label class="col-lg-2 control-label" for="descr">Описание</label>
             <div class="col-lg-6">
-                <textarea id="descr" name="descr" type="text" placeholder="описание заявки" class="form-control required-mark" required="required" rows="3" data-error="Введите описание заявки"></textarea>
+                <textarea id="descr" name="descr" type="text" placeholder="Что случилось?" class="form-control required-mark" required="required" rows="3" data-error="Введите описание заявки"></textarea>
+            </div>
+            <div class="col-lg-2"><span class="help-block with-errors"></span></div>
+        </div>
+        <div class="form-group">
+            <label class="col-lg-2 control-label" for="client_sd_num">№ SD заказчика</label>
+            <div class="col-lg-2">
+                <input id="client_sd_num" name="client_sd_num" type="text" class="form-control" data-error="Введите № SD заказчика" />
             </div>
             <div class="col-lg-2"><span class="help-block with-errors"></span></div>
         </div>
@@ -78,7 +88,7 @@
                 @*<a type="submit" class="btn btn-primary btn-sm" href="#"><i class="fa fa-save"></i>&nbsp;добавить</a>*@
                 <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>&nbsp;добавить</button>
                 <p class="text-danger">
-                    @TempData["ServerError"]
+                    @TempData["error"]
                 </p>
             </div>
         </div>
@@ -111,6 +121,12 @@
                 displayDevs(true);
                 $('#devList').focus();
             });//.blur(function () { displayDevs(true); });
+            $('#devSnFind').keypress(function (e) {
+                if (e.which !== 13) return;
+                e.preventDefault();
+                displayDevs(true);
+                $('#devList').focus();
+            });
             $('#ctrList').change(setCtrContNdev);
             $('#contList').change(setContВev);
             $('#devList').change(setDevCtrNcont);
@@ -178,16 +194,16 @@
             var contId = $('#contList').val();
             var devId = $('#devList').val();
             var devName = $('#devFind').val();
-            if (ctrId === null && contId === null && devName === '') {
+            var serialNum = $('#devSnFind').val();
+            if (ctrId === null && contId === null && devName === '' && serialNum === '') {
                 $('#devList').find('option').remove();
                 return;
             }
-
             $('#devListCount').text('');
             $.ajax({
                 url: '@Url.Action("GetDevices")',
                 method: 'POST',
-                data: { idContractor: ctrId, contractorName: ctrName, idContract: contId, contractNumber: contName, idDevice: devId, deviceName: devName },
+                data: { idContractor: ctrId, contractorName: ctrName, idContract: contId, contractNumber: contName, idDevice: devId, deviceName: devName, serialNum: serialNum },
                 success: function(data) {
                     var $devList = $('#devList');
                     var $vFltrCntnr = $('#vendorFilterCntnr');

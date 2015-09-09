@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>disabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
@@ -129,6 +129,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AdHelper.cs" />
+    <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\MainHelper.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Claim2ClaimState.cs" />
@@ -157,9 +159,11 @@
     <Compile Include="Objects\AdUser.cs" />
     <Compile Include="Objects\AdUserGroup.cs" />
     <Compile Include="Objects\BaseController.cs" />
+    <Compile Include="Objects\CompressAttribute.cs" />
     <Compile Include="Objects\DbList.cs" />
     <Compile Include="Objects\DbModel.cs" />
     <Compile Include="Objects\MultipleButtonAttribute.cs" />
+    <Compile Include="Objects\RequestMethod.cs" />
     <Compile Include="Objects\ResponseMessage.cs" />
     <Compile Include="Objects\WindowsImpersonationContextFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -239,9 +243,9 @@
     <Content Include="Views\ClientAccess\Edit.cshtml" />
     <Content Include="Views\ClientAccess\ClientSheet.cshtml" />
     <Content Include="Views\Claim\ConfirmWork.cshtml" />
-    <Content Include="Views\Claim\ServiceSheetTech.cshtml" />
+    <Content Include="Views\Claim\ServiceSheetTechForm.cshtml" />
     <Content Include="Views\Claim\StateEngOutWait.cshtml" />
-    <Content Include="Views\Claim\ServiceSheet.cshtml" />
+    <Content Include="Views\Claim\ServiceSheetForm.cshtml" />
     <Content Include="Views\Claim\TechConfirm.cshtml" />
     <Content Include="Views\Claim\StateDone.cshtml" />
     <Content Include="Views\ContractorAccess\List.cshtml" />
@@ -253,6 +257,7 @@
     <Content Include="Views\Claim\ZipConfirm.cshtml" />
     <Content Include="Views\Claim\ZipOrder.cshtml" />
     <Content Include="Views\Claim\ZipOrderConfirm.cshtml" />
+    <Content Include="Views\Claim\ServiceSheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

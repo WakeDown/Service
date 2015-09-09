@@ -54,7 +54,9 @@ namespace ZipClaim.Models
         public string EngeneerConclusion { get; set; }
         public string ManagerMail { get; set; }
         public int? IdContract { get; set; }
-        public bool HideTop { get; set; }    
+        public bool HideTop { get; set; }
+        public string ServiceIdServSheet { get; set; }
+        public string ServiceIdClaim { get; set; }
 
 
         public Claim()
@@ -171,8 +173,10 @@ namespace ZipClaim.Models
             SqlParameter pContractNum = new SqlParameter() { ParameterName = "contract_num", Value = ContractNum, DbType = DbType.AnsiString };
             SqlParameter pContractType = new SqlParameter() { ParameterName = "contract_type", Value = ContractType, DbType = DbType.AnsiString };
             SqlParameter pContractorSdNum = new SqlParameter() { ParameterName = "contractor_sd_num", Value = ContractorSdNum, DbType = DbType.AnsiString };
+            SqlParameter pServiceIdServSheet = new SqlParameter() { ParameterName = "service_id_serv_sheet", Value = ServiceIdServSheet, DbType = DbType.AnsiString };
+            SqlParameter pServiceIdClaim = new SqlParameter() { ParameterName = "service_id_claim", Value = ServiceIdClaim, DbType = DbType.AnsiString };
 
-            DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "saveClaim", pId, pIdDevice, pSerialNum, pDeviceModel, pContractor, pCity, pAddress, pIdEngeneerConclusion, pCounter, pIdClaimState, pRequestNum, pDescr, pIdManager, pIdOperator, pIdServiceEngeneer, pIdServiceAdmin, pIdContractor, pIdCity, pIdCreator, pServiceDeskNum, pCounterColour, pCancelComment, pObjectName, pWaybillNum, pContractNum, pContractType, pContractorSdNum);
+            DataTable dt = ExecuteQueryStoredProcedure(Zipcl.sp, "saveClaim", pId, pIdDevice, pSerialNum, pDeviceModel, pContractor, pCity, pAddress, pIdEngeneerConclusion, pCounter, pIdClaimState, pRequestNum, pDescr, pIdManager, pIdOperator, pIdServiceEngeneer, pIdServiceAdmin, pIdContractor, pIdCity, pIdCreator, pServiceDeskNum, pCounterColour, pCancelComment, pObjectName, pWaybillNum, pContractNum, pContractType, pContractorSdNum, pServiceIdServSheet, pServiceIdClaim);
 
 
             if (dt.Rows.Count > 0)

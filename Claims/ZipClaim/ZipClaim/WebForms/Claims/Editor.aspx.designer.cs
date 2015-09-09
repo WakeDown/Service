@@ -22,6 +22,24 @@ namespace ZipClaim.WebForms.Claims {
         protected global::System.Web.UI.WebControls.Literal lFormTitle;
         
         /// <summary>
+        /// hfServSheetId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfServSheetId;
+        
+        /// <summary>
+        /// hfIdServClaim control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdServClaim;
+        
+        /// <summary>
         /// hfContractNumAmdDate control.
         /// </summary>
         /// <remarks>

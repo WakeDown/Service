@@ -8,6 +8,7 @@ using ServiceClaim.Objects;
 
 namespace ServiceClaim.Controllers
 {
+    [Compress]
     public class ServiceIssueController : BaseController
     {
         // GET: Issue

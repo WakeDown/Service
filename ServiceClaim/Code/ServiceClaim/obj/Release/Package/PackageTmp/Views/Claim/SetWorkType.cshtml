@@ -1,7 +1,7 @@
 ﻿@using ServiceClaim.Models
 @model ServiceClaim.Models.Claim
 
-@using (Html.BeginForm("SetWorkType", "Claim", FormMethod.Post, new { @id = "StateNewForm", @class = "form-horizontal", data_toggle = "validator", role = "form" }))
+@using (Html.BeginForm("SetWorkType", "Claim", FormMethod.Post, new { @id = "StateNewForm", @class = "form-horizontal", role = "form" }))
 {
     @*<p>
             @Html.DropDownListFor(m=>m.WorkType, WorkType.GetSelectionList())
@@ -10,7 +10,7 @@
     <div class="row">
         <label class="col-lg-2 text-right">Тип работ</label>
         <div class="col-lg-6">
-            @Html.DropDownListFor(m => m.IdWorkType, WorkType.GetSelectionList(), new { @class = "form-control required-mark", required = "required", data_error = "Выберите Тип работ", multicol = "true" })
+            @Html.DropDownListFor(m => m.IdWorkType, WorkType.GetSelectionList(), "--выберите тип работ--", new { @class = "form-control required-mark", required = "required", data_error = "Выберите Тип работ", multicol = "true" })
             <span class="help-block with-errors"></span>
         </div>
     </div>
@@ -29,7 +29,7 @@
     </div>
     <div class="row">
         <div class="col-lg-push-2 col-lg-10">
-            <p class="text-danger">@TempData["ServerError"]</p>
+            <p class="text-danger">@TempData["error"]</p>
         </div>
     </div>
 }
@@ -37,33 +37,44 @@
 
 <script type="text/javascript">
     $(function () {
-        loadSpecialistList();
+        //loadSpecialistList();
         $('#IdWorkType').change(loadSpecialistList);
     });
 
     function loadSpecialistList() {
+        
         var val = $('#IdWorkType option:selected').attr('value');
+        if (val === '') return;
+        var $list = $('#SpecialistSid');
+        $list.find('option').remove();
+        showSpinner($('#SpecialistSid'), true, 7, 20);
         $.ajax({
             url: '@Url.Action("GetWorkTypeSpecialistSelectionList")',
             method: 'POST',
             data: { idWorkType: val },
             success: function (data) {
-                var $list = $('#SpecialistSid');
-                $list.find('option').remove();
+                //var $list = $('#SpecialistSid');
                 if (data && data.length > 0) {
                     if (data.length > 1) {
-                        var nullOpt = '<option value="null">--выберите специалиста--</option>';
+                        var nullOpt = '<option value=>--выберите специалиста--</option>';
                         $list.append(nullOpt);
                     }
+                    
                     for (var i = 0; i <= data.length; i++) {
+                        try{
                         var item = data[i];
                         var option = '<option value="' + item.Key + '">' + item.Value + '</option>';
                         $list.append(option);
+                        } catch(error) {
+                            
+                        }
                     }
                 }
+                hideSpinner();
             },
             error: function (data) {
                 alert(data.error);
+                hideSpinner();
             }
         });
     }

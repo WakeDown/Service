@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using ServiceClaim.Helpers;
 using ServiceClaim.Models;
@@ -9,6 +11,7 @@ using ServiceClaim.Objects;
 
 namespace ServiceClaim.Controllers
 {
+    
     public class ClaimController : BaseController
     {
         //[HttpGet]
@@ -22,7 +25,7 @@ namespace ServiceClaim.Controllers
         [HttpGet]
         public ActionResult Index(int? id)
         {
-            if (!id.HasValue) return RedirectToAction("New");
+            if (!id.HasValue || id <= 0) return RedirectToAction("New");
             Claim model=new Claim();
             try
             {
@@ -42,43 +45,82 @@ namespace ServiceClaim.Controllers
         //    return View();
         //}
 
-        public JsonResult ClaimSave(int? id, string descr)
+        public async Task<JsonResult> ClaimSave(int? id, string descr)
         {
-            try
-            {
+            //try
+            //{
                 if (!id.HasValue) throw new ArgumentException("Не указана заявка!");
                 ResponseMessage responseMessage;
                 var model = new Claim();
                 model.Id = id.Value;
                 model.Descr = descr;
-                bool complete = model.Save(out responseMessage);
-                if (!complete) throw new Exception(responseMessage.ErrorMessage);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { errorMessage = ex.Message });
-            }
+                 await model.SaveAsync();
+                //bool complete = model.Save(out responseMessage);
+                //if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return Json(new { errorMessage = ex.Message });
+            //}
             return Json(new { });
         }
 
-        public JsonResult ClaimContinue(int? id, string descr)
+        //public JsonResult ClaimSave(int? id, string descr)
+        //{
+        //    try
+        //    {
+        //        if (!id.HasValue) throw new ArgumentException("Не указана заявка!");
+        //        ResponseMessage responseMessage;
+        //        var model = new Claim();
+        //        model.Id = id.Value;
+        //        model.Descr = descr;
+        //        bool complete = model.Save(out responseMessage);
+        //        if (!complete) throw new Exception(responseMessage.ErrorMessage);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { errorMessage = ex.Message });
+        //    }
+        //    return Json(new { });
+        //}
+
+        public async Task<JsonResult> ClaimContinue(int? id, string descr)
         {
-            try
-            {
+            //try
+            //{
                 if (!id.HasValue) throw new ArgumentException("Не указана заявка!");
                 ResponseMessage responseMessage;
                 var model = new Claim();
                 model.Id = id.Value;
                 model.Descr = descr;
-                bool complete = model.Save(out responseMessage);
-                if (!complete) throw new Exception(responseMessage.ErrorMessage);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { errorMessage = ex.Message });
-            }
+                await model.SaveAsync();
+                //if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return Json(new { errorMessage = ex.Message });
+            //}
             return Json(new { });
         }
+
+        //public JsonResult ClaimContinue(int? id, string descr)
+        //{
+        //    try
+        //    {
+        //        if (!id.HasValue) throw new ArgumentException("Не указана заявка!");
+        //        ResponseMessage responseMessage;
+        //        var model = new Claim();
+        //        model.Id = id.Value;
+        //        model.Descr = descr;
+        //        bool complete = model.Save(out responseMessage);
+        //        if (!complete) throw new Exception(responseMessage.ErrorMessage);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return Json(new { errorMessage = ex.Message });
+        //    }
+        //    return Json(new { });
+        //}
         //public JsonResult ClaimEnd(int? id, string descr)
         //{
         //    try
@@ -98,12 +140,17 @@ namespace ServiceClaim.Controllers
         //    return Json(new { });
         //}
 
-        public ActionResult List()
+        public async Task<ActionResult> List()
         {
-            ListResult<Claim> result = Claim.GetList(topRows: 10);
-
+            ListResult<Claim> result = await new Claim().GetList(topRows: 10);
             return View(result);
         }
+
+        //public ActionResult List()
+        //{
+        //    ListResult<Claim> result = Claim.GetList(topRows: 10);
+        //    return View(result);
+        //}
 
         [HttpGet]
         public ActionResult New()
@@ -124,19 +171,47 @@ namespace ServiceClaim.Controllers
                 model.Contract = new Contract() { Id = MainHelper.GetValueInt(Request.Form["contList"]) };
                 model.Device = new Device() { Id = MainHelper.GetValueInt(Request.Form["devList"]) };
                 model.Descr = Request.Form["descr"];
-                bool complete = model.Save(out responseMessage);
-                if (!complete) throw new Exception(responseMessage.ErrorMessage);
-
+                model.ClientSdNum = Request.Form["client_sd_num"];
+                bool result = model.Save(out responseMessage);
+                //var response = DbModel.DeserializeResponse(result);
+                if (!result) throw new Exception(responseMessage.ErrorMessage);
                 return RedirectToAction("Index", new { id = responseMessage.Id });
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return View("New", model);
             }
 
             //return RedirectToAction("New", model);
         }
+
+        //[HttpPost]
+        //public ActionResult New(Claim model)
+        //{
+        //    //if (!CurUser.UserCanCreateClaim()) return RedirectToAction("AccessDenied", "Error");
+
+        //    //Создаем заявку с основными полями и одельно первый статус с комментарием
+        //    try
+        //    {
+        //        ResponseMessage responseMessage;
+        //        model.Contractor = new Contractor() { Id = MainHelper.GetValueInt(Request.Form["ctrList"]) };
+        //        model.Contract = new Contract() { Id = MainHelper.GetValueInt(Request.Form["contList"]) };
+        //        model.Device = new Device() { Id = MainHelper.GetValueInt(Request.Form["devList"]) };
+        //        model.Descr = Request.Form["descr"];
+        //        bool complete = model.Save(out responseMessage);
+        //        if (!complete) throw new Exception(responseMessage.ErrorMessage);
+
+        //        return RedirectToAction("Index", new { id = responseMessage.Id });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        TempData["error"] = ex.Message;
+        //        return View("New", model);
+        //    }
+
+        //    //return RedirectToAction("New", model);
+        //}
 
         [HttpPost]
         public JsonResult GetCtors(int? idContractor = null, string contractorName = null, int? idContract = null, string contractNumber = null, int? idDevice = null, string deviceName = null)
@@ -173,8 +248,8 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
-                return RedirectToAction("List", new {id=model.Id});
+                TempData["error"] = ex.Message;
+                return RedirectToAction("Index", new {id=model.Id});
             }
         }
         
@@ -191,11 +266,11 @@ namespace ServiceClaim.Controllers
                 bool complete = model.Go(out responseMessage);
                 if (!complete) throw new Exception(responseMessage.ErrorMessage);
 
-                return RedirectToAction("Index", new { id = responseMessage.Id });
+                return RedirectToAction("List", new { id = responseMessage.Id });
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
         }
@@ -225,7 +300,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -233,31 +308,33 @@ namespace ServiceClaim.Controllers
         }
 
         [HttpPost]
-        public ActionResult ServiceSheetTech(Claim model)
+        public ActionResult ServiceSheetTechForm(Claim model)
         {
             try
             {
+                ResponseMessage responseMessage = null;
+                bool complete = false;
                 if (!String.IsNullOrEmpty(Request.Form["ServiceSheetSave"]))
                 {
-                    
-                
+                    complete = model.Go(out responseMessage);
+
                 }
                 else if (!String.IsNullOrEmpty(Request.Form["ServiceSheetCancel"]))
                 {
-                    model.ServiceSheet4Save.NoTechWork = true;
+                    complete = model.GoBack(out responseMessage);
                 }
-
-                ResponseMessage responseMessage;
-                bool complete = model.Go(out responseMessage);
+                
+                if (responseMessage == null)responseMessage = new ResponseMessage();
                 if (!complete) throw new Exception(responseMessage.ErrorMessage);
+                return RedirectToAction("List");
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
-            return RedirectToAction("List");
+            
         }
 
         [HttpPost]
@@ -271,7 +348,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -289,7 +366,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -297,7 +374,7 @@ namespace ServiceClaim.Controllers
         }
 
         [HttpPost]
-        public ActionResult ServiceSheet(Claim model)
+        public ActionResult ServiceSheetForm(Claim model)
         {
             try
             {
@@ -307,7 +384,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -325,7 +402,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -343,7 +420,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -353,17 +430,17 @@ namespace ServiceClaim.Controllers
         [HttpPost]
         public ActionResult ZipCheck(Claim model)
         {
-            try
-            {
-                ResponseMessage responseMessage;
-                bool complete = model.Go(out responseMessage);
-                if (!complete) throw new Exception(responseMessage.ErrorMessage);
-            }
-            catch (Exception ex)
-            {
-                TempData["ServerError"] = ex.Message;
-                return RedirectToAction("Index", new { id = model.Id });
-            }
+            //try
+            //{
+            //    ResponseMessage responseMessage;
+            //    bool complete = model.Go(out responseMessage);
+            //    if (!complete) throw new Exception(responseMessage.ErrorMessage);
+            //}
+            //catch (Exception ex)
+            //{
+            //    TempData["error"] = ex.Message;
+            //    return RedirectToAction("Index", new { id = model.Id });
+            //}
 
             return RedirectToAction("List");
         }
@@ -379,7 +456,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -397,7 +474,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -430,7 +507,7 @@ namespace ServiceClaim.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServerError"] = ex.Message;
+                TempData["error"] = ex.Message;
                 return RedirectToAction("Index", new { id = model.Id });
             }
 
@@ -442,6 +519,13 @@ namespace ServiceClaim.Controllers
         {
             var list = Claim.GetWorkTypeSpecialistSelectionList(idWorkType);
             return Json(list);
+        }
+
+        public ActionResult ServiceSheet(int? id)
+        {
+            if (!id.HasValue) return HttpNotFound();
+            var model = new ServiceSheet(id.Value);
+            return View(model);
         }
     }
 }

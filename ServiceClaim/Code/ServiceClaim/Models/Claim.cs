@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
@@ -29,6 +33,11 @@ namespace ServiceClaim.Models
         public ServiceSheet ServiceSheet4Save { get; set; }
         public DateTime DateCreate { get; set; }
         public ServiceIssue ServiceIssue4Save { get; set; }
+        public string ClientSdNum { get; set; }
+        public string CurEngeneerSid { get; set; }
+        public string CurAdminSid { get; set; }
+        public string CurTechSid { get; set; }
+        public string CurManagerSid { get; set; }
 
         public string StateChangeDateDiffStr
         {
@@ -38,6 +47,8 @@ namespace ServiceClaim.Models
                 double mins  = (DateTime.Now - DateStateChange).TotalMinutes;
                 int hrs = (int) mins/60;
                 int mns = (int) mins%60;
+                if (hrs < 0) hrs = 0;
+                if (mns < 0) mns = 0;
                 //if (hrs == 0)
                 //{
                 //    result = String.Format("{0}м", mns);
@@ -45,6 +56,26 @@ namespace ServiceClaim.Models
                 //else
                 //{
                     result = String.Format("{0}ч. {1}м", hrs, mns);
+                //}
+                return result;
+            }
+        }
+
+        public string CreateDateDiffStr
+        {
+            get
+            {
+                string result = "";
+                double mins = (DateTime.Now - DateCreate).TotalMinutes;
+                int hrs = (int)mins / 60;
+                int mns = (int)mins % 60;
+                //if (hrs == 0)
+                //{
+                //    result = String.Format("{0}м", mns);
+                //}
+                //else
+                //{
+                result = String.Format("{0}ч. {1}м", hrs, mns);
                 //}
                 return result;
             }
@@ -90,23 +121,63 @@ namespace ServiceClaim.Models
             Specialist = model.Specialist;
             DateCreate = model.DateCreate;
             DateStateChange = model.DateStateChange;
+            ClientSdNum = model.ClientSdNum;
+            CurEngeneerSid = model.CurEngeneerSid;
+            CurAdminSid = model.CurAdminSid;
+            CurTechSid = model.CurTechSid;
+            CurManagerSid = model.CurManagerSid;
         }
 
-        public static ListResult<Claim> GetList(int? idAdmin = null, int? idEngeneer = null, DateTime? dateStart = null, DateTime? dateEnd = null, int? topRows = null)
+        public async Task<ListResult<Claim>> GetList(int? idAdmin = null, int? idEngeneer = null, DateTime? dateStart = null, DateTime? dateEnd = null, int? topRows = null)
         {
             Uri uri = new Uri($"{OdataServiceUri}/Claim/GetList?idAdmin={idAdmin}&idEngeneer={idEngeneer}&dateStart={dateStart}&dateEnd={dateEnd}&topRows={topRows}");
-            string jsonString = GetJson(uri);
+            string jsonString = await GetApiClientAsync().GetStringAsync(uri);
             var model = JsonConvert.DeserializeObject<ListResult<Claim>>(jsonString);
             return model;
+        }
+
+        //public static ListResult<Claim> GetList(int? idAdmin = null, int? idEngeneer = null, DateTime? dateStart = null, DateTime? dateEnd = null, int? topRows = null)
+        //{
+        //    Uri uri = new Uri($"{OdataServiceUri}/Claim/GetList?idAdmin={idAdmin}&idEngeneer={idEngeneer}&dateStart={dateStart}&dateEnd={dateEnd}&topRows={topRows}");
+        //    string jsonString = GetJson(uri);
+        //    var model = JsonConvert.DeserializeObject<ListResult<Claim>>(jsonString);
+        //    return model;
+        //}
+
+        public async Task<ResponseMessage> SaveAsync()
+        {
+            Uri uri = new Uri(String.Format("{0}/Claim/Save", OdataServiceUri));
+            string json = JsonConvert.SerializeObject(this);
+            var content = new StringContent(json,Encoding.UTF8,"application/json");
+            var response = await GetApiClientAsync().PostAsync(uri, content);
+            //bool result = PostJson(uri, json, out responseMessage);
+            //var response =  DeserializeResponse();
+            var res = DeserializeResponse(await response.Content.ReadAsStreamAsync());
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                throw new Exception(res.ErrorMessage);
+            }
+            return  res;
         }
 
         public bool Save(out ResponseMessage responseMessage)
         {
             Uri uri = new Uri(String.Format("{0}/Claim/Save", OdataServiceUri));
             string json = JsonConvert.SerializeObject(this);
+            //var content = new StringContent(json, Encoding.UTF8, "application/json");
+            //var response = GetApiClientAsync().PostAsync(uri, content).Result;
             bool result = PostJson(uri, json, out responseMessage);
+            //var response =  DeserializeResponse();
             return result;
         }
+
+        //public bool Save(out ResponseMessage responseMessage)
+        //{
+        //    Uri uri = new Uri(String.Format("{0}/Claim/Save", OdataServiceUri));
+        //    string json = JsonConvert.SerializeObject(this);
+        //    bool result = PostJson(uri, json, out responseMessage);
+        //    return result;
+        //}
 
         //public bool SaveAndGoNextState(out ResponseMessage responseMessage)
         //{
@@ -165,6 +236,12 @@ namespace ServiceClaim.Models
             return new SelectList(model, "Key", "Value");
         }
 
-        
+        public ServiceSheet GetLastServiceSheet()
+        {
+            Uri uri = new Uri(String.Format("{0}/Claim/GetLastServiceSheet?idClaim={1}", OdataServiceUri, Id));
+            string jsonString = GetJson(uri);
+            var model = JsonConvert.DeserializeObject<ServiceSheet>(jsonString);
+            return model;
+        }
     }
 }

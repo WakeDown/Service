@@ -12,7 +12,7 @@
     <div class="row">
         <label class="col-lg-2 text-right">Специалист</label>
         <div class="col-lg-6">
-            @Html.DropDownListFor(m => m.SpecialistSid, Model.GetCurrentClaimSpecialistSelectionList(), new {@class = "form-control required-mark", required = "required", data_error = "Выберите специалиста"})
+            @Html.DropDownListFor(m => m.SpecialistSid, Model.GetCurrentClaimSpecialistSelectionList(), "--выберите специалиста--", new {@class = "form-control required-mark", required = "required", data_error = "Выберите специалиста"})
             <span class="help-block with-errors"></span>
         </div>
     </div>
@@ -37,7 +37,7 @@
     </div>
     <div class="row">
         <div class="col-lg-push-2 col-lg-10">
-            <p class="text-danger">@TempData["ServerError"]</p>
+            <p class="text-danger">@TempData["error"]</p>
         </div>
     </div>
 }

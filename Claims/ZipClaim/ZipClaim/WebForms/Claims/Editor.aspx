@@ -12,6 +12,8 @@
   <li><a href="#">Оборудование</a></li>
 </ul>
      <div>--%>
+    <asp:HiddenField ID="hfServSheetId" runat="server" />
+     <asp:HiddenField ID="hfIdServClaim" runat="server" />
     <asp:HiddenField ID="hfContractNumAmdDate" runat="server" />
     <asp:HiddenField ID="hfIdDevice" runat="server" />
     <div class="form-horizontal val-form" role="form">

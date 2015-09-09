@@ -16,22 +16,30 @@
     <p class="text-info">
         @*<span class="">показано записей <span class="label label-warning label-badge">@Model.List.Count()</span> из <span class="label label-success label-badge">@Model.TotalCount</span></span>*@
         <span class="">показано записей <span class="bold">@Model.List.Count()</span> из @Model.TotalCount</span>
-
     </p>
     <table id="claimList" class="table table-bordered sel-list">
         <tr class="bg-primary">
             <th class="min-width">№</th>
+            <th class="min-width">№ SD клиента</th>
             <th>Контрагент</th>
+            <th>Аппарат</th>
+            <th>S/N</th>
+            <td>Последнее изменение</td>
             <th>Статус</th>
+            <td>Время с момента создания</td>
             <th>Дата создания</th>
         </tr>
         @foreach (var claim in Model.List)
         {
             <tr claimid="@claim.Id" onclick="window.location = '@Url.Action("Index")/@claim.Id';">
                 <th>@claim.Id</th>
+                <th>@claim.ClientSdNum</th>
                 <td>@claim.Contractor.FullName</td>
-                <td style="background-color: #@claim.State.BackgroundColor; color: #@claim.State.ForegroundColor">@claim.State.Name
-                    <div class="small"><span class="text-danger">@claim.StateChangeDateDiffStr</span>   @String.Format("{0:dd.MM.yy hh:mm}", claim.DateStateChange)</div></td>
+                <td>@claim.Device.FullName</td>
+                <td>@claim.Device.SerialNum</td>
+                <td>@claim.StateChangeDateDiffStr</td>
+                <td style="background-color: #@claim.State.BackgroundColor; color: #@claim.State.ForegroundColor">@claim.State.Name<div class="small">@String.Format("{0:dd.MM.yy hh:mm}", claim.DateStateChange)</div></td>
+                <td>@claim.CreateDateDiffStr</td>
                 <td>@String.Format("{0:dd.MM.yy hh:mm}", claim.DateCreate)</td>
             </tr>
         }
@@ -42,6 +50,8 @@
             $('#claimList tr').click(function() {
                 window.location = '@Url.Action("Index")/'+ $(this).attr('claimid');
             });
+
+            //setTimeout(function () {window.location.reload(1);}, 60000);
         });
     </script>
 }

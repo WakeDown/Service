@@ -270,8 +270,30 @@ blockquote.bg-success {
     left: 10px;
 }
 
+.spinner.on-element {
+    z-index:999;
+    position:absolute;
+}
+
 .spinner.active {
     cursor:progress;
   opacity: 1;
   max-width: 50px; /* More than it will ever come, notice that this affects on animation duration */
+}
+
+.planing-sel-list {
+    
+}
+.planing-sel-list .pad-1 {
+    margin-left: 15px;
+}
+
+.planing-sel-list .pad-2 {
+    margin-left: 15px;
+    font-size: 0.9em;
+}
+
+.planing-sel-list .pad-3 {
+    margin-left: 15px;
+    font-size: 0.9em;
 }

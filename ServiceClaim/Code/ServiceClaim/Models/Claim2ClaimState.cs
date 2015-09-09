@@ -16,6 +16,7 @@ namespace ServiceClaim.Models
         public ClaimState State { get; set; }
         public string SpecialistSid { get; set; }
         public int IdWorkType { get; set; }
+        public int? IdServiceSheet { get; set; }
 
         public Claim2ClaimState() { }
     }

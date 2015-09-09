@@ -22,6 +22,21 @@ namespace ServiceClaim.Helpers
 
             return result;
         }
-
+        public static string ShortName(string fullName)
+        {
+            if (String.IsNullOrEmpty(fullName)) return String.Empty;
+            string result = String.Empty;
+            string[] nameArr = fullName.Split(' ');
+            for (int i = 0; i < nameArr.Count(); i++)
+            {
+                //if (i > 2) break;
+                string name = nameArr[i];
+                if (String.IsNullOrEmpty(name)) continue;
+                if (i > 0) name = name[0] + ".";
+                if (i == 1) name = " " + name;
+                result += name;
+            }
+            return result;
+        }
     }
 }
