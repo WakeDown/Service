@@ -144,6 +144,7 @@
     <Compile Include="Models\Contractor.cs" />
     <Compile Include="Models\ContractorAccess.cs" />
     <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\DeviceInfoResult.cs" />
     <Compile Include="Models\DeviceSearchResult.cs" />
     <Compile Include="Models\EmployeeSm.cs" />
     <Compile Include="Controllers\ServiceIssueController.cs" />

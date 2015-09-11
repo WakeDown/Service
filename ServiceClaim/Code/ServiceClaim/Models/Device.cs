@@ -60,6 +60,14 @@ namespace ServiceClaim.Models
             return model;
         }
 
+        public static IEnumerable<DeviceInfoResult> GetInfoList()
+        {
+            Uri uri = new Uri(String.Format("{0}/Device/GetInfoList", OdataServiceUri));
+            string jsonString = GetJson(uri);
+            var model = JsonConvert.DeserializeObject<IEnumerable<DeviceInfoResult>>(jsonString);
+            return model;
+        }
+
         //public void SetSelListName()
         //{
         //    SelListName = String.Format("{2} {0} №{1} {4} {3}", ModelName, SerialNum, Vendor, ObjectName, Address);
