@@ -1,5 +1,0 @@
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterInstallerNoStart\bin\Debug\ServiceInstallNoStart.exe.config
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterInstallerNoStart\bin\Debug\ServiceInstallNoStart.exe
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterInstallerNoStart\bin\Debug\ServiceInstallNoStart.pdb
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterInstallerNoStart\obj\Debug\ServiceInstallNoStart.exe
-D:\GoogleDrive\Dev\GitHub\Service\Collector\SnmpScanner\CounterInstallerNoStart\obj\Debug\ServiceInstallNoStart.pdb

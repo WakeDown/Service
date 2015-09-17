@@ -1,3 +1,0 @@
-<Trace Tag="AutodiscoverConfiguration" Tid="8" Time="2014-11-30 10:01:37Z">
-Trying to get Autodiscover host from DNS SRV record for unitgroup.ru.
-</Trace>
